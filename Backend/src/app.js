@@ -19,7 +19,8 @@ app.use(cookieParser());
 
 import formRoute from './Routes/formRoute.js'
 import adminRoute from './Routes/adminRoute.js'
+import propertyRoute from './Routes/propertyRoute.js'
 app.use("/api/v1/form" , formRoute)
 app.use("/api/v1" , adminRoute)
-
+app.use("/api/v1/properties", propertyRoute);
 export { app };
