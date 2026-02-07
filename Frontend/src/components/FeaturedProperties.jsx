@@ -1,45 +1,35 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import PropertyCard from "./PropertyCard";
-
-const properties = [
-  {
-    id: 1,
-    title: "Luxury Modern Villa",
-    location: "Beverly Hills, CA",
-    price: "$2,850,000",
-    beds: 5,
-    baths: 4,
-    type: "Villa",
-    image:
-      "https://images.unsplash.com/photo-1622015663381-d2e05ae91b72",
-  },
-  {
-    id: 2,
-    title: "Premium Penthouse",
-    location: "Manhattan, NY",
-    price: "$1,950,000",
-    beds: 4,
-    baths: 3,
-    type: "Penthouse",
-    image:
-      "https://images.unsplash.com/photo-1650838693474-756df587cc0e",
-  },
-  {
-    id: 3,
-    title: "Modern Commercial Building",
-    location: "Downtown, Miami",
-    price: "$5,500,000",
-    type: "Commercial",
-    image:
-      "https://images.unsplash.com/photo-1716827172024-f63110d8e0f2",
-  },
-];
+import API from "../service/Api";
 
 const FeaturedProperties = () => {
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchProperties = async () => {
+    try {
+      setLoading(true);
+      const { data } = await API.get("/properties");
+
+      
+      setProperties(data);
+    } catch (error) {
+      console.log("Failed to fetch properties", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProperties();
+  }, []);
+
   return (
     <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* Heading */}
+       
         <div className="text-center mb-12">
           <div className="inline-block bg-[#d4af37]/10 px-4 py-2 rounded-full mb-4">
             <span className="text-[#d4af37] font-medium">
@@ -56,18 +46,35 @@ const FeaturedProperties = () => {
           </p>
         </div>
 
-        {/* Grid */}
+        
+        {loading && (
+          <p className="text-center text-gray-500">Loading properties...</p>
+        )}
+
+       
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {properties.map((property) => (
-            <PropertyCard key={property.id} property={property} />
+          {properties.slice(0, 6).map((property) => (
+            <PropertyCard
+              key={property._id}
+              property={{
+                id: property._id,
+                title: property.propertyName,
+                location: property.location,
+                price: `₹${property.price}`,
+                type: property.propertyType,
+                image: property.images?.[0]?.url, 
+              }}
+            />
           ))}
         </div>
 
-        {/* Button */}
+        
         <div className="text-center mt-12">
-          <button className="bg-[#1a2a4e] text-white px-8 py-3 rounded-lg hover:bg-[#2a3a5e] transition">
-            View All Properties
-          </button>
+          <Link to="/properties">
+            <button className="bg-[#1a2a4e] text-white px-8 py-3 rounded-lg hover:bg-[#2a3a5e] transition">
+              View All Properties
+            </button>
+          </Link>
         </div>
 
       </div>

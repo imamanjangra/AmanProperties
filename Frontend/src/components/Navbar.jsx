@@ -32,7 +32,7 @@ const Navbar = () => {
         {/* Menu */}
         <ul className="flex gap-8 text-white font-medium">
           <li><Link to="/" className="hover:text-blue-400 transition">Home</Link></li>
-          <li><Link to="/propeties" className="hover:text-blue-400 transition">propeties</Link></li>
+          <li><Link to="/properties" className="hover:text-blue-400 transition">propeties</Link></li>
           <li><Link to="/contact" className="hover:text-blue-400 transition">Contact</Link></li>
         </ul>
 
