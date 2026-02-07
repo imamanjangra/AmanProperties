@@ -1,90 +1,125 @@
-import React from "react";
+import React, { useState } from "react";
+import API from "../service/Api";
 
 const ContactPage = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [propertype, setPropertype] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await API.post("/form", {
+        firstName,
+        lastName,
+        mobileNo: Number(mobileNo),
+        purpose,
+        propertype,
+      });
+
+      console.log(res.data);
+      alert("Message sent successfully!");
+
+      setFirstName("");
+      setLastName("");
+      setMobileNo("");
+      setPurpose("");
+      setPropertype("");
+    } catch (error) {
+      console.error(error.response?.data || error.message);
+      alert("Failed to send message");
+    }
+  };
+
   return (
     <div>
-      {/* Hero Image */}
-   <section className="w-full h-[80vh] lg:h-[60vh] relative">
-  <img
-    src="https://sobharealty.com/sites/default/files/styles/webp/public/2024-07/banner-1400x726.jpg.webp?itok=J6GW-yox"
-    alt="Contact Hero"
-    className="w-full h-full object-cover"
-  />
-</section>
+    
+      <section className="w-full h-[80vh] lg:h-[60vh] relative">
+        <img
+          src="https://sobharealty.com/sites/default/files/styles/webp/public/2024-07/banner-1400x726.jpg.webp?itok=J6GW-yox"
+          alt="Contact Hero"
+          className="w-full h-full object-cover"
+        />
+      </section>
 
-
-
-      {/* Contact Section */}
+    
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
-            
-            {/* Contact Form */}
+
+          
             <div className="bg-white p-8 rounded-xl shadow-lg">
               <h2 className="text-[#1a2a4e] mb-6 text-2xl font-semibold">
                 Send Us a Message
               </h2>
-              <form className="space-y-6">
-                {/* First Name */}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+              
                 <div>
                   <label className="block text-[#1a2a4e] mb-2">First Name</label>
                   <input
                     type="text"
-                    placeholder="John"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#d4af37]"
                   />
                 </div>
 
-                {/* Last Name */}
+               
                 <div>
                   <label className="block text-[#1a2a4e] mb-2">Last Name</label>
                   <input
                     type="text"
-                    placeholder="Doe"
-                    required
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#d4af37]"
                   />
                 </div>
 
-                {/* Mobile Number */}
+              
                 <div>
                   <label className="block text-[#1a2a4e] mb-2">Mobile Number</label>
                   <input
                     type="tel"
-                    placeholder="+1 (234) 567-890"
+                    value={mobileNo}
+                    onChange={(e) => setMobileNo(e.target.value)}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#d4af37]"
                   />
                 </div>
 
-                {/* Purpose */}
+              
                 <div>
                   <label className="block text-[#1a2a4e] mb-2">Purpose</label>
                   <select
+                    value={purpose}
+                    onChange={(e) => setPurpose(e.target.value)}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#d4af37]"
                   >
                     <option value="">Select Purpose</option>
-                    <option value="buy">Buy</option>
-                    <option value="sell">Sell</option>
-                    <option value="rent">Rent</option>
-                    <option value="consultation">Consultation</option>
+                    <option value="Buy">Buy</option>
+                    <option value="Sell">Sell</option>
                   </select>
                 </div>
 
-                {/* Property Type */}
+            
                 <div>
                   <label className="block text-[#1a2a4e] mb-2">Property Type</label>
                   <select
+                    value={propertype}
+                    onChange={(e) => setPropertype(e.target.value)}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#d4af37]"
                   >
                     <option value="">Select Property Type</option>
-                    <option value="residential">Residential</option>
-                    <option value="commercial">Commercial</option>
-                    <option value="land">Land</option>
-                    <option value="luxury">Luxury</option>
+                    <option value="Plot">Plot</option>
+                    <option value="Home">Home</option>
+                    <option value="Floor">Floor</option>
                   </select>
                 </div>
 
@@ -96,16 +131,15 @@ const ContactPage = () => {
                 </button>
               </form>
             </div>
-
-            {/* Contact Info + Map + Buttons */}
+                    
             <div className="space-y-6">
-              {/* Contact Info Card */}
+             
               <div className="bg-white p-8 rounded-xl shadow-lg">
                 <h3 className="text-[#1a2a4e] mb-6 text-xl font-semibold">
                   Contact Information
                 </h3>
                 <div className="space-y-6">
-                  {/* Office Address */}
+                
                   <div className="flex items-start gap-4">
                     <div className="bg-[#1a2a4e] p-3 rounded-lg">
                       <svg
@@ -129,7 +163,7 @@ const ContactPage = () => {
                     </div>
                   </div>
 
-                  {/* Phone */}
+               
                   <div className="flex items-start gap-4">
                     <div className="bg-[#1a2a4e] p-3 rounded-lg">
                       <svg
@@ -154,7 +188,7 @@ const ContactPage = () => {
                     </div>
                   </div>
 
-                  {/* Email */}
+              
                   <div className="flex items-start gap-4">
                     <div className="bg-[#1a2a4e] p-3 rounded-lg">
                       <svg
@@ -182,7 +216,7 @@ const ContactPage = () => {
                 </div>
               </div>
 
-              {/* WhatsApp & Call Buttons */}
+             
               <div className="grid grid-cols-2 gap-4">
                 <button className="bg-[#25D366] text-white px-6 py-4 rounded-lg hover:bg-[#20ba5a] transition-all hover:scale-105 flex items-center justify-center gap-2">
                   WhatsApp
@@ -192,7 +226,6 @@ const ContactPage = () => {
                 </button>
               </div>
 
-              {/* Google Map */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden h-64 mt-6">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3471.195059679129!2d76.97025117539334!3d29.53981327518153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390e7700337d796d%3A0x4162340ae00b672e!2sRailway%20road%20gharaunda!5e0!3m2!1sen!2sin!4v1770480607960!5m2!1sen!2sin" 
@@ -205,6 +238,8 @@ const ContactPage = () => {
                 ></iframe>
               </div>
             </div>
+           
+            
           </div>
         </div>
       </section>
