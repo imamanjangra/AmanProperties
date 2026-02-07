@@ -26,6 +26,13 @@ const propertiesSchema = new mongoose.Schema(
       enum: ["Plot", "Home", "Floor", "Villa"],
       required: true,
     },
+    Bedroom : {
+      type : Number,
+    },
+    Bathroom : {
+      type : Number,
+    },
+
   },
   { timestamps: true }
 );
