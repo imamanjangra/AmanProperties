@@ -1,0 +1,92 @@
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+
+export default function Footer() {
+  return (
+    <footer className="bg-slate-950 text-slate-400 pt-20">
+      <div className="max-w-7xl mx-auto px-6">
+
+        {/* Top Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-slate-800">
+
+          {/* Brand */}
+          <div>
+            <h3 className="text-white text-2xl font-bold mb-4">
+              Estate<span className="text-[#c9a24d]">Pro</span>
+            </h3>
+            <p className="text-sm leading-relaxed">
+              Delivering premium real estate solutions with trust,
+              transparency, and personalized service.
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li className="hover:text-[#c9a24d] transition">Home</li>
+              <li className="hover:text-[#c9a24d] transition">About Us</li>
+              <li className="hover:text-[#c9a24d] transition">Services</li>
+              <li className="hover:text-[#c9a24d] transition">Properties</li>
+              <li className="hover:text-[#c9a24d] transition">Contact</li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">
+              Our Services
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li>Buy Property</li>
+              <li>Sell Property</li>
+              <li>Rent Property</li>
+              <li>Investment Consulting</li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">
+              Contact Us
+            </h4>
+
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#c9a24d]" />
+                <span>Gurgaon, Haryana, India</span>
+              </li>
+
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-[#c9a24d]" />
+                <span>+91 98765 43210</span>
+              </li>
+
+              <li className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-[#c9a24d]" />
+                <span>contact@estatepro.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+
+          <p className="text-sm">
+            © {new Date().getFullYear()} EstatePro. All rights reserved.
+          </p>
+
+          {/* Social */}
+          <div className="flex gap-5">
+            <Facebook className="w-5 h-5 hover:text-[#c9a24d] cursor-pointer transition" />
+            <Instagram className="w-5 h-5 hover:text-[#c9a24d] cursor-pointer transition" />
+            <Linkedin className="w-5 h-5 hover:text-[#c9a24d] cursor-pointer transition" />
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  );
+}
