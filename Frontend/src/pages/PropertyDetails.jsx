@@ -6,6 +6,8 @@ import {
   Maximize,
   Tag,
   MapPin,
+  MessageSquare,
+  Phone,
 } from "lucide-react";
 import PropertyImageCarousel from "../components/PropertyImageCarousel";
 import API from "../service/Api";
@@ -42,7 +44,7 @@ export default function PropertyDetails() {
 
             {/* Overview */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold text-[#1a2a4e] mb-8">
+              <h2 className="font-script text-2xl font-semibold text-[#1a2a4e] mb-8">
                 Property Overview
               </h2>
 
@@ -58,7 +60,7 @@ export default function PropertyDetails() {
 
             {/* Description */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold text-[#1a2a4e] mb-4">
+              <h2 className="font-script text-2xl font-semibold text-[#1a2a4e] mb-4">
                 Property Description
               </h2>
               <p className="text-gray-700 leading-relaxed">
@@ -69,7 +71,7 @@ export default function PropertyDetails() {
 
           {/* RIGHT – CONTACT */}
           <div className="sticky top-24 h-fit">
-            <ContactForm />
+            <ContactForm property={property} />
           </div>
         </div>
       </section>
@@ -81,12 +83,12 @@ export default function PropertyDetails() {
             <span className="inline-block bg-[#d4af37]/10 px-4 py-2 rounded-full mb-4 text-[#d4af37]">
               Prime Location
             </span>
-            <h2 className="text-3xl font-semibold text-[#1a2a4e]">
+            <h2 className="font-script text-3xl font-semibold text-[#1a2a4e]">
               Property Location
             </h2>
           </div>
 
-          <div className="rounded-2xl overflow-hidden shadow-xl h-[420px]">
+          <div className="rounded-2xl overflow-hidden shadow-xl h-105">
             <iframe
               src={`https://www.google.com/maps?q=${property.location}&output=embed`}
               className="w-full h-full border-0"
@@ -117,7 +119,7 @@ function DetailItem({ icon: Icon, label, value }) {
 }
 
 
-function ContactForm() {
+function ContactForm({property}) {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [number, setNumber] = useState("");
@@ -143,12 +145,33 @@ function ContactForm() {
     alert("Form submitted successfully");
   };
 
+  const handleWhatsapp = () => {
+  const phoneNo = "919255446593"; // your WhatsApp number
+  const propertyName = property?.propertyName || "this property"; // fallback
+
+  // Medium-length message
+  const message = `Hi, I am interested in the property "${propertyName}".`;
+
+  const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+};
+
+
+const callNow = () => {
+  if (/Mobi|Android/i.test(navigator.userAgent)) {
+    window.location.href = "tel:+919255446593";
+  } else {
+    alert("Please call this number from your mobile: +91 9255446593");
+  }
+};
+
+
   return (
     <form
       onSubmit={handleSubmit}
       className="bg-white rounded-2xl p-8 shadow-xl space-y-6"
     >
-      <h3 className="text-xl font-semibold text-[#1a2a4e]">
+      <h3 className="font-script text-xl font-semibold text-[#1a2a4e]">
         Request Consultation
       </h3>
 
@@ -202,6 +225,32 @@ function ContactForm() {
       <button className="w-full bg-[#1a2a4e] text-white py-3 rounded hover:bg-[#d4af37] hover:text-[#1a2a4e] transition">
         Submit
       </button>
+
+      <div className="flex items-center my-6">
+  <hr className="grow border-gray-300" />
+  <span className="mx-4 text-gray-500 font-medium">or</span>
+  <hr className="grow border-gray-300" />
+</div>
+
+      <div className="flex justify-center gap-6 mt-6">
+  <button
+    type="button"
+    onClick={handleWhatsapp}
+    className="flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl hover:bg-[#20ba5a] transition-all hover:scale-105"
+  >
+    <MessageSquare className="w-5 h-5" />
+    WhatsApp
+  </button>
+
+  <button
+    type="button"
+    onClick={callNow}
+    className="flex items-center gap-2 bg-[#1a2a4e] text-white px-6 py-3 rounded-xl hover:bg-[#2a3a5e] transition-all hover:scale-105"
+  >
+    <Phone className="w-5 h-5" />
+    Call Now
+  </button>
+</div>
     </form>
   );
 }

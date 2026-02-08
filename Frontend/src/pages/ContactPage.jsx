@@ -8,6 +8,13 @@ const ContactPage = () => {
   const [purpose, setPurpose] = useState("");
   const [propertype, setPropertype] = useState("");
 
+   const phoneNo = 9468255640;
+  const message = "Heelo i want to connect with you ";
+  const handleWhatsapp = () => {
+    const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`
+    window.open(url , "_blank");
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,6 +41,16 @@ const ContactPage = () => {
     }
   };
 
+  const callNow = () => {
+  if (/Mobi|Android/i.test(navigator.userAgent)) {
+    window.location.href = "tel:+919255446593";
+  } else {
+    alert("Please call this number from your mobile: +91 9255446593");
+  }
+};
+
+
+
   return (
     <div>
     
@@ -52,8 +69,8 @@ const ContactPage = () => {
 
           
             <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h2 className="text-[#1a2a4e] mb-6 text-2xl font-semibold">
-                Send Us a Message
+              <h2 className="font-script text-[#1a2a4e] mb-6 text-2xl font-semibold">
+                SEND US A MESSAGE
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -125,7 +142,7 @@ const ContactPage = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#d4af37] text-[#1a2a4e] px-6 py-4 rounded-lg hover:bg-[#c19a2e] transition-colors"
+                  className="  font-nav w-full bg-[#d4af37] text-[#1a2a4e] px-6 py-4 rounded-lg hover:bg-[#c19a2e] transition-colors"
                 >
                   Send Message
                 </button>
@@ -135,8 +152,8 @@ const ContactPage = () => {
             <div className="space-y-6">
              
               <div className="bg-white p-8 rounded-xl shadow-lg">
-                <h3 className="text-[#1a2a4e] mb-6 text-xl font-semibold">
-                  Contact Information
+                <h3 className="font-script text-[#1a2a4e] mb-6 text-xl font-semibold">
+                   CONTACT INFORMATION 
                 </h3>
                 <div className="space-y-6">
                 
@@ -218,10 +235,12 @@ const ContactPage = () => {
 
              
               <div className="grid grid-cols-2 gap-4">
-                <button className="bg-[#25D366] text-white px-6 py-4 rounded-lg hover:bg-[#20ba5a] transition-all hover:scale-105 flex items-center justify-center gap-2">
+                <button  onClick={handleWhatsapp} className="bg-[#25D366] text-white px-6 py-4 rounded-lg hover:bg-[#20ba5a] transition-all hover:scale-105 flex items-center justify-center gap-2">
                   WhatsApp
                 </button>
-                <button className="bg-[#1a2a4e] text-white px-6 py-4 rounded-lg hover:bg-[#2a3a5e] transition-all hover:scale-105 flex items-center justify-center gap-2">
+                <button 
+                onClick={() => callNow()}
+                className="bg-[#1a2a4e] text-white px-6 py-4 rounded-lg hover:bg-[#2a3a5e] transition-all hover:scale-105 flex items-center justify-center gap-2">
                   Call Now
                 </button>
               </div>

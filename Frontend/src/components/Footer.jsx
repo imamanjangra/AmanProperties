@@ -1,8 +1,9 @@
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-400 pt-20">
+    <footer className="font-nav bg-slate-950 text-slate-400 pt-20 pb-10 ">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Top Grid */}
@@ -10,8 +11,8 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <h3 className="text-white text-2xl font-bold mb-4">
-              Estate<span className="text-[#c9a24d]">Pro</span>
+            <h3 className="font-script text-white text-2xl font-bold mb-4">
+              Aman<span className="text-[#c9a24d]"> Properties</span>
             </h3>
             <p className="text-sm leading-relaxed">
               Delivering premium real estate solutions with trust,
@@ -25,15 +26,13 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-3 text-sm">
-              <li className="hover:text-[#c9a24d] transition">Home</li>
-              <li className="hover:text-[#c9a24d] transition">About Us</li>
-              <li className="hover:text-[#c9a24d] transition">Services</li>
-              <li className="hover:text-[#c9a24d] transition">Properties</li>
-              <li className="hover:text-[#c9a24d] transition">Contact</li>
+             <li><Link to="/" className="hover:text-[#c9a24d] transition">Home</Link></li>
+             <li><Link to="/properties" className="hover:text-[#c9a24d] transition">Properties</Link></li>
+             <li><Link to="/contact" className="hover:text-[#c9a24d] transition">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Services */}  
           <div>
             <h4 className="text-white font-semibold mb-4">
               Our Services
@@ -41,8 +40,6 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li>Buy Property</li>
               <li>Sell Property</li>
-              <li>Rent Property</li>
-              <li>Investment Consulting</li>
             </ul>
           </div>
 
@@ -60,12 +57,12 @@ export default function Footer() {
 
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-[#c9a24d]" />
-                <span>+91 98765 43210</span>
+                <span>+91 9255446593</span>
               </li>
 
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-[#c9a24d]" />
-                <span>contact@estatepro.com</span>
+                <span>Amanproperties.@email.com</span>
               </li>
             </ul>
           </div>
@@ -75,7 +72,7 @@ export default function Footer() {
         <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
 
           <p className="text-sm">
-            © {new Date().getFullYear()} EstatePro. All rights reserved.
+            © {new Date().getFullYear()} Amanproperties. All rights reserved.
           </p>
 
           {/* Social */}

@@ -36,14 +36,14 @@ export default function Contact() {
   };
 
   return (
-    <section className="py-24 bg-slate-950">
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="py-24 bg-slate-950 rounded-t-3xl">
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center ">
 
         <div>
           <span className="inline-block bg-[#c9a24d]/10 text-[#c9a24d] px-4 py-2 rounded-full mb-4">
             Get In Touch
           </span>
-          <h2 className="text-4xl font-bold text-white mb-6">
+          <h2 className="font-script text-4xl font-bold text-white mb-6">
             Let’s Find the Right Property for You
           </h2>
           <p className="text-slate-400 max-w-lg">
@@ -109,7 +109,7 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="w-full bg-slate-900 text-white py-3 rounded hover:bg-[#c9a24d]"
+            className="font-nav w-full bg-slate-900 text-white py-3 rounded hover:bg-[#c9a24d]"
           >
             Request Consultation
           </button>

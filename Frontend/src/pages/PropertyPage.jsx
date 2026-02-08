@@ -32,9 +32,9 @@ const PropertyPage = () => {
           alt="Luxury Properties"
           className="w-full h-full rounded-b-3xl object-cover"
         />
-        <div className="absolute inset-0 bg-black/40 flex items-center rounded-b-3xl">
+        <div className="absolute inset-0 bg-black/55 flex items-center rounded-b-3xl">
           <div className="max-w-7xl mx-auto px-6 text-white">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+            <h1 className="font-script text-3xl md:text-4xl font-bold text-white leading-snug mb-4">
               Explore Premium Properties
             </h1>
             <p className="max-w-2xl text-lg text-gray-200">
@@ -49,7 +49,7 @@ const PropertyPage = () => {
 
         {/* Section Header */}
         <div className="flex justify-between items-center mb-10">
-          <h2 className="text-2xl font-semibold text-[#1a2a4e]">
+          <h2 className="font-script text-2xl font-semibold text-[#1a2a4e]">
             Available Properties
           </h2>
 

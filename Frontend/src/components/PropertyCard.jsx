@@ -22,7 +22,7 @@ const PropertyCard = ({ property }) => {
 
       {/* Content */}
       <div className="p-6">
-        <h3 className="text-[#1a2a4e] text-lg font-semibold mb-2">
+        <h3 className="font-script text-[#1a2a4e] text-xl font-semibold mb-2">
           {property.title}
         </h3>
 
@@ -66,7 +66,7 @@ const PropertyCard = ({ property }) => {
             {property.price}
           </p>
 
-          <button onClick={() => navigate(`/properties/${property.id}`)} className="bg-[#1a2a4e] text-white px-4 py-2 rounded-lg hover:bg-[#2a3a5e] transition">
+          <button onClick={() => navigate(`/properties/${property.id}`)} className="bg-[#1a2a4e] font-nav text-white px-4 py-2 rounded-lg hover:bg-[#2a3a5e] transition">
             View Details
           </button>
         </div>

@@ -36,7 +36,7 @@ export default function Services() {
             </span>
           </div>
 
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">
+          <h2 className="font-script text-3xl font-bold text-slate-900 mb-4">
             Our Services
           </h2>
 
@@ -65,7 +65,7 @@ export default function Services() {
                   <Icon className="w-8 h-8 text-[#c9a24d] group-hover:text-slate-900" />
                 </div>
 
-                <h3 className="text-slate-900 text-lg font-semibold mb-3">
+                <h3 className="font-script text-slate-900 text-lg font-semibold mb-3">
                   {service.title}
                 </h3>
 

@@ -32,13 +32,13 @@ const FeaturedProperties = () => {
 
        
         <div className="text-center mb-12">
-          <div className="inline-block bg-[#d4af37]/10 px-4 py-2 rounded-full mb-4">
-            <span className="text-[#d4af37] font-medium">
+          <div className=" inline-block bg-[#d4af37]/10 px-4 py-2 rounded-full mb-4">
+            <span className="  text-[#d4af37] font-medium">
               Premium Selection
             </span>
-          </div>
+          </div>  
 
-          <h2 className="text-3xl font-bold text-[#1a2a4e] mb-4">
+          <h2 className=" font-script text-3xl font-bold text-[#1a2a4e] mb-4">
             Featured Properties
           </h2>
 
@@ -75,7 +75,7 @@ const FeaturedProperties = () => {
         
         <div className="text-center mt-12">
           <Link to="/properties">
-            <button className="bg-[#1a2a4e] text-white px-8 py-3 rounded-lg hover:bg-[#2a3a5e] transition">
+            <button className="bg-[#1a2a4e] font-nav text-white px-8 py-3 rounded-lg hover:bg-[#2a3a5e] transition">
               View All Properties
             </button>
           </Link>

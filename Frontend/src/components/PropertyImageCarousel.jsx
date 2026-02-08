@@ -20,7 +20,7 @@ export default function PropertyImageCarousel({ images }) {
   }, [images]); // re-run if images array changes
 
   return (
-    <div className="relative h-[520px] w-full overflow-hidden rounded-b-2xl shadow-xl">
+    <div className="relative h-130 w-full overflow-hidden rounded-b-2xl shadow-xl">
       {/* Image */}
       <img
         src={images[active]}
@@ -29,7 +29,7 @@ export default function PropertyImageCarousel({ images }) {
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-black/30" />
 
       {/* Prev/Next Buttons */}
       <button
