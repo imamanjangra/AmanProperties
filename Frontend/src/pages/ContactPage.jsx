@@ -41,7 +41,7 @@ const ContactPage = () => {
         <img
           src="https://sobharealty.com/sites/default/files/styles/webp/public/2024-07/banner-1400x726.jpg.webp?itok=J6GW-yox"
           alt="Contact Hero"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-b-3xl"
         />
       </section>
 

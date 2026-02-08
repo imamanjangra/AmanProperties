@@ -1,16 +1,19 @@
 const HeroSection = () => {
   return (
-    <section className="relative h-[75vh] w-full">
+    <section className="relative h-[75vh] w-full ">
 
       {/* Background Image */}
+      <div className="rounded-b-2xl">
+
       <img
-        src="https://images.unsplash.com/photo-1560185008-b033106af5c3"
+        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
         alt="Real Estate"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full rounded-b-3xl object-cover"
       />
+      <div className="absolute inset-0 bg-black/55 rounded-b-3xl"></div>
+      </div>
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/55"></div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
