@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import API from "../service/Api";
+import { motion } from "framer-motion";
 
 const ContactPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -8,12 +9,12 @@ const ContactPage = () => {
   const [purpose, setPurpose] = useState("");
   const [propertype, setPropertype] = useState("");
 
-   const phoneNo = 9468255640;
+  const phoneNo = 9468255640;
   const message = "Heelo i want to connect with you ";
   const handleWhatsapp = () => {
-    const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`
-    window.open(url , "_blank");
-  }
+    const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,41 +43,47 @@ const ContactPage = () => {
   };
 
   const callNow = () => {
-  if (/Mobi|Android/i.test(navigator.userAgent)) {
-    window.location.href = "tel:+919255446593";
-  } else {
-    alert("Please call this number from your mobile: +91 9255446593");
-  }
-};
-
-
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      window.location.href = "tel:+919255446593";
+    } else {
+      alert("Please call this number from your mobile: +91 9255446593");
+    }
+  };
 
   return (
     <div>
-    
-      <section className="w-full h-[80vh] lg:h-[60vh] relative">
+      <motion.section
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="w-full h-[80vh] lg:h-[60vh] relative"
+      >
         <img
           src="https://sobharealty.com/sites/default/files/styles/webp/public/2024-07/banner-1400x726.jpg.webp?itok=J6GW-yox"
           alt="Contact Hero"
           className="w-full h-full object-cover rounded-b-3xl"
         />
-      </section>
+      </motion.section>
 
-    
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
-
-          
-            <div className="bg-white p-8 rounded-xl shadow-lg">
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="bg-white p-8 rounded-xl shadow-lg"
+            >
               <h2 className="font-script text-[#1a2a4e] mb-6 text-2xl font-semibold">
                 SEND US A MESSAGE
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-              
                 <div>
-                  <label className="block text-[#1a2a4e] mb-2">First Name</label>
+                  <label className="block text-[#1a2a4e] mb-2">
+                    First Name
+                  </label>
                   <input
                     type="text"
                     value={firstName}
@@ -86,7 +93,6 @@ const ContactPage = () => {
                   />
                 </div>
 
-               
                 <div>
                   <label className="block text-[#1a2a4e] mb-2">Last Name</label>
                   <input
@@ -97,9 +103,10 @@ const ContactPage = () => {
                   />
                 </div>
 
-              
                 <div>
-                  <label className="block text-[#1a2a4e] mb-2">Mobile Number</label>
+                  <label className="block text-[#1a2a4e] mb-2">
+                    Mobile Number
+                  </label>
                   <input
                     type="tel"
                     value={mobileNo}
@@ -109,7 +116,6 @@ const ContactPage = () => {
                   />
                 </div>
 
-              
                 <div>
                   <label className="block text-[#1a2a4e] mb-2">Purpose</label>
                   <select
@@ -124,9 +130,10 @@ const ContactPage = () => {
                   </select>
                 </div>
 
-            
                 <div>
-                  <label className="block text-[#1a2a4e] mb-2">Property Type</label>
+                  <label className="block text-[#1a2a4e] mb-2">
+                    Property Type
+                  </label>
                   <select
                     value={propertype}
                     onChange={(e) => setPropertype(e.target.value)}
@@ -147,16 +154,20 @@ const ContactPage = () => {
                   Send Message
                 </button>
               </form>
-            </div>
-                    
+            </motion.div>
+
             <div className="space-y-6">
-             
-              <div className="bg-white p-8 rounded-xl shadow-lg">
+              <motion.div
+                initial={{ opacity: 0, x: 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="bg-white p-8 rounded-xl shadow-lg"
+              >
                 <h3 className="font-script text-[#1a2a4e] mb-6 text-xl font-semibold">
-                   CONTACT INFORMATION 
+                  CONTACT INFORMATION
                 </h3>
                 <div className="space-y-6">
-                
                   <div className="flex items-start gap-4">
                     <div className="bg-[#1a2a4e] p-3 rounded-lg">
                       <svg
@@ -175,12 +186,13 @@ const ContactPage = () => {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-[#1a2a4e] mb-1 font-medium">Office Address</h4>
+                      <h4 className="text-[#1a2a4e] mb-1 font-medium">
+                        Office Address
+                      </h4>
                       <p className="text-gray-600">Gharaunda, Karnal</p>
                     </div>
                   </div>
 
-               
                   <div className="flex items-start gap-4">
                     <div className="bg-[#1a2a4e] p-3 rounded-lg">
                       <svg
@@ -199,13 +211,15 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <h4 className="text-[#1a2a4e] mb-1 font-medium">Phone</h4>
-                      <a href="tel:+1234567890" className="text-gray-600 hover:text-[#d4af37] transition-colors">
-                       +91 9255446593
+                      <a
+                        href="tel:+1234567890"
+                        className="text-gray-600 hover:text-[#d4af37] transition-colors"
+                      >
+                        +91 9255446593
                       </a>
                     </div>
                   </div>
 
-              
                   <div className="flex items-start gap-4">
                     <div className="bg-[#1a2a4e] p-3 rounded-lg">
                       <svg
@@ -225,29 +239,47 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <h4 className="text-[#1a2a4e] mb-1 font-medium">Email</h4>
-                      <a href="mailto:info@eliteproperties.com" className="text-gray-600 hover:text-[#d4af37] transition-colors">
-                       amanproperties.@email.com
+                      <a
+                        href="mailto:info@eliteproperties.com"
+                        className="text-gray-600 hover:text-[#d4af37] transition-colors"
+                      >
+                        amanproperties.@email.com
                       </a>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-             
-              <div className="grid grid-cols-2 gap-4">
-                <button  onClick={handleWhatsapp} className="bg-[#25D366] text-white px-6 py-4 rounded-lg hover:bg-[#20ba5a] transition-all hover:scale-105 flex items-center justify-center gap-2">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-2 gap-4"
+              >
+                <button
+                  onClick={handleWhatsapp}
+                  className="bg-[#25D366] text-white px-6 py-4 rounded-lg hover:bg-[#20ba5a] transition-all hover:scale-105 flex items-center justify-center gap-2"
+                >
                   WhatsApp
                 </button>
-                <button 
-                onClick={() => callNow()}
-                className="bg-[#1a2a4e] text-white px-6 py-4 rounded-lg hover:bg-[#2a3a5e] transition-all hover:scale-105 flex items-center justify-center gap-2">
+                <button
+                  onClick={() => callNow()}
+                  className="bg-[#1a2a4e] text-white px-6 py-4 rounded-lg hover:bg-[#2a3a5e] transition-all hover:scale-105 flex items-center justify-center gap-2"
+                >
                   Call Now
                 </button>
-              </div>
+              </motion.div>
 
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden h-64 mt-6">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-white rounded-xl shadow-lg overflow-hidden h-64 mt-6"
+              >
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3471.195059679129!2d76.97025117539334!3d29.53981327518153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390e7700337d796d%3A0x4162340ae00b672e!2sRailway%20road%20gharaunda!5e0!3m2!1sen!2sin!4v1770480607960!5m2!1sen!2sin" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3471.195059679129!2d76.97025117539334!3d29.53981327518153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390e7700337d796d%3A0x4162340ae00b672e!2sRailway%20road%20gharaunda!5e0!3m2!1sen!2sin!4v1770480607960!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   allowFullScreen=""
@@ -255,10 +287,8 @@ const ContactPage = () => {
                   title="Office Location"
                   className="border-0"
                 ></iframe>
-              </div>
+              </motion.div>
             </div>
-           
-            
           </div>
         </div>
       </section>

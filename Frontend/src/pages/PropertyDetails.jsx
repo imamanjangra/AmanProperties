@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
 import {
   Bed,
   Bath,
@@ -14,7 +16,7 @@ import API from "../service/Api";
 import { useParams } from "react-router-dom";
 
 export default function PropertyDetails() {
-  const {id} = useParams("id")
+  const { id } = useParams("id");
   const [property, setProperty] = useState(null);
 
   useEffect(() => {
@@ -30,18 +32,25 @@ export default function PropertyDetails() {
   return (
     <>
       {/* ================= CAROUSEL ================= */}
-     <section className="container mx-auto">
-  <PropertyImageCarousel
-    images={property.images.map((img) => img.url)}
-  />
-</section>
+      <motion.section
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="container mx-auto"
+      >
+        <PropertyImageCarousel images={property.images.map((img) => img.url)} />
+      </motion.section>
       {/* ============ PROPERTY INFO + CONTACT ============ */}
       <section className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-3 gap-12">
-
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-7xl mx-auto px-4 grid lg:grid-cols-3 gap-12"
+        >
           {/* LEFT */}
           <div className="lg:col-span-2 space-y-12">
-
             {/* Overview */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
               <h2 className="font-script text-2xl font-semibold text-[#1a2a4e] mb-8">
@@ -49,12 +58,36 @@ export default function PropertyDetails() {
               </h2>
 
               <div className="grid sm:grid-cols-2 gap-6">
-                <DetailItem icon={Tag} label="Price" value={`₹ ${property.price}`} />
-                <DetailItem icon={Home} label="Type" value={property.propertyType} />
-                <DetailItem icon={Bed} label="Bedrooms" value={property.Bedroom} />
-                <DetailItem icon={Bath} label="Bathrooms" value={property.Bathroom} />
-                <DetailItem icon={Maximize} label="Area" value={property.size} />
-                <DetailItem icon={MapPin} label="Location" value={property.location} />
+                <DetailItem
+                  icon={Tag}
+                  label="Price"
+                  value={`₹ ${property.price}`}
+                />
+                <DetailItem
+                  icon={Home}
+                  label="Type"
+                  value={property.propertyType}
+                />
+                <DetailItem
+                  icon={Bed}
+                  label="Bedrooms"
+                  value={property.Bedroom}
+                />
+                <DetailItem
+                  icon={Bath}
+                  label="Bathrooms"
+                  value={property.Bathroom}
+                />
+                <DetailItem
+                  icon={Maximize}
+                  label="Area"
+                  value={property.size}
+                />
+                <DetailItem
+                  icon={MapPin}
+                  label="Location"
+                  value={property.location}
+                />
               </div>
             </div>
 
@@ -73,11 +106,17 @@ export default function PropertyDetails() {
           <div className="sticky top-24 h-fit">
             <ContactForm property={property} />
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ================= MAP ================= */}
-      <section className="py-16 bg-white">
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+        className="py-16 bg-white"
+      >
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <span className="inline-block bg-[#d4af37]/10 px-4 py-2 rounded-full mb-4 text-[#d4af37]">
@@ -97,7 +136,7 @@ export default function PropertyDetails() {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 }
@@ -118,8 +157,7 @@ function DetailItem({ icon: Icon, label, value }) {
   );
 }
 
-
-function ContactForm({property}) {
+function ContactForm({ property }) {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [number, setNumber] = useState("");
@@ -137,34 +175,32 @@ function ContactForm({property}) {
       propertype: propertyType,
     });
 
-    setFirstname("")
-    setLastname("")
-    setNumber("")
-    setPurpose("")
-    setPropertyType("")
+    setFirstname("");
+    setLastname("");
+    setNumber("");
+    setPurpose("");
+    setPropertyType("");
     alert("Form submitted successfully");
   };
 
   const handleWhatsapp = () => {
-  const phoneNo = "919255446593"; // your WhatsApp number
-  const propertyName = property?.propertyName || "this property"; // fallback
+    const phoneNo = "919255446593"; // your WhatsApp number
+    const propertyName = property?.propertyName || "this property"; // fallback
 
-  // Medium-length message
-  const message = `Hi, I am interested in the property "${propertyName}".`;
+    // Medium-length message
+    const message = `Hi, I am interested in the property "${propertyName}".`;
 
-  const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
-};
+    const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  };
 
-
-const callNow = () => {
-  if (/Mobi|Android/i.test(navigator.userAgent)) {
-    window.location.href = "tel:+919255446593";
-  } else {
-    alert("Please call this number from your mobile: +91 9255446593");
-  }
-};
-
+  const callNow = () => {
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      window.location.href = "tel:+919255446593";
+    } else {
+      alert("Please call this number from your mobile: +91 9255446593");
+    }
+  };
 
   return (
     <form
@@ -227,30 +263,30 @@ const callNow = () => {
       </button>
 
       <div className="flex items-center my-6">
-  <hr className="grow border-gray-300" />
-  <span className="mx-4 text-gray-500 font-medium">or</span>
-  <hr className="grow border-gray-300" />
-</div>
+        <hr className="grow border-gray-300" />
+        <span className="mx-4 text-gray-500 font-medium">or</span>
+        <hr className="grow border-gray-300" />
+      </div>
 
       <div className="flex justify-center gap-6 mt-6">
-  <button
-    type="button"
-    onClick={handleWhatsapp}
-    className="flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl hover:bg-[#20ba5a] transition-all hover:scale-105"
-  >
-    <MessageSquare className="w-5 h-5" />
-    WhatsApp
-  </button>
+        <button
+          type="button"
+          onClick={handleWhatsapp}
+          className="flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl hover:bg-[#20ba5a] transition-all hover:scale-105"
+        >
+          <MessageSquare className="w-5 h-5" />
+          WhatsApp
+        </button>
 
-  <button
-    type="button"
-    onClick={callNow}
-    className="flex items-center gap-2 bg-[#1a2a4e] text-white px-6 py-3 rounded-xl hover:bg-[#2a3a5e] transition-all hover:scale-105"
-  >
-    <Phone className="w-5 h-5" />
-    Call Now
-  </button>
-</div>
+        <button
+          type="button"
+          onClick={callNow}
+          className="flex items-center gap-2 bg-[#1a2a4e] text-white px-6 py-3 rounded-xl hover:bg-[#2a3a5e] transition-all hover:scale-105"
+        >
+          <Phone className="w-5 h-5" />
+          Call Now
+        </button>
+      </div>
     </form>
   );
 }
