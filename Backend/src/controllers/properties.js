@@ -5,7 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 
 export const createProperty = async (req, res) => {
   try {
-    const { propertyName, location, description, price, propertyType , Bedroom , Bathroom } =
+    const { propertyName, location, description, price, propertyType , size , Bedroom , Bathroom } =
       req.body;
 
     if (!propertyName || !location || !price || !propertyType) {
@@ -42,6 +42,7 @@ export const createProperty = async (req, res) => {
       description,
       price,
       propertyType,
+      size,
       Bedroom,
       Bathroom,
     });
