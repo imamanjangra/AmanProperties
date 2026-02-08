@@ -5,7 +5,7 @@ const HeroSection = () => {
   const navlink = useNavigate();
 
   return (
-    <section className="relative h-[75vh] w-full overflow-hidden">
+    <section className="relative h-[60vh] lg:h-[75vh] w-full overflow-hidden">
       
       {/* Background Image */}
       <motion.img

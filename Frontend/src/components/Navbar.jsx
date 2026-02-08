@@ -32,11 +32,11 @@ const Navbar = () => {
          
           />
         </div> */}
-           <h3 className="font-script text-white text-2xl font-bold">
+           <h3 className="font-script text-white text-lg lg-text-2xl font-bold">
               Aman<span className="text-[#c9a24d]"> Properties</span>
             </h3>
         {/* Menu */}
-        <ul className="flex gap-8 text-white ">
+        <ul className="flex gap-5 lg-gap-8 text-white ">
           <li><Link to="/" className="font-nav hover:text-blue-400 transition">Home</Link></li>
           <li><Link to="/properties" className="font-nav hover:text-blue-400 transition">Properties</Link></li>
           <li><Link to="/contact" className="font-nav hover:text-blue-400 transition">Contact</Link></li>

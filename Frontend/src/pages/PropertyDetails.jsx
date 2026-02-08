@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
+import toast from "react-hot-toast";
 import {
   Bed,
   Bath,
@@ -167,20 +167,34 @@ function ContactForm({ property }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await API.post("/form", {
-      firstName: firstname,
-      lastName: lastname,
-      mobileNo: Number(number),
-      purpose,
-      propertype: propertyType,
-    });
+    if (number.length != 10) {
+      toast.error("Mobile Number must be 10 digit !");
+      return;
+    }
 
-    setFirstname("");
-    setLastname("");
-    setNumber("");
-    setPurpose("");
-    setPropertyType("");
-    alert("Form submitted successfully");
+    if (!firstname || !number || !purpose || !propertyType) {
+      toast.error("Please fill compelete form !!");
+    }
+
+    try {
+      await API.post("/form", {
+        firstName: firstname,
+        lastName: lastname,
+        mobileNo: Number(number),
+        purpose,
+        propertype: propertyType,
+      });
+
+      setFirstname("");
+      setLastname("");
+      setNumber("");
+      setPurpose("");
+      setPropertyType("");
+      toast.success("Form submitted successfully");
+    } catch (error) {
+      toast.error("Failed to submit form");
+      return;
+    }
   };
 
   const handleWhatsapp = () => {
@@ -198,7 +212,7 @@ function ContactForm({ property }) {
     if (/Mobi|Android/i.test(navigator.userAgent)) {
       window.location.href = "tel:+919255446593";
     } else {
-      alert("Please call this number from your mobile: +91 9255446593");
+      toast.error("Please call this number from your mobile: +91 9255446593");
     }
   };
 

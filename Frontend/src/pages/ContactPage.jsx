@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import API from "../service/Api";
 import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
 
 const ContactPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -18,7 +19,14 @@ const ContactPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (mobileNo.length != 10) {
+      toast.error("Mobile Number must be 10 digit !");
+      return;
+    }
 
+    if (!firstName || !mobileNo || !purpose || !propertype) {
+      toast.error("Please fill compelete form !!");
+    }
     try {
       const res = await API.post("/form", {
         firstName,
@@ -27,9 +35,14 @@ const ContactPage = () => {
         purpose,
         propertype,
       });
+      if (number.length != 10) {
+      toast.error("Mobile Number must be 10 digit !");
+      return;
+    }
 
+  
       console.log(res.data);
-      alert("Message sent successfully!");
+      toast.success("Form submitted successfully")
 
       setFirstName("");
       setLastName("");
@@ -38,7 +51,7 @@ const ContactPage = () => {
       setPropertype("");
     } catch (error) {
       console.error(error.response?.data || error.message);
-      alert("Failed to send message");
+       toast.error("Failed to submit Form")
     }
   };
 
@@ -46,7 +59,7 @@ const ContactPage = () => {
     if (/Mobi|Android/i.test(navigator.userAgent)) {
       window.location.href = "tel:+919255446593";
     } else {
-      alert("Please call this number from your mobile: +91 9255446593");
+      toast.error("Please call this number from your mobile: +91 9255446593")
     }
   };
 
@@ -56,7 +69,7 @@ const ContactPage = () => {
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="w-full h-[80vh] lg:h-[60vh] relative"
+        className="w-full h-[40vh] lg:h-[60vh] relative"
       >
         <img
           src="https://sobharealty.com/sites/default/files/styles/webp/public/2024-07/banner-1400x726.jpg.webp?itok=J6GW-yox"

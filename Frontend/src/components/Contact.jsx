@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import API from "../service/Api";
+import toast from "react-hot-toast";
 
 export default function Contact() {
   const [firstname, setFirstname] = useState("");
@@ -13,6 +14,15 @@ export default function Contact() {
     e.preventDefault();
 
     try {
+
+      if (number.length != 10) {
+      toast.error("Mobile Number must be 10 digit !");
+      return;
+    }
+
+    if (!firstname || !number || !purpose || !propertyType) {
+      toast.error("Please fill compelete form !!");
+    }
       const res = await API.post("/form", {
         firstName: firstname,
         lastName: lastname,
@@ -29,10 +39,10 @@ export default function Contact() {
       setPurpose("");
       setPropertyType("");
 
-      alert("Form submitted successfully");
+       toast.success("Form submitted successfully")
     } catch (error) {
       console.error(error.response?.data || error.message);
-      alert("Form submission failed");
+       toast.error("Form submission failed")
     }
   };
 
