@@ -1,6 +1,9 @@
-import { MapPin, Bed, Bath } from "lucide-react";
+import { MapPin, Bed, Bath , Ruler } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const PropertyCard = ({ property }) => {
+
+  const navigate = useNavigate()
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
 
@@ -29,23 +32,33 @@ const PropertyCard = ({ property }) => {
         </div>
 
         {/* Details */}
-        {(property.beds || property.baths) && (
-          <div className="flex items-center gap-4 mb-4 text-gray-600">
-            {property.beds && (
-              <div className="flex items-center gap-1">
-                <Bed className="w-4 h-4" />
-                <span>{property.beds} Beds</span>
-              </div>
-            )}
+        {(property.beds || property.baths || property.size) && (
+  <div className="flex items-center gap-4 mb-4 text-gray-600 flex-wrap">
+    
+    {property.beds && (
+      <div className="flex items-center gap-1">
+        <Bed className="w-4 h-4" />
+        <span>{property.beds} Beds</span>
+      </div>
+    )}
 
-            {property.baths && (
-              <div className="flex items-center gap-1">
-                <Bath className="w-4 h-4" />
-                <span>{property.baths} Baths</span>
-              </div>
-            )}
-          </div>
-        )}
+    {property.baths && (
+      <div className="flex items-center gap-1">
+        <Bath className="w-4 h-4" />
+        <span>{property.baths} Baths</span>
+      </div>
+    )}
+
+    {property.size && (
+      <div className="flex items-center gap-1">
+        <Ruler className="w-4 h-4" />
+        <span>{property.size} Sq Ft</span>
+      </div>
+    )}
+
+  </div>
+)}
+
 
         {/* Price */}
         <div className="flex items-center justify-between">
@@ -53,7 +66,7 @@ const PropertyCard = ({ property }) => {
             {property.price}
           </p>
 
-          <button className="bg-[#1a2a4e] text-white px-4 py-2 rounded-lg hover:bg-[#2a3a5e] transition">
+          <button onClick={() => navigate(`/properties/${property.id}`)} className="bg-[#1a2a4e] text-white px-4 py-2 rounded-lg hover:bg-[#2a3a5e] transition">
             View Details
           </button>
         </div>
