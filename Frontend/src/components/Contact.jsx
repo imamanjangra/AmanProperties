@@ -87,7 +87,7 @@ export default function Contact() {
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
               required
-              className="border p-3 rounded"
+              className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
             />
 
             <input
@@ -95,7 +95,7 @@ export default function Contact() {
               placeholder="Last Name"
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
-              className="border p-3 rounded"
+              className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
             />
           </div>
 
@@ -105,14 +105,14 @@ export default function Contact() {
             value={number}
             onChange={(e) => setNumber(e.target.value)}
             required
-            className="border p-3 rounded w-full"
+            className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
           />
 
           <select
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
             required
-            className="border p-3 rounded w-full"
+            className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
           >
             <option value="">Select purpose</option>
             <option value="Buy">Buy Property</option>
@@ -123,7 +123,7 @@ export default function Contact() {
             value={propertyType}
             onChange={(e) => setPropertyType(e.target.value)}
             required
-            className="border p-3 rounded w-full"
+            className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
           >
             <option value="">Select property type</option>
             <option value="Plot">Plot</option>
@@ -135,7 +135,7 @@ export default function Contact() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             type="submit"
-            className="font-nav w-full bg-slate-900 text-white py-3 rounded hover:bg-[#c9a24d]"
+            className="w-full mt-2 bg-[#d4af37] text-[#1a2a4e] py-3 rounded-md font-medium hover:bg-[#c19a2e] transition"
           >
             Request Consultation
           </motion.button>

@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 import ContactButtons from "../components/ContactButtons";
+import FloatingContactCard from "../components/FloatingContactCard";
 
 export default function Layout() {
   return (
@@ -12,6 +13,7 @@ export default function Layout() {
       </main>
       <Footer />
       <ContactButtons/>
+      <FloatingContactCard/>
     </div>
   );
 }

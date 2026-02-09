@@ -32,9 +32,12 @@ const Navbar = () => {
          
           />
         </div> */}
+        <Link to='/'>
            <h3 className="font-script text-white text-lg lg-text-2xl font-bold">
               Aman<span className="text-[#c9a24d]"> Properties</span>
             </h3>
+          </Link>
+          
         {/* Menu */}
         <ul className="flex gap-5 lg-gap-8 text-white ">
           <li><Link to="/" className="font-nav hover:text-blue-400 transition">Home</Link></li>

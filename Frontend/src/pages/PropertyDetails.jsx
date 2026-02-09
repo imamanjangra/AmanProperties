@@ -231,13 +231,13 @@ function ContactForm({ property }) {
           value={firstname}
           onChange={(e) => setFirstname(e.target.value)}
           required
-          className="border p-3 rounded"
+          className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
         />
         <input
           placeholder="Last Name"
           value={lastname}
           onChange={(e) => setLastname(e.target.value)}
-          className="border p-3 rounded"
+          className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
         />
       </div>
 
@@ -246,14 +246,14 @@ function ContactForm({ property }) {
         value={number}
         onChange={(e) => setNumber(e.target.value)}
         required
-        className="border p-3 rounded w-full"
+        className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
       />
 
       <select
         value={purpose}
         onChange={(e) => setPurpose(e.target.value)}
         required
-        className="border p-3 rounded w-full"
+        className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
       >
         <option value="">Select Purpose</option>
         <option value="Buy">Buy</option>
@@ -264,7 +264,7 @@ function ContactForm({ property }) {
         value={propertyType}
         onChange={(e) => setPropertyType(e.target.value)}
         required
-        className="border p-3 rounded w-full"
+        className="w-full px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:border-[#d4af37]"
       >
         <option value="">Property Type</option>
         <option value="Plot">Plot</option>
@@ -272,7 +272,7 @@ function ContactForm({ property }) {
         <option value="Floor">Floor</option>
       </select>
 
-      <button className="w-full bg-[#1a2a4e] text-white py-3 rounded hover:bg-[#d4af37] hover:text-[#1a2a4e] transition">
+      <button className="w-full mt-2 bg-[#d4af37] text-[#1a2a4e] py-3 rounded-md font-medium hover:bg-[#c19a2e] transition">
         Submit
       </button>
 

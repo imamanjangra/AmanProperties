@@ -35,7 +35,7 @@ const ContactPage = () => {
         purpose,
         propertype,
       });
-      if (number.length != 10) {
+      if (mobileNo.length != 10) {
       toast.error("Mobile Number must be 10 digit !");
       return;
     }

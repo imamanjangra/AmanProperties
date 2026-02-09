@@ -30,9 +30,9 @@ export default function Services() {
                 key={i}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -15 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.7 }}
                 className="bg-white p-8 rounded-2xl shadow hover:shadow-2xl"
               >
                 <Icon className="w-10 h-10 text-[#c9a24d] mb-4" />

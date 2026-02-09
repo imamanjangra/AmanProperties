@@ -5,7 +5,7 @@ const PropertyCard = ({ property }) => {
 
   const navigate = useNavigate()
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+    <div onClick={() => navigate(`/properties/${property.id}`)} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
 
       {/* Image */}
       <div className="relative h-64 overflow-hidden">
