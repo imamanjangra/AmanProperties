@@ -14,7 +14,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    if (user) navigate("/admin/dashboard");
+    if (user) navigate("/admin/FormData");
   }, [user, navigate]);
 
   const handleLogin = async (e) => {
