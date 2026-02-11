@@ -47,7 +47,7 @@ export default function FormData() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className=" flex-1 overflow-y-auto p-6 bg-zinc-950 text-zinc-100">
       <div className="mb-6">
         <h1 className="text-2xl md:text-3xl font-semibold text-purple-400">
           Form Responses
@@ -57,7 +57,7 @@ export default function FormData() {
         </p>
       </div>
 
-      <div className="grid gap-4 ">
+    <div className="flex flex-col space-y-2">
         {loading ? (
           <div className="text-sm text-gray-500"><FormResponseSkeleton/></div>
         ) : formdata.length === 0 ? (

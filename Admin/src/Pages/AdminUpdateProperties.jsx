@@ -3,6 +3,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import API from "../Services/API";
 import { useNavigate } from "react-router-dom";
 import FormResponseSkeleton from "../Components/FormResponseSkeleton";
+import toast from "react-hot-toast";
 
 export default function AdminUpdateProperties() {
   const [properties, setProperties] = useState([]);
@@ -25,6 +26,28 @@ export default function AdminUpdateProperties() {
   useEffect(() => {
     fetchProperties();
   }, []);
+
+  const handleDelete = async (id) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this property?");
+  if (!confirmDelete) return;
+
+  try {
+    // Send DELETE request to your API
+    await API.delete(`/properties/${id}`);
+    
+    // Remove deleted property from the state so UI updates instantly
+    setProperties((prev) => prev.filter((property) => property._id !== id));
+    
+    // alert("Property deleted successfully!");
+    toast.success("Property deleted successfully!")
+  } catch (error) {
+    console.error("Failed to delete property", error);
+    // alert("Failed to delete property. Try agatoain.");
+    toast.error("Failed to delete property. Try again.")
+  }
+};
+
+  
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 p-4 md:p-8">
@@ -60,7 +83,7 @@ export default function AdminUpdateProperties() {
                   </button>
 
                   <button
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDelete(item._id)}
                     className="flex items-center gap-2 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-2 text-sm text-red-400"
                   >
                     <Trash2 size={14} /> Delete
