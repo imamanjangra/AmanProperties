@@ -38,17 +38,18 @@ export default function AdminSidebar() {
         </div>
 
         <nav className="p-4 space-y-2">
-          <NavLink to="/admin/forms" className={linkClass}>
+          
+          <NavLink to="/admin/FormData" className={linkClass}>
             <ClipboardList size={18} />
             Form Responses
           </NavLink>
 
-          <NavLink to="/admin/add-property" className={linkClass}>
+          <NavLink to="/admin/addproperties" className={linkClass}>
             <PlusCircle size={18} />
             Add Properties
           </NavLink>
 
-          <NavLink to="/admin/update-property" className={linkClass}>
+          <NavLink to="/admin/updateproperties" className={linkClass}>
             <Edit size={18} />
             Update Properties
           </NavLink>
