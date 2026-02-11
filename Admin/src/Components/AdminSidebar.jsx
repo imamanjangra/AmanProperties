@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { PlusCircle, Edit, ClipboardList, LogOut, PanelLeftOpen, PanelLeftClose, CircleX } from "lucide-react";
-import { AuthContext } from "../context/Authcontext";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 export default function AdminSidebar({ children }) {
   const { user, logout } = useContext(AuthContext);

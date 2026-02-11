@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import FormResponseCard from "../Components/FormResponseCard";
+import FormResponseCard from "../Components/FormResponseCard.jsx";
 import toast from "react-hot-toast";
-import API from "../Services/API";
-import FormResponseSkeleton from "../Components/FormResponseSkeleton";
+import API from "../Services/API.jsx";
+import FormResponseSkeleton from "../Components/FormResponseSkeleton.jsx";
 
 export default function FormData() {
   const [loading, setLoading] = useState(false);

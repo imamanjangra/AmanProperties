@@ -1,16 +1,17 @@
 import { useContext } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import Login from "./Pages/Login";
+import Login from "./Pages/Login.jsx";
 
-import { AuthContext } from "./context/Authcontext";
+// import { AuthContext } from "./context/Authcontext";
 
-import AdminLayout from "./layout/AdminLayout";
-import ProtectedAdmin from "./routes/ProtectedAdmin";
-import FormData from "./Pages/FormData";
-import AdminAddProperty from "./Pages/AdminAddProperty";
-import AdminUpdateProperties from "./Pages/AdminUpdateProperties";
-import EditPropertyForm from "./Pages/EditPropertyForm";
+import AdminLayout from "./layout/AdminLayout.jsx";
+import ProtectedAdmin from "./routes/ProtectedAdmin.jsx";
+import FormData from "./Pages/FormData.jsx";
+import AdminAddProperty from "./Pages/AdminAddProperty.jsx";
+import AdminUpdateProperties from "./Pages/AdminUpdateProperties.jsx";
+import EditPropertyForm from "./Pages/EditPropertyForm.jsx";
+import { AuthContext } from "./context/AuthContext.jsx";
 
 function App() {
   const { user } = useContext(AuthContext);

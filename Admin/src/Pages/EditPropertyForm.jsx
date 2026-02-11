@@ -10,7 +10,7 @@ import {
   FileText,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import API from "../Services/API";
+import API from "../Services/API.jsx";
 import { useParams } from "react-router-dom";
 
 export default function EditPropertyForm() {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Pencil, Trash2 } from "lucide-react";
-import API from "../Services/API";
+import API from "../Services/API.jsx";
 import { useNavigate } from "react-router-dom";
-import FormResponseSkeleton from "../Components/FormResponseSkeleton";
+import FormResponseSkeleton from "../Components/FormResponseSkeleton.jsx";
 import toast from "react-hot-toast";
 
 export default function AdminUpdateProperties() {

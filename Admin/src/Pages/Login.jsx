@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { Eye, EyeOff, User, Lock } from "lucide-react";
 import API from "../Services/API.jsx";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/Authcontext.jsx";
+// import { AuthContext } from "../context/Authcontext.jsx";
 import toast from "react-hot-toast";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 export default function Login() {
   const navigate = useNavigate();

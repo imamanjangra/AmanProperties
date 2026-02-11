@@ -11,7 +11,7 @@ import {
   FileText,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import API from "../Services/API";
+import API from "../Services/API.jsx";
 
 export default function AdminAddProperty() {
   const [images, setImages] = useState([]);
