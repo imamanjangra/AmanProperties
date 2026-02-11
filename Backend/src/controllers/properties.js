@@ -18,11 +18,9 @@ export const createProperty = async (req, res) => {
 
     const imageUrls = [];
 
-    // Upload each image to cloudinary
+   
     for (const file of req.files) {
       const cloudinaryResult = await uplodeOnCloudinary(file.path);
-      console.log("API KEY:", process.env.CLOUDINARY_API_KEY);
-      console.log("CLOUD NAME:", process.env.CLOUDINARY_CLOUD_NAME);
       if (!cloudinaryResult) {
         return res.status(500).json({
           message: "Image upload failed",
@@ -56,10 +54,7 @@ export const createProperty = async (req, res) => {
   }
 };
 
-// 
-/* ===============================
-   GET ALL PROPERTIES (PUBLIC)
-================================ */
+
 export const getProperties = async (req, res) => {
   try {
     const properties = await Properties.find().sort({ createdAt: -1 });
@@ -69,9 +64,6 @@ export const getProperties = async (req, res) => {
   }
 };
 
-/* ===============================
-   GET SINGLE PROPERTY (PUBLIC)
-================================ */
 export const getSingleProperty = async (req, res) => {
   try {
     const property = await Properties.findById(req.params.id);
@@ -86,9 +78,7 @@ export const getSingleProperty = async (req, res) => {
   }
 };
 
-/* ===============================
-   UPDATE PROPERTY (ADMIN)
-================================ */
+
 export const updateProperty = async (req, res) => {
   try {
     const property = await Properties.findById(req.params.id);
@@ -99,7 +89,7 @@ export const updateProperty = async (req, res) => {
 
     let images = property.images;
 
-    // If new images uploaded → delete old images from cloudinary
+  
     if (req.files && req.files.length > 0) {
       for (const img of property.images) {
         await cloudinary.uploader.destroy(img.public_id);
@@ -136,9 +126,7 @@ export const updateProperty = async (req, res) => {
   }
 };
 
-/* ===============================
-   DELETE PROPERTY (ADMIN)
-================================ */
+
 export const deleteProperty = async (req, res) => {
   try {
     const property = await Properties.findById(req.params.id);

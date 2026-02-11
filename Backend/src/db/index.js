@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const DB_NAME = "AmanProperties"
 
 const connectDB = async() => {
