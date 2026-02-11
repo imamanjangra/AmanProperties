@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function ContactButtons() {
   const navigate = useNavigate();
-  const phoneNo = 9468255640;
-  const message = "Hello I want to connect with you";
+  const phoneNo = 9255446593;
+  const message = "Hi, I'm interested in a property listed on your website. Could you please share more details?";
 
   const handleWhatsapp = () => {
     const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`;

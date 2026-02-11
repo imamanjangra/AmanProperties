@@ -10,8 +10,8 @@ const ContactPage = () => {
   const [purpose, setPurpose] = useState("");
   const [propertype, setPropertype] = useState("");
 
-  const phoneNo = 9468255640;
-  const message = "Heelo i want to connect with you ";
+  const phoneNo = 9255446593;
+  const message = "Hi, I'm interested in a property listed on your website. Could you please share more details?";
   const handleWhatsapp = () => {
     const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
@@ -41,7 +41,7 @@ const ContactPage = () => {
     }
 
   
-      console.log(res.data);
+
       toast.success("Form submitted successfully")
 
       setFirstName("");

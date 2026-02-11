@@ -31,7 +31,7 @@ export default function Contact() {
         propertype: propertyType,
       });
 
-      console.log(res.data);
+    
 
       setFirstname("");
       setLastname("");

@@ -16,7 +16,7 @@ const FeaturedProperties = () => {
 
       
       setProperties(data);
-      console.log(data);
+      
     } catch (error) {
       console.log("Failed to fetch properties", error);
     } finally {
