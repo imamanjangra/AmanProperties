@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import ContactBox from "./contactBox.jsx";
+import ContactBox from "./ContactBox.jsx";
 
 export default function FloatingContactCard() {
   const [show, setShow] = useState(false);
