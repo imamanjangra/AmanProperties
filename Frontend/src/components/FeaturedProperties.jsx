@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropertyCard from "./PropertyCard";
 import API from "../service/Api";
+import { PropertyCardSkeleton } from "./PropertyCardSkeleton";
+// import PropertyCardSkeleton from "./PropertyCardSkeleton";
 
 const FeaturedProperties = () => {
   const [properties, setProperties] = useState([]);
@@ -49,7 +51,7 @@ const FeaturedProperties = () => {
 
         
         {loading && (
-          <p className="text-center text-gray-500">Loading properties...</p>
+          <div className="text-center text-gray-500"><PropertyCardSkeleton/></div>
         )}
 
        

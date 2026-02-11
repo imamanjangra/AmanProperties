@@ -3,6 +3,7 @@ import PropertyCard from "../components/PropertyCard";
 import API from "../service/Api";
 import { motion } from "framer-motion";
 import Contact from "../components/Contact";
+import { PropertyCardSkeleton } from "../components/PropertyCardSkeleton";
 
 const PropertyPage = () => {
   const [properties, setProperties] = useState([]);
@@ -64,17 +65,12 @@ const PropertyPage = () => {
             Available Properties
           </h2>
 
-          <select className="border rounded-lg px-4 py-2 text-gray-600">
-            <option>Sort by</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Newest</option>
-          </select>
+         
         </div>
 
         {/* Loading */}
         {loading && (
-          <p className="text-center text-gray-500">Loading properties...</p>
+          <div className="text-center text-gray-500"><PropertyCardSkeleton/></div>
         )}
 
         {/* Property Grid */}
