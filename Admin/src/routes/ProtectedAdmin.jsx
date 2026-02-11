@@ -5,11 +5,10 @@ import { AuthContext } from "../context/Authcontext";
 export default function ProtectedAdmin({ children }) {
   const { user } = useContext(AuthContext);
 
-  // agar login nahi hai
+  
   if (!user) {
-    return <Navigate to="/login" />;
+    return ;
   }
 
-  // agar login hai
   return children;
 }

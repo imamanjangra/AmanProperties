@@ -72,6 +72,6 @@ export default function FormData() {
           ))
         )}
       </div>
-    </div>
+    </div>  
   );
 }
