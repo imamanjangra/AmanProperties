@@ -7,7 +7,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173","http://localhost:5174" , "https://amanproperties.onrender.com" , "https://amanproperties-admin.onrender.com/"
+      "http://localhost:5173","http://localhost:5174" , "https://amanproperties.onrender.com" , "https://amanproperties-admin.onrender.com"
     ],
     credentials: true,
   })
