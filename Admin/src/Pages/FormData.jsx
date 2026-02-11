@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import FormResponseCard from "../Components/FormResponseCard";
 import toast from "react-hot-toast";
 import API from "../Services/API";
+import FormResponseSkeleton from "../Components/FormResponseSkeleton";
 
 export default function FormData() {
   const [loading, setLoading] = useState(false);
@@ -58,7 +59,7 @@ export default function FormData() {
 
       <div className="grid gap-4 ">
         {loading ? (
-          <div className="text-sm text-gray-500">loading...</div>
+          <div className="text-sm text-gray-500"><FormResponseSkeleton/></div>
         ) : formdata.length === 0 ? (
           <div className="text-sm text-gray-500">no responses</div>
         ) : (
