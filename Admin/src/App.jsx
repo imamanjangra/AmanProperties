@@ -37,6 +37,7 @@ function App() {
           <Route path="updateproperties" element={<AdminUpdateProperties />} />
           <Route path="updateproperties/:id" element={<EditPropertyForm />} />
         </Route>
+         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
   );
