@@ -24,7 +24,7 @@ export default function FormData() {
   useEffect(() => {
     fetchForm();
   }, []);
-  console.log(formdata);
+  
 
   const copyNumber = (number) => {
     try {

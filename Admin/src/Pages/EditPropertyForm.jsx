@@ -141,11 +141,21 @@ export default function EditPropertyForm() {
                 onChange={(e) => setPropertyType(e.target.value)}
                 className="w-full bg-transparent py-2 text-sm outline-none"
               >
-                <option value="">Select Type</option>
-                <option value="Apartment">Apartment</option>
-                <option value="Villa">Villa</option>
-                <option value="Plot">Plot</option>
-                <option value="Commercial">Commercial</option>
+                 <option className="bg-zinc-950" value="">
+                  Select Type
+                </option>
+                <option className="bg-zinc-950" value="Apartment">
+                  Plot
+                </option>
+                <option className="bg-zinc-950" value="Villa">
+                  Home
+                </option>
+                <option className="bg-zinc-950" value="Plot">
+                  Floor
+                </option>
+                <option className="bg-zinc-950" value="Commercial">
+                  Villa
+                </option>
               </select>
             </div>
           </div>

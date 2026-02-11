@@ -57,7 +57,7 @@ export default function AdminAddProperty() {
       setBathroom("");
       setImages([]);
     } catch (error) {
-      console.log(error);
+     
       toast.error("Failed to add property");
     }
   };
