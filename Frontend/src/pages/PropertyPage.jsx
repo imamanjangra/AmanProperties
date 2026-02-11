@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import PropertyCard from "../components/PropertyCard";
-import API from "../service/Api";
+import PropertyCard from "../components/PropertyCard.jsx";
+import API from "../service/Api.jsx";
 import { motion } from "framer-motion";
-import Contact from "../components/Contact";
-import { PropertyCardSkeleton } from "../components/PropertyCardSkeleton";
+import Contact from "../components/Contact.jsx";
+import { PropertyCardSkeleton } from "../components/PropertyCardSkeleton.jsx";
 
 const PropertyPage = () => {
   const [properties, setProperties] = useState([]);

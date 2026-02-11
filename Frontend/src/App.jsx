@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 import {Route, Routes} from "react-router-dom"
-import Home from './pages/Home'
-import ContactPage from './pages/ContactPage'
-import PropertyPage from './pages/PropertyPage'
+import Home from './pages/Home.jsx'
+import ContactPage from './pages/ContactPage.jsx'
+import PropertyPage from './pages/PropertyPage.jsx'
 import Layout from './layout/layout.jsx'
 import PropertyDetails from './pages/PropertyDetails.jsx'
 // import PropertyPage from './pages/PropertyPage'

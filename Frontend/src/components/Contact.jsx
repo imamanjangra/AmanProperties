@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import API from "../service/Api";
+import API from "../service/Api.jsx";
 import toast from "react-hot-toast";
 
 export default function Contact() {

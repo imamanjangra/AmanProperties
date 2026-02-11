@@ -1,6 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import API from "../service/Api";
+import API from "../service/Api.jsx";
 export default function ContactBox() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

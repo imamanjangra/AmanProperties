@@ -1,7 +1,7 @@
-import HeroSection from "../components/HeroSection";
-import FeaturedProperties from "../components/FeaturedProperties";
-import Services from "../components/Services";
-import Contact from "../components/Contact";
+import HeroSection from "../components/HeroSection.jsx";
+import FeaturedProperties from "../components/FeaturedProperties.jsx";
+import Services from "../components/Services.jsx";
+import Contact from "../components/Contact.jsx";
 
 
 export default function Home() {

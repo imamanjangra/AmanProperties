@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/navbar";
-import Footer from "../components/Footer";
-import ContactButtons from "../components/ContactButtons";
-import FloatingContactCard from "../components/FloatingContactCard";
+import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
+import ContactButtons from "../components/ContactButtons.jsx";
+import FloatingContactCard from "../components/FloatingContactCard.jsx";
 
 export default function Layout() {
   return (

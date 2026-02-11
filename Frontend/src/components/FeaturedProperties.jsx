@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PropertyCard from "./PropertyCard";
-import API from "../service/Api";
-import { PropertyCardSkeleton } from "./PropertyCardSkeleton";
+import PropertyCard from "./PropertyCard.jsx";
+import API from "../service/Api.jsx";
+import { PropertyCardSkeleton } from "./PropertyCardSkeleton.jsx";
 // import PropertyCardSkeleton from "./PropertyCardSkeleton";
 
 const FeaturedProperties = () => {
