@@ -6,6 +6,7 @@ import ContactPage from './pages/ContactPage.jsx'
 import PropertyPage from './pages/PropertyPage.jsx'
 import Layout from './layout/layout.jsx'
 import PropertyDetails from './pages/PropertyDetails.jsx'
+import NotFound from './pages/NotFound.jsx'
 // import PropertyPage from './pages/PropertyPage'
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
     <Route path="properties" element={<PropertyPage />} />
     <Route path="properties/:id" element={<PropertyDetails />} />
   </Route>
+
+  <Route path="*" element={<NotFound />} />
 </Routes>
      
   )

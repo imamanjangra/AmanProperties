@@ -20,10 +20,14 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+  const trimmedUsername = username.trim();
+  const trimmedPassword = password.trim();
+
     try {
       const { data } = await API.post("/admin/login", {
-        username,
-        password,
+       username: trimmedUsername,
+       password: trimmedPassword,
       });
 
       localStorage.setItem("token", data.token);
