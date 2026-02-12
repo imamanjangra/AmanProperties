@@ -8,7 +8,7 @@ export default function NotFound() {
       
       {/* Image */}
       <img
-        src="../public/error.png"
+        src="https://i.ibb.co/HLFcvHt9/error.png"
         alt="Page Not Found"
         className="w-150 mb-8"
       />
