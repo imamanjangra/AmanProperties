@@ -1,18 +1,28 @@
-import { MapPin, Bed, Bath , Ruler } from "lucide-react";
+import { MapPin, Bed, Bath, Ruler } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const PropertyCard = ({ property }) => {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
   return (
-    <div onClick={() => navigate(`/properties/${property.id}`)} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-
+    <motion.div
+      onClick={() => navigate(`/properties/${property.id}`)}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      whileHover={{ y: -8 }}
+      viewport={{ once: true }}
+      className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+    >
       {/* Image */}
       <div className="relative h-64 overflow-hidden">
-        <img
+        <motion.img
           src={property.image}
           alt={property.title}
-          className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.5 }}
+          className="w-full h-full object-cover"
         />
 
         <div className="absolute top-4 right-4 bg-[#d4af37] text-[#1a2a4e] px-3 py-1 rounded-full text-sm font-medium">
@@ -31,34 +41,30 @@ const PropertyCard = ({ property }) => {
           <span>{property.location}</span>
         </div>
 
-        {/* Details */}
         {(property.beds || property.baths || property.size) && (
-  <div className="flex items-center gap-4 mb-4 text-gray-600 flex-wrap">
-    
-    {property.beds && (
-      <div className="flex items-center gap-1">
-        <Bed className="w-4 h-4" />
-        <span>{property.beds} Beds</span>
-      </div>
-    )}
+          <div className="flex items-center gap-4 mb-4 text-gray-600 flex-wrap">
+            {property.beds && (
+              <div className="flex items-center gap-1">
+                <Bed className="w-4 h-4" />
+                <span>{property.beds} Beds</span>
+              </div>
+            )}
 
-    {property.baths && (
-      <div className="flex items-center gap-1">
-        <Bath className="w-4 h-4" />
-        <span>{property.baths} Baths</span>
-      </div>
-    )}
+            {property.baths && (
+              <div className="flex items-center gap-1">
+                <Bath className="w-4 h-4" />
+                <span>{property.baths} Baths</span>
+              </div>
+            )}
 
-    {property.size && (
-      <div className="flex items-center gap-1">
-        <Ruler className="w-4 h-4" />
-        <span>{property.size} Sq Ft</span>
-      </div>
-    )}
-
-  </div>
-)}
-
+            {property.size && (
+              <div className="flex items-center gap-1">
+                <Ruler className="w-4 h-4" />
+                <span>{property.size} Sq Ft</span>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Price */}
         <div className="flex items-center justify-between">
@@ -66,12 +72,18 @@ const PropertyCard = ({ property }) => {
             {property.price}
           </p>
 
-          <button onClick={() => navigate(`/properties/${property.id}`)} className="bg-[#1a2a4e] font-nav text-white px-4 py-2 rounded-lg hover:bg-[#2a3a5e] transition">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/properties/${property.id}`);
+            }}
+            className="bg-[#1a2a4e] font-nav text-white px-4 py-2 rounded-lg hover:bg-[#2a3a5e] transition"
+          >
             View Details
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
