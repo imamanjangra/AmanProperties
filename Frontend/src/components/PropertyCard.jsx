@@ -8,11 +8,11 @@ const PropertyCard = ({ property }) => {
   return (
     <motion.div
       onClick={() => navigate(`/properties/${property.id}`)}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      whileHover={{ y: -8 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
       viewport={{ once: true }}
+      whileHover={{ y: -5 }}
       className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
     >
       {/* Image */}
@@ -20,8 +20,8 @@ const PropertyCard = ({ property }) => {
         <motion.img
           src={property.image}
           alt={property.title}
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.5 }}
+          // whileHover={{ scale: 1.1 }}
+          // transition={{ duration: 0.5 }}
           className="w-full h-full object-cover"
         />
 
@@ -68,9 +68,7 @@ const PropertyCard = ({ property }) => {
 
         {/* Price */}
         <div className="flex items-center justify-between">
-          <p className="text-[#d4af37] font-semibold">
-            {property.price}
-          </p>
+          <p className="text-[#d4af37] font-semibold">{property.price}</p>
 
           <button
             onClick={(e) => {
