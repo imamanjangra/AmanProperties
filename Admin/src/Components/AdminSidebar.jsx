@@ -112,7 +112,7 @@ export default function AdminSidebar({ children }) {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto p-6 ">{children}</main>
+      <main className="flex-1 overflow-auto">{children}</main>
     </div>
   );
 }

@@ -6,7 +6,7 @@ export default function AdminLayout() {
   return (
     <div className="flex min-h-screen bg-zinc-950 text-zinc-100">
       <AdminSidebar />
-      <main className=" flex-1 p-4 md:p-8">
+      <main className=" flex-1 md:p-8">
         <Outlet />
       </main>
     </div>
