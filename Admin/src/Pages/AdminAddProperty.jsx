@@ -44,7 +44,11 @@ export default function AdminAddProperty() {
         formData.append("images", img);
       });
 
-      const { data } = await API.post("/properties", formData);
+      const { data } = await API.post("/properties", formData, {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+});
 
       toast.success("Property added successfully");
 
