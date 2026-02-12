@@ -171,11 +171,11 @@ const ContactPage = () => {
 
             <div className="space-y-6">
               <motion.div
-                initial={{ opacity: 0, x: 60 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="bg-white p-8 rounded-xl shadow-lg"
+                // initial={{ opacity: 0, x: 60 }}
+                // whileInView={{ opacity: 1, x: 0 }}
+                // viewport={{ once: true }}
+                // transition={{ duration: 0.7 }}
+                // className="bg-white p-8 rounded-xl shadow-lg"
               >
                 <h3 className="font-script text-[#1a2a4e] mb-6 text-xl font-semibold">
                   CONTACT INFORMATION

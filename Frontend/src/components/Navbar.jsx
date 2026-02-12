@@ -17,13 +17,10 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
       ${
-        scrolled
-          ? "bg-black/50 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+        scrolled ? "bg-black/50 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-
         {/* Logo */}
         {/* <div className="text-white text-2xl font-bold tracking-wide">
           <img
@@ -32,19 +29,37 @@ const Navbar = () => {
          
           />
         </div> */}
-        <Link to='/'>
-           <h3 className="font-script text-white text-lg lg-text-2xl font-bold">
-              Aman<span className="text-[#c9a24d]"> Properties</span>
-            </h3>
-          </Link>
-          
+        <Link to="/">
+          <h3 className="font-script text-white font-bold leading-tight text-xl lg:text-2xl text-center lg:text-left">
+            <span className="block lg:inline">Aman</span>
+            <span className="block lg:inline text-[#c9a24d]">Properties</span>
+          </h3>
+        </Link>
+
         {/* Menu */}
         <ul className="flex gap-5 lg-gap-8 text-white ">
-          <li><Link to="/" className="font-nav hover:text-blue-400 transition">Home</Link></li>
-          <li><Link to="/properties" className="font-nav hover:text-blue-400 transition">Properties</Link></li>
-          <li><Link to="/contact" className="font-nav hover:text-blue-400 transition">Contact</Link></li>
+          <li>
+            <Link to="/" className="font-nav hover:text-blue-400 transition">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/properties"
+              className="font-nav hover:text-blue-400 transition"
+            >
+              Properties
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/contact"
+              className="font-nav hover:text-blue-400 "
+            >
+              Contact
+            </Link>
+          </li>
         </ul>
-
       </div>
     </nav>
   );
