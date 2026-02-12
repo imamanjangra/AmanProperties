@@ -3,17 +3,26 @@ import { useNavigate } from "react-router-dom";
 
 export default function ContactButtons() {
   const navigate = useNavigate();
-  const phoneNo = 9255446593;
-  const message = "Hi, I'm interested in a property listed on your website. Could you please share more details?";
+  const phoneNo = "919255446593"; // use country code for call & whatsapp
+  const message =
+    "Hi, I'm interested in a property listed on your website. Could you please share more details?";
 
   const handleWhatsapp = () => {
     const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
 
+  const callNow = () => {
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      window.location.href = "tel:+919255446593";
+    } else {
+      toast.error("Please call this number from your mobile: +91 9255446593")
+    }
+  };
+
   return (
     <>
-      {/* Mobile Bottom Bar */}
+      {/* 📱 Mobile Bottom Bar */}
       <div
         className="
           fixed bottom-0 left-0 right-0 z-50
@@ -22,8 +31,9 @@ export default function ContactButtons() {
           bg-gray-900
         "
       >
+        {/* ✅ Mobile → Direct Call */}
         <button
-          onClick={() => navigate(`/contact`)}
+          onClick={callNow}
           className="
             flex items-center justify-center gap-2
             py-4 text-white
@@ -31,9 +41,10 @@ export default function ContactButtons() {
           "
         >
           <PhoneCall className="w-5 h-5" />
-          <span className="font-nav font-semibold">CALL BACK</span>
+          <span className="font-nav font-semibold">CALL NOW</span>
         </button>
 
+        {/* WhatsApp */}
         <button
           onClick={handleWhatsapp}
           className="
@@ -46,8 +57,9 @@ export default function ContactButtons() {
         </button>
       </div>
 
-      {/* Desktop Floating Buttons */}
+      {/* 💻 Desktop Floating Buttons */}
       <div className="hidden md:flex fixed bottom-4 right-4 gap-4 z-50">
+        {/* Desktop → Navigate to Contact */}
         <button
           onClick={() => navigate(`/contact`)}
           className="

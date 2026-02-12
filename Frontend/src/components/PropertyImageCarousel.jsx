@@ -22,7 +22,7 @@ export default function PropertyImageCarousel({ images }) {
   }, [images]);
 
   return (
-<div className="relative w-full h-[400px] sm:h-[500px] lg:h-screen 
+<div className="relative w-full h-70 sm:h-125 lg:h-screen 
 overflow-hidden rounded-b-2xl lg:rounded-none">      
       {/* Image */}
       <img
@@ -32,7 +32,7 @@ overflow-hidden rounded-b-2xl lg:rounded-none">
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-black/40" />
 
       {/* Prev Button */}
       <button
