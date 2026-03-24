@@ -8,74 +8,98 @@ const PropertyCard = ({ property }) => {
   return (
     <motion.div
       onClick={() => navigate(`/properties/${property.id}`)}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      whileHover={{ y: -5 }}
-      className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+      whileHover={{ y: -6 }}
+      className="group bg-white rounded-2xl overflow-hidden 
+                 border border-gray-200 
+                 hover:border-[#c6a46c] 
+                 shadow-md hover:shadow-2xl 
+                 transition-all duration-300 cursor-pointer"
     >
-      {/* Image */}
+      {/* IMAGE */}
       <div className="relative h-64 overflow-hidden">
-        <motion.img
+        <img
           src={property.image}
           alt={property.title}
-          // whileHover={{ scale: 1.1 }}
-          // transition={{ duration: 0.5 }}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover 
+                     transition-transform duration-500 
+                     group-hover:scale-110"
         />
 
-        <div className="absolute top-4 right-4 bg-[#d4af37] text-[#1a2a4e] px-3 py-1 rounded-full text-sm font-medium">
+        {/* TYPE BADGE */}
+        <div className="absolute top-4 right-4 px-4 py-1.5 
+                        bg-[#c6a46c] text-white 
+                        rounded-full text-sm font-medium shadow-lg">
           {property.type}
         </div>
+
+        {/* FEATURED BADGE */}
+        {property.featured && (
+          <div className="absolute top-4 left-4 px-4 py-1.5 
+                          bg-[#1a2a4e] text-white 
+                          rounded-full text-sm font-medium shadow-lg">
+            Featured
+          </div>
+        )}
       </div>
 
-      {/* Content */}
+      {/* CONTENT */}
       <div className="p-6">
-        <h3 className="font-script text-[#1a2a4e] text-xl font-semibold mb-2">
+        {/* TITLE */}
+        <h3 className="text-xl font-semibold mb-2 
+                       text-[#1a2a4e] 
+                       transition-colors 
+                       group-hover:text-[#c6a46c]">
           {property.title}
         </h3>
 
-        <div className="flex items-center text-gray-600 mb-3">
-          <MapPin className="w-4 h-4 mr-2" />
-          <span>{property.location}</span>
-        </div>
+        {/* LOCATION */}
+        <p className="text-gray-500 text-sm mb-4 flex items-center gap-1">
+          <MapPin className="w-4 h-4" />
+          {property.location}
+        </p>
 
+        {/* DETAILS */}
         {(property.beds || property.baths || property.size) && (
-          <div className="flex items-center gap-4 mb-4 text-gray-600 flex-wrap">
+          <div className="flex items-center gap-4 mb-4 text-sm text-gray-500 flex-wrap">
             {property.beds && (
-              <div className="flex items-center gap-1">
+              <span className="flex items-center gap-1">
                 <Bed className="w-4 h-4" />
-                <span>{property.beds} Beds</span>
-              </div>
+                {property.beds} Beds
+              </span>
             )}
 
             {property.baths && (
-              <div className="flex items-center gap-1">
+              <span className="flex items-center gap-1">
                 <Bath className="w-4 h-4" />
-                <span>{property.baths} Baths</span>
-              </div>
+                {property.baths} Baths
+              </span>
             )}
 
             {property.size && (
-              <div className="flex items-center gap-1">
+              <span className="flex items-center gap-1">
                 <Ruler className="w-4 h-4" />
-                <span>{property.size} Sq Ft</span>
-              </div>
+                {property.size} sqft
+              </span>
             )}
           </div>
         )}
 
-        {/* Price */}
-        <div className="flex items-center justify-between">
-          <p className="text-[#d4af37] font-semibold">{property.price}</p>
+        {/* PRICE + BUTTON */}
+        <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+          <span className="text-2xl font-bold text-[#c6a46c]">
+            {property.price}
+          </span>
 
           <button
             onClick={(e) => {
               e.stopPropagation();
               navigate(`/properties/${property.id}`);
             }}
-            className="bg-[#1a2a4e] font-nav text-white px-4 py-2 rounded-lg hover:bg-[#2a3a5e] transition"
+            className="text-sm text-[#c6a46c] hover:underline"
           >
             View Details
           </button>

@@ -2,7 +2,7 @@ import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import dotenv from "dotenv";
 
-dotenv.config(); // ✅ THIS WAS MISSING
+dotenv.config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,22 +10,26 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const uplodeOnCloudinary = async (localFilePath) => {
+const uploadOnCloudinary = async (localFilePath) => {
   try {
     if (!localFilePath) return null;
 
     const response = await cloudinary.uploader.upload(localFilePath, {
-      folder: "properties",
+      folder: "products",
       resource_type: "auto",
     });
 
-    fs.unlinkSync(localFilePath);
+    fs.unlinkSync(localFilePath); // delete local file
+
     return response;
   } catch (error) {
-    console.error("Cloudinary Upload Error:", error.message); // ✅ IMPORTANT
-    if (fs.existsSync(localFilePath)) fs.unlinkSync(localFilePath);
+    if (fs.existsSync(localFilePath)) {
+      fs.unlinkSync(localFilePath);
+    }
+
+    console.error("Cloudinary error:", error);
     return null;
   }
 };
 
-export { uplodeOnCloudinary };
+export { uploadOnCloudinary };

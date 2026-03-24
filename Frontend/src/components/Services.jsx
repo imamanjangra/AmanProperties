@@ -10,7 +10,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-20 bg-linear-to-br from-[#f8f6f2] to-white">
       <div className="max-w-7xl mx-auto px-6">
 
         <motion.div

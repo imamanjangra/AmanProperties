@@ -18,7 +18,7 @@ const propertiesSchema = new mongoose.Schema(
     },
     description: String,
     price: {
-      type: Number,
+      type: String,
       required: true,
     },
     propertyType: {
@@ -35,6 +35,27 @@ const propertiesSchema = new mongoose.Schema(
     Bathroom : {
       type : Number,
     },
+    Floor : {
+      type : Number,
+    },
+    Facing : {
+      type : String,
+    },
+    PropertyAge : {
+      type : String,
+    },
+    isShow : {
+      type : Boolean,
+      default : true
+    },
+      owner : {
+      type : mongoose.Schema.Types.ObjectId,
+      ref : "User"
+    },
+    isverifed : {
+      type : Boolean,
+      default : false
+    }
 
   },
   { timestamps: true }

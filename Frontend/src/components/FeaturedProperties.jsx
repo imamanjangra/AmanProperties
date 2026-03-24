@@ -12,7 +12,7 @@ const FeaturedProperties = () => {
   const fetchProperties = async () => {
     try {
       setLoading(true);
-      const { data } = await API.get("/properties");
+      const { data } = await API.get("/properties/getverifiedProperties");
 
       
       setProperties(data);
@@ -29,7 +29,7 @@ const FeaturedProperties = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-linear-to-br from-[#f8f6f2] to-white">
       <div className="max-w-7xl mx-auto px-6">
 
        
@@ -74,10 +74,10 @@ const FeaturedProperties = () => {
           ))}
         </div>
 
-        
+         
         <div className="text-center mt-12">
           <Link to="/properties">
-            <button className="bg-[#1a2a4e] font-nav text-white px-8 py-3 rounded-lg hover:bg-[#2a3a5e] transition">
+            <button className="bg-[#c6a46c] font-nav text-white px-8 py-3 rounded-xl  hover:scale-105  transition">
               View All Properties
             </button>
           </Link>

@@ -5,7 +5,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative h-[100dvh] w-full overflow-hidden">
+    <section className="relative h-dvh w-full overflow-hidden">
       {/* Background Image */}
       <motion.img
         src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"
@@ -52,8 +52,8 @@ const HeroSection = () => {
             <div className="mt-10 flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
               <button
                 onClick={() => navigate("/properties")}
-                className="px-8 py-4 rounded-md bg-[#d4af37] text-black font-semibold hover:bg-[#c19a2e] transition duration-300"
-              >
+                className="px-8 py-4 rounded-xl bg-[#c6a46c] text-white  font-semibold hover:scale-105 transition duration-300"
+              > 
                 View Properties
               </button>
 

@@ -6,7 +6,7 @@ import Contact from "../components/Contact.jsx";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
+    <div className="min-h-screen bg-[#f8f6f2] dark:bg-slate-950">
       
       <HeroSection />
       <FeaturedProperties/>

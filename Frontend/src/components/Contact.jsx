@@ -47,7 +47,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="py-24 bg-slate-950 rounded-t-3xl overflow-hidden">
+    <section className="py-24 bg-linear-to-r from-[#c6a46c] to-[#b8955a]  overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
 
         {/* LEFT CONTENT */}
@@ -61,14 +61,11 @@ export default function Contact() {
             Get In Touch
           </span>
 
-          <h2 className="font-script text-4xl font-bold text-white mb-6">
+          <h2 className=" text-6xl font-bold leading-tight text-white mb-6">
             Let’s Find the Right Property for You
           </h2>
 
-          <p className="text-slate-400 max-w-lg">
-            Share your details and requirements. Our property experts will
-            personally reach out to assist you.
-          </p>
+        
         </motion.div>
 
         {/* FORM */}
@@ -135,7 +132,7 @@ export default function Contact() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             type="submit"
-            className="w-full mt-2 bg-[#d4af37] text-[#1a2a4e] py-3 rounded-md font-medium hover:bg-[#c19a2e] transition"
+            className="w-full mt-2 bg-[#c6a46c]  text-white py-3 rounded-xl font-medium hover:scale-102 transition"
           >
             Request Consultation
           </motion.button>

@@ -7,7 +7,7 @@ import FloatingContactCard from "../components/FloatingContactCard.jsx";
 export default function Layout() {
   return (
     <div > 
-      <Navbar />
+      <Navbar  variant="dark" />
       <main >
         <Outlet />
       </main>

@@ -125,7 +125,7 @@ export default function ContactBox() {
       {/* Button */}
       <button
         type="submit"
-        className="w-full mt-2 bg-[#d4af37] text-[#1a2a4e] py-3 rounded-md font-medium hover:bg-[#c19a2e] transition"
+        className="w-full mt-2 bg-[#dbaa5c] text-[#1a2a4e] py-3 rounded-md font-medium hover:bg-[#e0a84e] transition"
       >
         Send Message
       </button>

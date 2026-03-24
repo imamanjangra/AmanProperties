@@ -5,110 +5,152 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+   Building2,
+   Twitter,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="font-nav bg-slate-950 text-slate-400 pt-20 pb-10 ">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Top Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-slate-800">
-          {/* Brand */}
-          <div>
-            <h3 className="font-script text-white text-2xl font-bold mb-4">
-              Aman<span className="text-[#c9a24d]"> Properties</span>
-            </h3>
-            <p className="text-sm leading-relaxed">
-              Delivering premium real estate solutions with trust, transparency,
-              and personalized service.
+ 
+      <footer className="bg-linear-to-br from-[#f5f2ed] via-white to-[#f5f2ed] border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          {/* GRID */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-4 gap-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.15 },
+              },
+            }}
+          >
+            {/* BRAND */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+               
+
+                <h3 className="text-xl font-bold">
+                  Aman{" "}
+                  <span className="bg-gradient-to-r from-[#c6a46c] to-[#b8955a] bg-clip-text text-transparent">
+                    Properties
+                  </span>
+                </h3>
+              </div>
+
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Your trusted partner in finding the perfect property. Making
+                dreams come true.
+              </p>
+            </motion.div>
+
+            {/* QUICK LINKS */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <h3 className="font-semibold mb-5 text-gray-900">Quick Links</h3>
+
+              <ul className="space-y-3">
+                {[
+                  { name: "Home", link: "/" },
+                  { name: "Properties", link: "/properties" },
+                  { name: "Contact", link: "/contact" },
+              
+                ].map((item, i) => (
+                  <li key={i}>
+                    <a
+                      href={item.link}
+                      className="text-gray-600 text-sm hover:text-[#c6a46c] transition-all"
+                    >
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* SERVICES */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <h3 className="font-semibold mb-5 text-gray-900">Services</h3>
+
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li>Buy Property</li>
+                <li>Sell Property</li>
+                <li>Rent Property</li>
+                <li>Investment</li>
+              </ul>
+            </motion.div>
+
+            {/* CONTACT */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <h3 className="font-semibold mb-5 text-gray-900">Contact</h3>
+
+              <ul className="space-y-4 text-sm text-gray-600">
+                <li className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-[#c6a46c]" />
+                  AmanPropertie@email.com
+                </li>
+
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-[#c6a46c]" />
+                  +91 9255446593
+                </li>
+
+                <li className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#c6a46c]" />
+                  Haryana, India
+                </li>
+              </ul>
+            </motion.div>
+          </motion.div>
+
+          {/* BOTTOM */}
+          <motion.div
+            className="mt-14 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-sm text-gray-500">
+              © 2026 Aman Properties. All rights reserved.
             </p>
-          </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link to="/" className="hover:text-[#c9a24d] transition">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/properties"
-                  className="hover:text-[#c9a24d] transition"
+            {/* SOCIAL */}
+            <div className="flex items-center gap-4">
+              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+                <div
+                  key={i}
+                  className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center cursor-pointer hover:bg-gradient-to-br hover:from-[#c6a46c] hover:to-[#b8955a] hover:text-white transition-all duration-300 hover:scale-110"
                 >
-                  Properties
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-[#c9a24d] transition">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Our Services</h4>
-            <ul className="space-y-3 text-sm">
-              <li>Buy Property</li>
-              <li>Sell Property</li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Contact Us</h4>
-
-            <ul className="space-y-4 text-sm">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-[#c9a24d]" />
-                <span>Gharaunda,Haryana,India</span>
-              </li>
-
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-[#c9a24d]" />
-                <span>+91 9255446593</span>
-              </li>
-
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-[#c9a24d]" />
-                <span>Amanpropertie@email.com</span>
-              </li>
-            </ul>
-          </div>
+                  <Icon className="w-4 h-4" />
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
-
-        {/* Bottom */}
-        <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm">
-            © {new Date().getFullYear()} Amanproperties. All rights reserved.
-          </p>
-
-          {/* Social */}
-          <div className="flex gap-5">
-            <a
-              href="https://www.instagram.com/amanproperties_?igsh=OXBkeDY0OWRnZmhw"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Instagram className="w-5 h-5 hover:text-[#c9a24d] cursor-pointer transition" />
-            </a>
-
-            <a
-              href="https://www.facebook.com/profile.php?id=61587652093529&sk=about_details"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-            <Facebook className="w-5 h-5 hover:text-[#c9a24d] cursor-pointer transition" />
-            </a>
-            
-          </div>
-        </div>
-      </div>
-    </footer>
+      </footer>
   );
 }

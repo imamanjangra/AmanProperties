@@ -64,7 +64,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div>
+    <div className="bg-linear-to-br from-[#f8f6f2] to-white">
       <motion.section
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -78,7 +78,7 @@ const ContactPage = () => {
         />
       </motion.section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-[#f8f6f2]">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
             <motion.div
