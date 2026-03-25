@@ -7,7 +7,8 @@ import {
   Bed,
   Bath,
   MapPin,
-  Clock,
+  Clock ,
+  FileText,
   Layers,
 } from "lucide-react";
 import toast from "react-hot-toast";
@@ -31,45 +32,46 @@ export default function EditPropertyForm() {
   const [PropertyAge, setPropertyAge] = useState("");
   const [Floor, setFloor] = useState("");
 
-  const [existingImages, setExistingImages] = useState([]); // full objects
+  const [existingImages, setExistingImages] = useState([]);
   const [newImages, setNewImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // 🔥 FETCH DATA
-  const fetchProperty = async () => {
-    try {
-      const { data } = await API.get(`/properties/${id}`);
-
-      setPropertyName(data.propertyName || "");
-      setLocation(data.location || "");
-      setDescription(data.description || "");
-      setPrice(data.price || "");
-      setPropertyType(data.propertyType || "");
-      setSize(data.size || "");
-      setBedroom(data.bedroom || "");
-      setBathroom(data.bathroom || "");
-      setFacing(data.Facing || "");
-      setPropertyAge(data.PropertyAge || "");
-      setFloor(data.Floor || "");
-
-      // IMPORTANT: keep full object
-      setExistingImages(data.images || []);
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to load property");
-    }
-  };
-
   useEffect(() => {
+    const fetchProperty = async () => {
+      try {
+        const { data } = await API.get(`/properties/${id}`);
+
+        setPropertyName(data.propertyName || "");
+        setLocation(data.location || "");
+        setDescription(data.description || "");
+        setPrice(data.price || "");
+        setPropertyType(data.propertyType || "");
+        setSize(data.size || "");
+        setBedroom(data.bedroom || "");
+        setBathroom(data.bathroom || "");
+        setFacing(data.Facing || "");
+        setPropertyAge(data.PropertyAge || "");
+        setFloor(data.Floor || "");
+
+        if (data.images) {
+          setExistingImages(data.images.map((img) => img.url || img));
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Failed to load property");
+      }
+    };
+
     if (id) fetchProperty();
   }, [id]);
 
-  // 🔥 REMOVE EXISTING
+  // 🔥 REMOVE EXISTING IMAGE
   const removeExistingImage = (index) => {
     setExistingImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // 🔥 REMOVE NEW
+  // 🔥 REMOVE NEW IMAGE
   const removeNewImage = (index) => {
     setNewImages((prev) => prev.filter((_, i) => i !== index));
   };
@@ -102,11 +104,9 @@ export default function EditPropertyForm() {
       formData.append("PropertyAge", PropertyAge);
       formData.append("Floor", Floor);
 
-      // ✅ send only IDs (VERY IMPORTANT)
-      const existingIds = existingImages.map((img) => img._id);
-      formData.append("existingImages", JSON.stringify(existingIds));
+      // 🔥 important for backend
+      formData.append("existingImages", JSON.stringify(existingImages));
 
-      // new images
       newImages.forEach((file) => {
         formData.append("images", file);
       });
@@ -114,12 +114,7 @@ export default function EditPropertyForm() {
       await API.put(`/properties/${id}`, formData);
 
       toast.success("Property updated");
-
       setNewImages([]);
-
-      // 🔥 refresh UI with latest data
-      fetchProperty();
-
     } catch (error) {
       console.log(error);
       toast.error("Update failed");
@@ -130,8 +125,10 @@ export default function EditPropertyForm() {
 
   return (
     <div className="min-h-screen bg-[#f8f6f2] pt-20 text-black ">
-      <Navbar variant="light" />
-
+      <div>
+        <Navbar variant="light" />
+      </div>
+      {/* HEADER */}
       <div className="mb-6 max-w-4xl mx-auto">
         <h1 className="text-2xl md:text-3xl font-semibold text-[#c9a24d]">
           Edit Property
@@ -141,6 +138,7 @@ export default function EditPropertyForm() {
         </p>
       </div>
 
+      {/* FORM */}
       <div className="max-w-4xl mx-auto mb-10 rounded-xl border border-gray-200 bg-white shadow-sm p-4 md:p-6">
         <form
           onSubmit={updateProperty}
@@ -150,6 +148,7 @@ export default function EditPropertyForm() {
           <Input icon={<Home size={16} />} value={propertyName} setValue={setPropertyName} placeholder="Property Name" />
           <Input icon={<IndianRupee size={16} />} type="number" value={price} setValue={setPrice} placeholder="Price" />
 
+          {/* TYPE */}
           <div>
             <label className="text-sm text-gray-600">Property Type</label>
             <select
@@ -165,28 +164,29 @@ export default function EditPropertyForm() {
             </select>
           </div>
 
-          <div>
-            <label className="text-sm text-gray-600">Facing</label>
-            <select
-              value={Facing}
-              onChange={(e) => setFacing(e.target.value)}
-              className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            >
-              <option value="">Select Facing</option>
-              <option value="North">North</option>
-              <option value="South">South</option>
-              <option value="East">East</option>
-              <option value="West">West</option>
-            </select>
-          </div>
+            <div>
+              <label className="text-sm text-gray-600">Facing</label>
+              <select
+                value={Facing}
+                onChange={(e) => setFacing(e.target.value)}
+                className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+              >
+               <option value="">Select Facing</option>
+                <option value="North">North</option>
+                <option value="South">South</option>
+                <option value="East">East</option>
+                <option value="West">West</option>
+              </select>
+            </div>
 
-          <Input icon={<Layers size={16} />} type="number" value={Floor} setValue={setFloor} placeholder="Floor" />
+          <Input icon={<Layers  size={16} />} type="number" value={Floor} setValue={setFloor} placeholder="Floor" />
           <Input icon={<Maximize size={16} />} type="number" value={size} setValue={setSize} placeholder="Size" />
           <Input icon={<Bed size={16} />} type="number" value={bedroom} setValue={setBedroom} placeholder="Bedrooms" />
           <Input icon={<Bath size={16} />} type="number" value={bathroom} setValue={setBathroom} placeholder="Bathrooms" />
           <Input icon={<Clock size={16} />} value={PropertyAge} setValue={setPropertyAge} placeholder="Property Age" />
           <Input icon={<MapPin size={16} />} value={location} setValue={setLocation} placeholder="Location" />
 
+          {/* DESCRIPTION */}
           <div className="md:col-span-2">
             <label className="text-sm text-gray-600">Description</label>
             <textarea
@@ -209,9 +209,9 @@ export default function EditPropertyForm() {
             <div className="mt-3 flex gap-3 overflow-x-auto">
               
               {/* EXISTING */}
-              {existingImages.map((img, i) => (
+              {existingImages.map((url, i) => (
                 <div key={i} className="relative h-20 w-20">
-                  <img src={img.url} className="h-full w-full object-cover rounded-lg" />
+                  <img src={url} className="h-full w-full object-cover rounded-lg" />
                   <button
                     type="button"
                     onClick={() => removeExistingImage(i)}
@@ -241,6 +241,7 @@ export default function EditPropertyForm() {
             </div>
           </div>
 
+          {/* BUTTON */}
           <div className="md:col-span-2">
             <button
               type="submit"
@@ -253,12 +254,15 @@ export default function EditPropertyForm() {
 
         </form>
       </div>
-
-      <Footer />
+  
+        <Footer />
+      
     </div>
   );
 }
 
+
+/* 🔥 INPUT COMPONENT */
 function Input({ icon, value, setValue, placeholder, type = "text" }) {
   return (
     <div>
