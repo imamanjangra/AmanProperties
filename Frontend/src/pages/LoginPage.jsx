@@ -10,33 +10,65 @@ export default function LoginPage() {
 
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+const handleLoginForm = async (e) => {
+  e.preventDefault();
 
-  const handleLoginForm = async (e) => {
-    e.preventDefault();
+  const trimmedInput = Mobileno.trim();
+  const trimmedPassword = password.trim();
 
-    try {
-      const { data } = await API.post("/users/login", {
-        password,
-        email: Mobileno.includes("@") ? Mobileno : undefined,
-        mobileno: !Mobileno.includes("@") ? Mobileno : undefined,
-      });
+  // 🔴 Required checks
+  if (!trimmedInput) {
+    return toast.error("Mobile number or email is required");
+  }
 
-      // console.log("FULL RESPONSE:", data);
+  if (!trimmedPassword) {
+    return toast.error("Password is required");
+  }
 
-      const userData = data.user;
+  // 🔴 Detect type (email or mobile)
+  const isEmail = trimmedInput.includes("@");
 
-      localStorage.setItem("token", data.accessToken);
-      localStorage.setItem("user", JSON.stringify(userData));
+  // 🔴 Email validation
+  if (isEmail && !/^\S+@\S+\.\S+$/.test(trimmedInput)) {
+    return toast.error("Enter a valid email address");
+  }
 
-      setUser(userData);
-      toast.success("Login successfully");
-      navigate("/home");
-    } catch (error) {
-      console.log(error);
-      toast.error("Invalid email or password");
-    }
-  };
+  // 🔴 Mobile validation
+  if (!isEmail && !/^[6-9]\d{9}$/.test(trimmedInput)) {
+    return toast.error("Enter a valid 10-digit mobile number");
+  }
 
+  // 🔴 Password basic check
+  if (trimmedPassword.length < 6) {
+    return toast.error("Password must be at least 6 characters");
+  }
+
+  try {
+    const { data } = await API.post("/users/login", {
+      password: trimmedPassword,
+      email: isEmail ? trimmedInput : undefined,
+      mobileno: !isEmail ? trimmedInput : undefined,
+    });
+
+    const userData = data.user;
+
+    localStorage.setItem("token", data.accessToken);
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    setUser(userData);
+    toast.success("Login successfully");
+    navigate("/home");
+
+  } catch (error) {
+    console.log(error);
+
+    const message =
+      error?.response?.data?.message ||
+      "Invalid email or password";
+
+    toast.error(message);
+  }
+};
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#f2efe9] to-[#e8e4db]">
       <div className="relative w-full max-w-md p-8 rounded-3xl bg-white/70 backdrop-blur-xl shadow-xl border border-white/40 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">

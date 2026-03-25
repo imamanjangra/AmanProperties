@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await API.post("/user/logout"); // clear cookie in backend
+      await API.post("/users/logout"); 
     } catch (error) {}
 
     localStorage.removeItem("token");

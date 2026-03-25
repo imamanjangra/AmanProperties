@@ -11,40 +11,79 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-    const { setUser } = useContext(AuthContext);
-   const navigate = useNavigate();
-  
-  
+  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const trimmedFirstname = firstname.trim();
+    const trimmedLastname = lastname.trim();
+    const trimmedMobileno = mobileno.trim();
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    // 🔴 Required checks
+    if (!trimmedFirstname) {
+      return toast.error("First name is required");
+    }
+
+    if (!trimmedLastname) {
+      return toast.error("Last name is required");
+    }
+
+    if (!trimmedMobileno) {
+      return toast.error("Mobile number is required");
+    }
+
+    if (!trimmedPassword) {
+      return toast.error("Password is required");
+    }
+
+    // 🔴 Mobile validation (India basic)
+    if (!/^[6-9]\d{9}$/.test(trimmedMobileno)) {
+      return toast.error("Enter a valid 10-digit mobile number");
+    }
+
+    // 🔴 Email validation (only if user entered something)
+    if (trimmedEmail && !/^\S+@\S+\.\S+$/.test(trimmedEmail)) {
+      return toast.error("Enter a valid email address");
+    }
+
+    // 🔴 Password strength (don’t be lazy here)
+    if (trimmedPassword.length < 6) {
+      return toast.error("Password must be at least 6 characters");
+    }
+
     try {
       const { data } = await API.post("/users/register", {
-        firstname,
-        lastname,
-        password,
-        email : email || null,
-        mobileno
+        firstname: trimmedFirstname,
+        lastname: trimmedLastname,
+        password: trimmedPassword,
+        email: trimmedEmail || null,
+        mobileno: trimmedMobileno,
       });
 
-      // console.log(data);
-
-      
       const userData = data.user;
-localStorage.setItem("token", data.accessToken);
-localStorage.setItem("user", JSON.stringify(userData));
+
+      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("user", JSON.stringify(userData));
 
       setUser(userData);
 
       toast.success("Account created successfully");
       navigate("/home");
-
     } catch (error) {
       console.log(error);
-      toast.error("Failed to create account. Please check your details and try again.");
+
+      // Better error handling (don’t show generic garbage)
+      const message =
+        error?.response?.data?.message ||
+        "Failed to create account. Try again.";
+
+      toast.error(message);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#f2efe9] to-[#e8e4db]">
       <div className="relative w-full max-w-md p-8 rounded-3xl bg-white/70 backdrop-blur-xl shadow-xl border border-white/40 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">
@@ -54,8 +93,8 @@ localStorage.setItem("user", JSON.stringify(userData));
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <div className="w-25 h-25 rounded-full overflow-hidden border-4 border-[#d4af37] shadow-lg hover:scale-110 transition">
-            <img
-                src="/public/Amanpropertiesimage-removebg-preview.png"
+             <img
+              src="/Amanpropertiesimage-removebg-preview.png"
               alt="logo"
               className="w-full h-full object-cover"
             />
@@ -129,7 +168,10 @@ localStorage.setItem("user", JSON.stringify(userData));
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm mt-6">
           Already have an account?
-          <span onClick={() => navigate('/login')} className="text-[#d4af37] cursor-pointer hover:underline ml-1">
+          <span
+            onClick={() => navigate("/login")}
+            className="text-[#d4af37] cursor-pointer hover:underline ml-1"
+          >
             Login
           </span>
         </p>
