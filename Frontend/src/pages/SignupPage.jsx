@@ -29,15 +29,10 @@ export default function SignupPage() {
 
       console.log(data);
 
-      const userData = {
-        _id: data._id,
-        name: data.name,
-        email: data.email || null,
-        mobileno: data.mobileno || null,
-      };
-
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(userData));
+      
+      const userData = data.user;
+localStorage.setItem("token", data.accessToken);
+localStorage.setItem("user", JSON.stringify(userData));
 
       setUser(userData);
 

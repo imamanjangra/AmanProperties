@@ -269,7 +269,7 @@ export const refreshAccessToken = asyncHandler(async (req  , res) => {
       .status(200)
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
-      .json({ message: "Refresh Token is updated" }, accessToken, refreshToken);
+      .json({ message: "Refresh Token is updated" ,  accessToken, refreshToken});
   } catch (error) {
         return res.status(500).json({message : "internal server error " , error : error.message , stack : error.stack})
   }

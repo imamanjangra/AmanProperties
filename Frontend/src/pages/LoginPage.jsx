@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import API from "../service/Api";
 
 export default function LoginPage() {
-
   const [Mobileno, setMobileno] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,23 +21,16 @@ export default function LoginPage() {
         mobileno: !Mobileno.includes("@") ? Mobileno : undefined,
       });
 
-      console.log(data);
+      console.log("FULL RESPONSE:", data);
 
-      const userData = {
-        _id: data._id,
-        name: data.name,
-        email: data.email || null,
-        mobileno: data.mobileno || null,
-      };
+      const userData = data.user;
 
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.accessToken);
       localStorage.setItem("user", JSON.stringify(userData));
 
       setUser(userData);
-
       toast.success("Login successfully");
       navigate("/home");
-
     } catch (error) {
       console.log(error);
       toast.error("Invalid email or password");
@@ -48,7 +40,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#f2efe9] to-[#e8e4db]">
       <div className="relative w-full max-w-md p-8 rounded-3xl bg-white/70 backdrop-blur-xl shadow-xl border border-white/40 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">
-        
         {/* Glow Effect */}
         <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#d4af37]/20 rounded-full blur-3xl"></div>
 
@@ -73,7 +64,6 @@ export default function LoginPage() {
 
         {/* Form */}
         <form onSubmit={handleLoginForm} className="mt-6 space-y-5">
-          
           {/* Mobile Number or Email */}
           <div className="relative">
             <input
@@ -108,7 +98,10 @@ export default function LoginPage() {
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm mt-6">
           Don’t have an account?
-          <span onClick={() => navigate('/signup')} className="text-[#d4af37] cursor-pointer hover:underline ml-1">
+          <span
+            onClick={() => navigate("/signup")}
+            className="text-[#d4af37] cursor-pointer hover:underline ml-1"
+          >
             Sign Up
           </span>
         </p>
