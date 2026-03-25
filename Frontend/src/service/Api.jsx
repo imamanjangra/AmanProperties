@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API = axios.create({
   // baseURL: import.meta.env.VITE_BACKEND_URL,
-    baseURL: "https://amanproperties.onrender.com/api/v1",
+    baseURL: "https://amanproperties-backend.onrender.com/api/v1",
   // baseURL: "http://localhost:8000/api/v1",
   withCredentials: true,
 });
