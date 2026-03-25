@@ -27,7 +27,7 @@ export default function SignupPage() {
         mobileno
       });
 
-      console.log(data);
+      // console.log(data);
 
       
       const userData = data.user;

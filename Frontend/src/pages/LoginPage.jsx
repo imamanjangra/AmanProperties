@@ -21,7 +21,7 @@ export default function LoginPage() {
         mobileno: !Mobileno.includes("@") ? Mobileno : undefined,
       });
 
-      console.log("FULL RESPONSE:", data);
+      // console.log("FULL RESPONSE:", data);
 
       const userData = data.user;
 
