@@ -79,7 +79,6 @@ export const getSingleProperty = async (req, res) => {
   }
 };
 
-
 export const updateProperty = async (req, res) => {
   try {
     const property = await Properties.findById(req.params.id);
@@ -90,15 +89,29 @@ export const updateProperty = async (req, res) => {
 
     let images = property.images;
 
-  
-    if (req.files && req.files.length > 0) {
-      for (const img of property.images) {
-        await cloudinary.uploader.destroy(img.public_id);
-      }
+    // ✅ get existing images sent from frontend
+    let existingImages = [];
+    if (req.body.existingImages) {
+      existingImages = JSON.parse(req.body.existingImages);
+    }
 
-      images = [];
+    // 🔥 DELETE removed images from cloudinary
+    const imagesToDelete = property.images.filter(
+      (img) => !existingImages.includes(img._id.toString())
+    );
 
-      for (const file of req.files) {
+    for (const img of imagesToDelete) {
+      await cloudinary.uploader.destroy(img.public_id);
+    }
+
+    // ✅ keep only remaining images
+    images = property.images.filter((img) =>
+      existingImages.includes(img._id.toString())
+    );
+
+    // 🔥 ADD new images
+    if (req.files && req.files["images"]) {
+      for (const file of req.files["images"]) {
         const result = await cloudinary.uploader.upload(file.path, {
           folder: "properties",
         });
@@ -112,6 +125,7 @@ export const updateProperty = async (req, res) => {
       }
     }
 
+    // 🔥 UPDATE PROPERTY
     const updatedProperty = await Properties.findByIdAndUpdate(
       req.params.id,
       {
@@ -123,10 +137,10 @@ export const updateProperty = async (req, res) => {
 
     res.status(200).json(updatedProperty);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Failed to update property" });
   }
 };
-
 
 export const deleteProperty = async (req, res) => {
   try {
