@@ -22,7 +22,7 @@ export const generateAccessTokenAndRefreshToken = async (id) => {
 };
 
 export const registerUser = asyncHandler(async (req, res) => {
-  const { firstname, lastname, mobileno, email, password } = req.body;
+  const { firstname, lastname, mobileno, password } = req.body;
 
   if (!firstname || !mobileno  || !password) {
     return res.status(400).json({ message: "Required fields are missing" });
@@ -39,7 +39,7 @@ export const registerUser = asyncHandler(async (req, res) => {
   // }
 
   const userExists = await User.findOne({
-    $or: [{ email }, { mobileno }],
+    $or: [ { mobileno }],
   });
 
   if (userExists) {
@@ -50,7 +50,6 @@ export const registerUser = asyncHandler(async (req, res) => {
     firstname,
     lastname,
     mobileno,
-    email,
     password,
     image: ImageUpload || null,
   });
@@ -76,14 +75,14 @@ export const registerUser = asyncHandler(async (req, res) => {
 
 export const loginUser = asyncHandler(async (req, res) => {
   try {
-    const { email, password, mobileno } = req.body;
-    if (!email && !mobileno) {
-      throw new ApiError(400, "Email or Mobile number is required");
+    const { password, mobileno } = req.body;
+    if (!mobileno) {
+      throw new ApiError(400, "Mobile number is required");
     }
     if (!password) {
       throw new ApiError(400, "Password is required");
     }
-    const user = await User.findOne({ $or: [{ email }, { mobileno }] });
+    const user = await User.findOne({ $or: [ { mobileno }] });
     if (!user) {
       throw new ApiError(404, "User not found");
     }
@@ -212,9 +211,9 @@ export const updateImage = asyncHandler(async (req , res) => {
 
 export const updateUserInfo = asyncHandler(async (req , res) => {
     try {
-    const { firstname, lastname, mobileno, email } = req.body;
+    const { firstname, lastname, mobileno } = req.body;
 
-    if (!firstname && !lastname && !email && !mobileno ) {
+    if (!firstname && !lastname  && !mobileno ) {
       return res.status(401).json({ message: "Enter data for update " });
     }
 
@@ -224,7 +223,6 @@ export const updateUserInfo = asyncHandler(async (req , res) => {
         $set: {
           firstname,
           lastname,
-          email,
           mobileno,
         },
       },

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 import { AuthContext } from "../Contexts/auth.context";
 import toast from "react-hot-toast";
 import API from "../service/Api";
@@ -8,9 +9,11 @@ export default function SignupPage() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [mobileno, setMobileno] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
+  const [password, setPassword] = useState("");
+ const [confirmPassword, setConfirmPassword] = useState("");
+const [showPassword, setShowPassword] = useState(false);
+const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -21,6 +24,10 @@ export default function SignupPage() {
     const trimmedLastname = lastname.trim();
     const trimmedMobileno = mobileno.trim();
     const trimmedPassword = password.trim();
+
+    if (trimmedPassword !== confirmPassword.trim()) {
+      return toast.error("Passwords do not match");
+    }
 
     // 🔴 Required checks
     if (!trimmedFirstname) {
@@ -88,7 +95,7 @@ export default function SignupPage() {
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <div className="w-25 h-25 rounded-full overflow-hidden border-4 border-[#d4af37] shadow-lg hover:scale-110 transition">
-             <img
+            <img
               src="/Amanpropertiesimage-removebg-preview.png"
               alt="logo"
               className="w-full h-full object-cover"
@@ -134,23 +141,41 @@ export default function SignupPage() {
             className="w-full px-4 py-3 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
           />
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-3 pr-12 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
+            />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
-          />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
+
+          <div className="relative">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full px-4 py-3 pr-12 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black"
+            >
+              {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
 
           <button
             type="submit"
