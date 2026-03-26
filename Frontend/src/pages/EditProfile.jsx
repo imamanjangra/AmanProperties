@@ -12,7 +12,6 @@ export default function EditProfile() {
   const [form, setForm] = useState({
     firstname: "",
     lastname: "",
-    email: "",
     mobileno: "",
   });
 
@@ -36,7 +35,6 @@ export default function EditProfile() {
         setForm({
           firstname: user.firstname || "",
           lastname: user.lastname || "",
-          email: user.email || "",
           mobileno: user.mobileno || "",
         });
 
@@ -175,14 +173,7 @@ export default function EditProfile() {
               />
             </div>
 
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Email"
-              className="border rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#c9a24d]"
-            />
+        
 
             <input
               type="text"

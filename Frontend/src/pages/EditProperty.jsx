@@ -146,7 +146,7 @@ export default function EditPropertyForm() {
         >
 
           <Input icon={<Home size={16} />} value={propertyName} setValue={setPropertyName} placeholder="Property Name" />
-          <Input icon={<IndianRupee size={16} />} type="number" value={price} setValue={setPrice} placeholder="Price" />
+          <Input icon={<IndianRupee size={16} />} type="String" value={price} setValue={setPrice} placeholder="Price" />
 
           {/* TYPE */}
           <div>

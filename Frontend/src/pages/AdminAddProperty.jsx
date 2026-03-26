@@ -24,8 +24,8 @@ export default function AdminAddProperty() {
   const [price, setPrice] = useState("");
   const [propertyType, setPropertyType] = useState("");
   const [size, setSize] = useState("");
-  const [bedroom, setBedroom] = useState("");
-  const [bathroom, setBathroom] = useState("");
+  const [Bedroom, setBedroom] = useState("");
+  const [Bathroom, setBathroom] = useState("");
   const [loading, setLoading] = useState(false);
   const [Facing, setFacing] = useState("");
   const [PropertyAge, setPropertyAge] = useState("");
@@ -54,15 +54,15 @@ export default function AdminAddProperty() {
       formData.append("price", price);
       formData.append("propertyType", propertyType);
       formData.append("size", size);
-      formData.append("bedroom", bedroom);
-      formData.append("bathroom", bathroom);
+      formData.append("Bedroom", Bedroom);
+      formData.append("Bathroom", Bathroom);
       formData.append("Facing", Facing);
       formData.append("PropertyAge", PropertyAge);
       formData.append("Floor", Floor);
       images.forEach((img) => formData.append("images", img));
 
       await API.post("/properties", formData);
-
+      console.log(formData);
       toast.success("Property added");
 
       // reset
@@ -73,7 +73,7 @@ export default function AdminAddProperty() {
       setPropertyType("");
       setSize("");
       setBedroom("");
-      setBathroom("");
+      set("");
       setImages([]);
       setFacing("");
       setPropertyAge("");
@@ -150,10 +150,10 @@ export default function AdminAddProperty() {
             <Input icon={<Maximize size={16} />} type="number" value={size} setValue={setSize} placeholder="Size" />
 
             {/* Bedrooms */}
-            <Input icon={<Bed size={16} />} type="number" value={bedroom} setValue={setBedroom} placeholder="Bedrooms" />
+            <Input icon={<Bed size={16} />} type="number" value={Bedroom} setValue={setBedroom} placeholder="Bedrooms" />
 
-            {/* Bathrooms */}
-            <Input icon={<Bath size={16} />} type="number" value={bathroom} setValue={setBathroom} placeholder="Bathrooms" />
+            {/* s */}
+            <Input icon={<Bath size={16} />} type="number" value={Bathroom} setValue={setBathroom} placeholder="Bathrooms" />
 
             {/* Location */}
             <Input icon={<Clock size={16} />} value={PropertyAge} setValue={setPropertyAge} placeholder="Property Age" />
