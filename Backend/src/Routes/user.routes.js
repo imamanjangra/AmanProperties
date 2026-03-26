@@ -30,6 +30,6 @@ router.route("/logout").post(Protect, logoutUser);
 router.route("/changePassword").post(Protect, changeCurrentPassword);
 router.route("/update").patch(Protect, updateUserInfo);
 router.route("/userdata").get(Protect, getuserData);
-router.route("/refreshTokens").get(Protect, refreshAccessToken);
+router.route("/refreshTokens").get( refreshAccessToken);
 
 export default router;

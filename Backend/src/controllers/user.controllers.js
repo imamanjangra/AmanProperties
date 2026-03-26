@@ -69,6 +69,8 @@ export const registerUser = asyncHandler(async (req, res) => {
     .json({
       message: "User registered successfully",
       user: createdUser,
+      accessToken
+
     });
 });
 

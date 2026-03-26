@@ -20,7 +20,6 @@ export default function SignupPage() {
     const trimmedFirstname = firstname.trim();
     const trimmedLastname = lastname.trim();
     const trimmedMobileno = mobileno.trim();
-    const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
     // 🔴 Required checks
@@ -46,9 +45,6 @@ export default function SignupPage() {
     }
 
     // 🔴 Email validation (only if user entered something)
-    if (trimmedEmail && !/^\S+@\S+\.\S+$/.test(trimmedEmail)) {
-      return toast.error("Enter a valid email address");
-    }
 
     // 🔴 Password strength (don’t be lazy here)
     if (trimmedPassword.length < 6) {
@@ -60,7 +56,6 @@ export default function SignupPage() {
         firstname: trimmedFirstname,
         lastname: trimmedLastname,
         password: trimmedPassword,
-        email: trimmedEmail || null,
         mobileno: trimmedMobileno,
       });
 
