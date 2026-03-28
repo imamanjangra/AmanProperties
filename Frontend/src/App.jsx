@@ -20,6 +20,7 @@ import Landingpage2 from "./pages/Landingpage2.jsx";
 import { AuthContext } from "./Contexts/auth.context.jsx";
 // import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import ProtectedRoute from "../ProtectedRoute.jsx";
+import TermsConditionsPage from "./pages/TermsConditionsPage.jsx";
 function App() {
   const { user } = useContext(AuthContext);
 
@@ -27,7 +28,7 @@ function App() {
     <Routes>
 
       {/* 🔹 Public Routes */}
-      <Route path="/" element={<Landingpage2 />} />
+      <Route path="/" element={!user ? <Landingpage2 /> : <Navigate to="/home" />} />
 
       <Route
         path="/login"
@@ -38,6 +39,10 @@ function App() {
         path="/signup"
         element={!user ? <Signup /> : <Navigate to="/home" />}
       />
+      <Route
+        path="/term-and-condition"
+        element={<TermsConditionsPage />} 
+        />
 
       {/* 🔹 Protected Routes WITH Layout */}
       <Route
@@ -115,6 +120,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+
 
       {/* 🔹 Fallback */}
       <Route path="*" element={<NotFound />} />

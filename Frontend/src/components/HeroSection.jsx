@@ -52,7 +52,7 @@ const HeroSection = () => {
             <div className="mt-10 flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
               <button
                 onClick={() => navigate("/properties")}
-                className="px-8 py-4 rounded-xl bg-[#c6a46c] text-white  font-semibold hover:scale-105 transition duration-300"
+                className="px-8 py-4 rounded-xl bg-[#d4af37] text-white  font-semibold hover:scale-105 transition duration-300"
               > 
                 View Properties
               </button>

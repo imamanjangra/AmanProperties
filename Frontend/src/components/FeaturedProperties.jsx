@@ -77,7 +77,7 @@ const FeaturedProperties = () => {
          
         <div className="text-center mt-12">
           <Link to="/properties">
-            <button className="bg-[#c6a46c] font-nav text-white px-8 py-3 rounded-xl  hover:scale-105  transition">
+            <button className="bg-[#d4af37] font-nav text-white px-8 py-3 rounded-xl  hover:scale-105  transition">
               View All Properties
             </button>
           </Link>

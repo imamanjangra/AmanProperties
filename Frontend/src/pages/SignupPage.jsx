@@ -9,11 +9,14 @@ export default function SignupPage() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [mobileno, setMobileno] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+
+  
 
   const [password, setPassword] = useState("");
- const [confirmPassword, setConfirmPassword] = useState("");
-const [showPassword, setShowPassword] = useState(false);
-const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -45,6 +48,10 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     if (!trimmedPassword) {
       return toast.error("Password is required");
     }
+
+    if (!acceptedTerms) {
+    return toast.error("You must accept Terms & Conditions");
+  }
 
     // 🔴 Mobile validation (India basic)
     if (!/^[6-9]\d{9}$/.test(trimmedMobileno)) {
@@ -175,6 +182,25 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
             >
               {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
+          </div>
+
+          <div className="flex items-start gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={acceptedTerms}
+              onChange={() => setAcceptedTerms(!acceptedTerms)}
+              className="mt-1 accent-[#d4af37] cursor-pointer"
+            />
+
+            <p className="text-gray-600">
+              I agree to{" "}
+              <span
+                onClick={() => navigate("/term-and-condition")}
+                className="text-blue-600 cursor-pointer hover:underline"
+              >
+                Terms & Conditions
+              </span>
+            </p>
           </div>
 
           <button
