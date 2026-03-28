@@ -6,8 +6,8 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./Contexts/auth.context.jsx";
 
 createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
   <AuthProvider>
-    <BrowserRouter>
       <Toaster
         position="down-right"
         toastOptions={{
@@ -31,6 +31,6 @@ createRoot(document.getElementById("root")).render(
         }}
       />
       <App />
-    </BrowserRouter>
   </AuthProvider>,
+    </BrowserRouter>
 );

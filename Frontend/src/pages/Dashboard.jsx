@@ -14,6 +14,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Footer from "../components/Footer";
+import ContactButtons from "../components/ContactButtons";
 
 export default function Dashboard() {
   const [properties, setProperties] = useState([]);
@@ -83,7 +84,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-[#f8f6f2]">
       <Navbar variant="light" />
-
+       <ContactButtons/>
       <div className="w-full max-w-400 mx-auto px-6 lg:px-10 xl:px-16 pt-24 pb-12">
 
         {/* HEADER */}

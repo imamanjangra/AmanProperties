@@ -5,6 +5,7 @@ import { Home, Eye, MessageCircle, LogOut, Phone } from "lucide-react";
 import { AuthContext } from "../Contexts/auth.context";
 import { useNavigate } from "react-router-dom";
 import API from "../service/Api";
+import ContactButtons from "../components/ContactButtons";
 
 export default function ProfilePage() {
   const { logout } = useContext(AuthContext);
@@ -43,7 +44,7 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#f8f6f2]">
       <Navbar variant="light" />
-
+       <ContactButtons/>
       <div className="w-full bg-[#f8f6f2] flex flex-col lg:flex-row gap-8 px-6 lg:px-10 xl:px-20 pt-24 pb-12 flex-1">
 
         {/* 🔥 LEFT PROFILE */}

@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import API from "../service/Api";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ContactButtons from "../components/ContactButtons";
 
 export default function AdminAddProperty() {
   const [images, setImages] = useState([]);
@@ -91,7 +92,7 @@ export default function AdminAddProperty() {
     <div className="min-h-screen bg-[#f8f6f2] text-black flex flex-col">
       
       <Navbar variant="light" />
-
+       <ContactButtons/>
       <div className="flex-1 px-4 md:px-8 py-6">
         <div className="mb-6 mt-20 max-w-4xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-semibold">

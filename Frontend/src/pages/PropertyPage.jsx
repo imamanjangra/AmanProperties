@@ -6,13 +6,14 @@ import { PropertyCardSkeleton } from "../components/PropertyCardSkeleton.jsx";
 import Properties_u from "../components/Properties_u.jsx";
 import Footer from "../components/Footer.jsx";
 import Navbar from "../components/Navbar.jsx";
+import ContactButtons from "../components/ContactButtons.jsx";
 
 const PropertyPage = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [type, setType] = useState("");
-  const [price, setPrice] = useState(""); 
+  const [price, setPrice] = useState("");
 
   // 🔥 FETCH FUNCTION
   const fetchProperties = async () => {
@@ -55,7 +56,7 @@ const PropertyPage = () => {
     <div className="bg-[#f8f6f2] min-h-screen flex flex-col">
       <div className="grow">
         <Navbar variant="light" />
-
+        <ContactButtons />
         <div className="h-20" />
 
         <motion.div
@@ -82,6 +83,39 @@ const PropertyPage = () => {
           {loading && (
             <div className="mt-6">
               <PropertyCardSkeleton />
+            </div>
+          )}
+          {!loading && properties.length === 0 && (
+            <div className="flex flex-col items-center justify-center mt-16 text-center">
+              {/* Icon / Illustration */}
+              <div className="w-45 h-45 flex items-center justify-center rounded-full bg-[#f1ede6] mb-6 shadow-inner">
+                <span className="text-3xl">
+                  <img src="/propertysvg.png" alt="No results" className="w-40 h-40" />
+                </span>
+              </div>
+
+              {/* Heading */}
+              <h3 className="text-xl font-semibold text-gray-800">
+                No Properties Found
+              </h3>
+
+              {/* Sub text */}
+              <p className="text-gray-500 mt-2 max-w-md">
+                We couldn’t find any properties matching your search. Try
+                changing filters or search terms.
+              </p>
+
+              {/* Action button */}
+              <button
+                onClick={() => {
+                  setSearchQuery("");
+                  setType("");
+                  setPrice("");
+                }}
+                className="mt-6 px-5 py-2 rounded-lg bg-[#d4af37] text-black font-medium hover:bg-[#c19a2e] transition"
+              >
+                Clear Filters
+              </button>
             </div>
           )}
 
