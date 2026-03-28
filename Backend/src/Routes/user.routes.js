@@ -7,7 +7,8 @@ import {
   getuserData,
   updateUserInfo,
   refreshAccessToken,
-  updateImage
+  updateImage,
+  getMe
 } from "../controllers/user.controllers.js";
 import { Protect } from "../middleware/auth.middleware.js";
 import { upload } from "../middleware/multer.js";
@@ -31,5 +32,5 @@ router.route("/changePassword").post(Protect, changeCurrentPassword);
 router.route("/update").patch(Protect, updateUserInfo);
 router.route("/userdata").get(Protect, getuserData);
 router.route("/refreshTokens").get( refreshAccessToken);
-
+router.route("/me" ).get(Protect , getMe)
 export default router;
