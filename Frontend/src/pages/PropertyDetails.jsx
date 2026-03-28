@@ -180,6 +180,26 @@ function ContactForm({ property }) {
     }
   };
 
+  const handleWhatsapp = () => {
+    const phoneNo = "919255446593"; // your WhatsApp number
+    const propertyName = property?.propertyName || "this property"; // fallback
+
+    // Medium-length message
+    const message = `Hi, I am interested in the property "${propertyName}".`;
+
+    const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  };
+
+  const callNow = () => {
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      window.location.href = "tel:+919255446593";
+    } else {
+      toast.error("Please call this number from your mobile: +91 9255446593");
+    } 
+  };
+
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -231,6 +251,7 @@ function ContactForm({ property }) {
       <div className="flex gap-3">
         <button
           type="button"
+          onClick={handleWhatsapp}
           className="flex-1 bg-[#25D366] text-white py-2 rounded-md flex justify-center items-center gap-2"
         >
           <MessageSquare className="w-4 h-4" /> WhatsApp
@@ -238,6 +259,7 @@ function ContactForm({ property }) {
 
         <button
           type="button"
+           onClick={callNow}
           className="flex-1 bg-[#1a2a4e] text-white py-2 rounded-md flex justify-center items-center gap-2"
         >
           <Phone className="w-4 h-4" /> Call
