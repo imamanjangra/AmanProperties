@@ -22,9 +22,11 @@ import formRoute from './Routes/formRoute.js'
 import adminRoute from './Routes/adminRoute.js'
 import propertyRoute from './Routes/propertyRoute.js'
 import userRoutes from "./Routes/user.routes.js"
+import propertyUpdateRoute from "./Routes/propertyUpdate.js"
 
 app.use("/api/v1/users" , userRoutes)
 app.use("/api/v1/form" , formRoute)
 app.use("/api/v1" , adminRoute)
 app.use("/api/v1/properties", propertyRoute);
+app.use("/api/v1/propertyUpdates", propertyUpdateRoute);
 export { app };

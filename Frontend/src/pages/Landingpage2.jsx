@@ -528,3 +528,4 @@ export default function Landingpage2() {
     </div>
   );
 }
+
