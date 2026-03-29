@@ -28,7 +28,7 @@ function App() {
     <Routes>
 
       {/* 🔹 Public Routes */}
-      <Route path="/" element={!user ? <Landingpage2 /> : <Navigate to="/home" />} />
+      <Route path="/" element={ <Landingpage2 />} />
 
       <Route
         path="/login"
