@@ -3,9 +3,11 @@ import './index.css'
 import App from './App.jsx'
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from './context/AuthContext.jsx';
+import { BrowserRouter } from 'react-router-dom';
 // import { AuthProvider } from './context/Authcontext.jsx';
 
 createRoot(document.getElementById('root')).render(
+   <BrowserRouter>
   <AuthProvider>
      <Toaster
   position="down-right"
@@ -32,4 +34,5 @@ createRoot(document.getElementById('root')).render(
 
     <App />
   </AuthProvider>
+  </BrowserRouter>
 )

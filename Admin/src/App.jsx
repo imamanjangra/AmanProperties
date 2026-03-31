@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import Login from "./Pages/Login.jsx";
 import Dashboard from "./Pages/Dashboard.jsx";
@@ -18,38 +18,35 @@ function App() {
   const { user } = useContext(AuthContext);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Login */}
-        <Route
-          path="/login"
-          element={!user ? <Login /> : <Navigate to="/admin" />}
-        />
+    <Routes>
+      {/* Login */}
+      <Route
+        path="/login"
+        element={!user ? <Login /> : <Navigate to="/admin" replace />}
+      />
 
-        {/* Protected Layout */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedAdmin>
-              <Layout />
-            </ProtectedAdmin>
-          }
-        >
-          {/* Dashboard Page */}
-          <Route index element={<Dashboard />} />
-          <Route path="/admin/formdata" element={<FormData/>} />
-          <Route path="/admin/verify-properties" element={<VerifyProperties />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/update-requests" element={<UpdateRequests />} />
-          <Route path="/admin/properties" element={<AdminProperties />} />
-          <Route path="/admin/ManageProperties" element={<ManageProperties />} />
-          <Route path="/admin/EditProperty/:id" element={<EditPropertyForm />} />
-        </Route>
+      {/* Protected */}
+      <Route
+        path="/admin"
+        element={
+          <ProtectedAdmin>
+            <Layout />
+          </ProtectedAdmin>
+        }
+      >
+        <Route index element={<Dashboard />} />
+        <Route path="formdata" element={<FormData />} />
+        <Route path="verify-properties" element={<VerifyProperties />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="update-requests" element={<UpdateRequests />} />
+        <Route path="properties" element={<AdminProperties />} />
+        <Route path="ManageProperties" element={<ManageProperties />} />
+        <Route path="EditProperty/:id" element={<EditPropertyForm />} />
+      </Route>
 
-        {/* Redirect */}
-        <Route path="*" element={<Navigate to="/login" />} />
-      </Routes>
-    </BrowserRouter>
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
   );
 }
 
