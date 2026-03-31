@@ -11,7 +11,7 @@ export default function FormResponseCard({ item, onDelete, onCopy }) {
   };
 
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900/70 p-4 shadow">
+    <div className="rounded-xl border border-gray-800 bg-gray-900 p-4 shadow">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between text-zinc-300">
         <div className="font-medium text-base text-white min-w-40">
           {item.firstName} {item.lastName}

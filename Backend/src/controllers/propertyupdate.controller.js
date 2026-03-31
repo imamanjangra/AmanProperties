@@ -2,7 +2,7 @@ import { Properties } from "../Models/properties.js";
 import { PropertyUpdateRequest } from "../Models/propertyUpdate.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
-import { uploadOnCloudinary } from "../util/cloudinary.js";
+
 // import { PropertyUpdateRequest } from "../Models/propertyUpdateRequest.js";
 
 export const updateProperty = async (req, res) => {
@@ -131,3 +131,42 @@ export const approveUpdateRequest = async (req, res) => {
     res.status(500).json({ message: "Approval failed" });
   }
 };
+export const getUpdateRequests = async (req, res) => {
+  try {
+    const requests = await PropertyUpdateRequest.find({
+      status: "pending",
+    })
+      .populate("propertyId")
+      .populate("userId");
+
+    res.status(200).json(requests);
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed",
+      error: error.message,
+      stack: error.stack,
+    });
+  }
+};
+
+export const rejectUpdateRequest = async (req, res) => {
+  try {
+    const request = await PropertyUpdateRequest.findById(req.params.id);
+
+    if (!request) {
+      return res.status(404).json({ message: "Request not found" });
+    }
+
+    request.status = "rejected";
+    await request.save();
+
+    res.status(200).json({
+      message: "Update rejected",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Reject failed",
+    });
+  }
+};
+

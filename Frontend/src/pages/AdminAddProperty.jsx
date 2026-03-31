@@ -8,8 +8,8 @@ import {
   Bath,
   MapPin,
   FileText,
-  Layers ,
-  Clock 
+  Layers,
+  Clock,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import API from "../service/Api";
@@ -66,7 +66,6 @@ export default function AdminAddProperty() {
       console.log(formData);
       toast.success("Property added");
 
-      // reset
       setPropertyName("");
       setLocation("");
       setDescription("");
@@ -74,12 +73,11 @@ export default function AdminAddProperty() {
       setPropertyType("");
       setSize("");
       setBedroom("");
-      set("");
+      setBathroom("");
       setImages([]);
       setFacing("");
       setPropertyAge("");
       setFloor("");
-
     } catch (error) {
       console.log(error);
       toast.error("Failed to add property");
@@ -90,9 +88,8 @@ export default function AdminAddProperty() {
 
   return (
     <div className="min-h-screen bg-[#f8f6f2] text-black flex flex-col">
-      
       <Navbar variant="light" />
-       <ContactButtons/>
+      <ContactButtons />
       <div className="flex-1 px-4 md:px-8 py-6">
         <div className="mb-6 mt-20 max-w-4xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-semibold">
@@ -108,12 +105,22 @@ export default function AdminAddProperty() {
             onSubmit={addDetail}
             className="grid grid-cols-1 md:grid-cols-2 gap-5"
           >
-
             {/* Property Name */}
-            <Input icon={<Home size={16} />} value={propertyName} setValue={setPropertyName} placeholder="Property Name" />
+            <Input
+              icon={<Home size={16} />}
+              value={propertyName}
+              setValue={setPropertyName}
+              placeholder="Property Name"
+            />
 
             {/* Price */}
-            <Input icon={<IndianRupee size={16} />} type="string" value={price} setValue={setPrice} placeholder="Price" />
+            <Input
+              icon={<IndianRupee size={16} />}
+              type="string"
+              value={price}
+              setValue={setPrice}
+              placeholder="Price"
+            />
 
             {/* Type */}
             <div>
@@ -138,7 +145,7 @@ export default function AdminAddProperty() {
                 onChange={(e) => setFacing(e.target.value)}
                 className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
               >
-               <option value="">Select Facing</option>
+                <option value="">Select Facing</option>
                 <option value="North">North</option>
                 <option value="South">South</option>
                 <option value="East">East</option>
@@ -147,21 +154,53 @@ export default function AdminAddProperty() {
             </div>
 
             {/* Size */}
-            <Input icon={<Layers  size={16} />} type="number" value={Floor} setValue={setFloor} placeholder="Floor" />
-            <Input icon={<Maximize size={16} />} type="number" value={size} setValue={setSize} placeholder="Size" />
+            <Input
+              icon={<Layers size={16} />}
+              type="number"
+              value={Floor}
+              setValue={setFloor}
+              placeholder="Floor"
+            />
+            <Input
+              icon={<Maximize size={16} />}
+              type="number"
+              value={size}
+              setValue={setSize}
+              placeholder="Size"
+            />
 
             {/* Bedrooms */}
-            <Input icon={<Bed size={16} />} type="number" value={Bedroom} setValue={setBedroom} placeholder="Bedrooms" />
+            <Input
+              icon={<Bed size={16} />}
+              type="number"
+              value={Bedroom}
+              setValue={setBedroom}
+              placeholder="Bedrooms"
+            />
 
             {/* s */}
-            <Input icon={<Bath size={16} />} type="number" value={Bathroom} setValue={setBathroom} placeholder="Bathrooms" />
+            <Input
+              icon={<Bath size={16} />}
+              type="number"
+              value={Bathroom}
+              setValue={setBathroom}
+              placeholder="Bathrooms"
+            />
 
             {/* Location */}
-            <Input icon={<Clock size={16} />} value={PropertyAge} setValue={setPropertyAge} placeholder="Property Age" />
-            <Input icon={<MapPin size={16} />} value={location} setValue={setLocation} placeholder="Location" />
-            
-            
-            
+            <Input
+              icon={<Clock size={16} />}
+              value={PropertyAge}
+              setValue={setPropertyAge}
+              placeholder="Property Age"
+            />
+            <Input
+              icon={<MapPin size={16} />}
+              value={location}
+              setValue={setLocation}
+              placeholder="Location"
+            />
+
             {/* Description */}
             <div className="md:col-span-2">
               <label className="text-sm text-gray-600">Description</label>
@@ -179,7 +218,12 @@ export default function AdminAddProperty() {
 
               <label className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-gray-300 p-6 hover:border-[#c9a24d]">
                 <Upload size={24} className="text-[#c9a24d]" />
-                <input type="file" multiple onChange={handleImageUpload} className="hidden" />
+                <input
+                  type="file"
+                  multiple
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
               </label>
 
               {images.length > 0 && (
@@ -213,7 +257,6 @@ export default function AdminAddProperty() {
                 {loading ? "Publishing..." : "Publish Property"}
               </button>
             </div>
-
           </form>
         </div>
       </div>
@@ -222,7 +265,6 @@ export default function AdminAddProperty() {
     </div>
   );
 }
-
 
 /* 🔥 Reusable Input Component */
 function Input({ icon, value, setValue, placeholder, type = "text" }) {

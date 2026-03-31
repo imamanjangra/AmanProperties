@@ -55,7 +55,20 @@ const propertiesSchema = new mongoose.Schema(
     isverifed : {
       type : Boolean,
       default : false
+    },
+    rejectedreason : {
+      type : String,
+    },
+     status: {
+      type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: "pending",
+    },
+    isrejected : {
+      type : Boolean,
+      default : false
     }
+
 
   },
   { timestamps: true }

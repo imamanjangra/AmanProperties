@@ -5,8 +5,19 @@ import { v2 as cloudinary } from "cloudinary";
 
 export const createProperty = async (req, res) => {
   try {
-    const { propertyName, location, description, price, propertyType , size , Bedroom , Bathroom , Facing , PropertyAge , Floor } =
-      req.body;
+    const {
+      propertyName,
+      location,
+      description,
+      price,
+      propertyType,
+      size,
+      Bedroom,
+      Bathroom,
+      Facing,
+      PropertyAge,
+      Floor,
+    } = req.body;
 
     if (!propertyName || !location || !price || !propertyType) {
       return res.status(400).json({ message: "Required fields missing" });
@@ -18,20 +29,18 @@ export const createProperty = async (req, res) => {
 
     let propertyImages = [];
 
-  if (req.files?.images) {
+    if (req.files?.images) {
+      for (const file of req.files.images) {
+        const result = await uploadOnCloudinary(file.path);
 
-    for (const file of req.files.images) {
-
-      const result = await uploadOnCloudinary(file.path);
-
-      if (result) {
-        propertyImages.push({
-          url: result.secure_url,
-          public_id: result.public_id,
-        });
+        if (result) {
+          propertyImages.push({
+            url: result.secure_url,
+            public_id: result.public_id,
+          });
+        }
       }
     }
-  }
 
     const property = await Properties.create({
       images: propertyImages,
@@ -46,7 +55,11 @@ export const createProperty = async (req, res) => {
       Facing,
       PropertyAge,
       Floor,
-      owner : req.user._id
+      owner: req.user._id,
+      status: "pending",
+      isverifed: false,
+      isrejected: false,
+      isShow: true,
     });
 
     res.status(201).json(property);
@@ -81,8 +94,6 @@ export const getSingleProperty = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch property" });
   }
 };
-
-
 export const updateProperty = async (req, res) => {
   try {
     const property = await Properties.findById(req.params.id);
@@ -91,22 +102,16 @@ export const updateProperty = async (req, res) => {
       return res.status(404).json({ message: "Property not found" });
     }
 
-    let images = property.images;
+    let newImages = [];
 
-  
-    if (req.files && req.files.length > 0) {
-      for (const img of property.images) {
-        await cloudinary.uploader.destroy(img.public_id);
-      }
-
-      images = [];
-
-      for (const file of req.files) {
+    // ✅ Upload new images
+    if (req.files?.images && req.files.images.length > 0) {
+      for (const file of req.files.images) {
         const result = await cloudinary.uploader.upload(file.path, {
           folder: "properties",
         });
 
-        images.push({
+        newImages.push({
           url: result.secure_url,
           public_id: result.public_id,
         });
@@ -115,21 +120,50 @@ export const updateProperty = async (req, res) => {
       }
     }
 
+    // ✅ Parse existing images from frontend
+    let existingImages = [];
+
+    if (req.body.existingImages) {
+      existingImages = Array.isArray(req.body.existingImages)
+        ? req.body.existingImages
+        : [req.body.existingImages];
+    }
+
+    // ✅ Find images to delete
+    const imagesToDelete = property.images.filter(
+      (img) => !existingImages.includes(img.url)
+    );
+
+    // ✅ Delete from Cloudinary
+    for (const img of imagesToDelete) {
+      await cloudinary.uploader.destroy(img.public_id);
+    }
+
+    // ✅ Keep only selected old images
+    const remainingOldImages = property.images.filter((img) =>
+      existingImages.includes(img.url)
+    );
+
+    // ✅ Final images
+    const finalImages = [...remainingOldImages, ...newImages];
+
     const updatedProperty = await Properties.findByIdAndUpdate(
       req.params.id,
       {
         ...req.body,
-        images,
+        images: finalImages,
       },
       { new: true }
     );
 
     res.status(200).json(updatedProperty);
   } catch (error) {
-    res.status(500).json({ message: "Failed to update property" });
+    res.status(500).json({
+      message: "Failed to update property",
+      error: error.message,
+    });
   }
 };
-
 
 export const deleteProperty = async (req, res) => {
   try {
@@ -158,53 +192,74 @@ export const getUserProperties = async (req, res) => {
   try {
     const properties = await Properties.find({ owner: req.user._id }).sort({
       createdAt: -1,
-    }); 
+    });
     res.status(200).json(properties);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch user properties" , error : error.message  , stack : error.stack });
+    res
+      .status(500)
+      .json({
+        message: "Failed to fetch user properties",
+        error: error.message,
+        stack: error.stack,
+      });
   }
 };
-
 export const verifyProperty = async (req, res) => {
   try {
     const property = await Properties.findById(req.params.id);
+
     if (!property) {
       return res.status(404).json({ message: "Property not found" });
     }
-    property.isverifed = true;
+
+    property.status = "approved"; // ✅ main flag
+    property.isverifed = true; // optional (legacy)
+    property.isrejected = false;
+    property.rejectedreason = "";
+    property.isShow = true;
+
     await property.save();
-    res.status(200).json({ message: "Property verified successfully" });
+
+    res.status(200).json({
+      message: "Property approved successfully",
+    });
   } catch (error) {
-    res.status(500).json({ message: "Failed to verify property" });
+    res.status(500).json({
+      message: "Failed to verify property",
+      error: error.message,
+    });
   }
 };
 
 export const unverifyProperty = async (req, res) => {
   try {
-    const property = await Properties.findById(req.params.id);  
+    const property = await Properties.findById(req.params.id);
     if (!property) {
       return res.status(404).json({ message: "Property not found" });
     }
     property.isverifed = false;
     await property.save();
     res.status(200).json({ message: "Property unverified successfully" });
-  }
-    catch (error) {
+  } catch (error) {
     res.status(500).json({ message: "Failed to unverify property" });
   }
 };
 
 export const getverifiedProperties = async (req, res) => {
   try {
-    const properties = await Properties.find({ isverifed: true  , isShow: true }).sort({
-      createdAt: -1,
-    });
+    const properties = await Properties.find({
+      status: "approved", // ✅ single source of truth
+      isShow: true,
+    }).sort({ createdAt: -1 });
+
     res.status(200).json(properties);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch verified properties" });
+    res.status(500).json({
+      message: "Failed to fetch verified properties",
+      error: error.message,
+    });
   }
 };
-
 
 export const hideProperty = async (req, res) => {
   try {
@@ -214,12 +269,13 @@ export const hideProperty = async (req, res) => {
     }
     property.isShow = !property.isShow;
     await property.save();
-    res.status(200).json({ message: "Property visibility toggled successfully" });
-  }
-    catch (error) {
+    res
+      .status(200)
+      .json({ message: "Property visibility toggled successfully" });
+  } catch (error) {
     res.status(500).json({ message: "Failed to toggle property visibility" });
   }
-}
+};
 
 // export const serachProperties = async (req, res) => {
 //   try {
@@ -288,5 +344,49 @@ export const serachProperties = async (req, res) => {
     res.status(200).json(properties);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch search results" });
+  }
+};
+
+export const getUnverifiedProperties = async (req, res) => {
+  try {
+    const properties = await Properties.find({
+      status: "pending", // 👈 correct filter
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json(properties);
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch unverified properties",
+    });
+  }
+};
+
+export const rejectProperty = async (req, res) => {
+  try {
+    const { rejectedreason } = req.body;
+
+    const property = await Properties.findById(req.params.id);
+
+    if (!property) {
+      return res.status(404).json({ message: "Property not found" });
+    }
+
+    // ✅ Update all related fields
+    property.status = "rejected";
+    property.isrejected = true;
+    property.isverifed = false;
+    property.isShow = false; // 👈 hide from public
+    property.rejectedreason = rejectedreason || "No reason provided";
+
+    await property.save();
+
+    res.status(200).json({
+      message: "Property rejected successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to reject property",
+      error: error.message,
+    });
   }
 };

@@ -14,9 +14,8 @@ import API from "../Services/API.jsx";
 import { useParams } from "react-router-dom";
 
 export default function EditPropertyForm() {
-  const { id } = useParams(); 
+  const { id } = useParams();
 
- 
   const [propertyName, setPropertyName] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
@@ -26,14 +25,16 @@ export default function EditPropertyForm() {
   const [bedroom, setBedroom] = useState("");
   const [bathroom, setBathroom] = useState("");
 
- 
-  const [existingImages, setExistingImages] = useState([]); 
+  const [existingImages, setExistingImages] = useState([]);
   const [newImages, setNewImages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  // 🔥 FETCH PROPERTY
   useEffect(() => {
     const fetchProperty = async () => {
       try {
         const { data } = await API.get(`/properties/${id}`);
+
         setPropertyName(data.propertyName || "");
         setLocation(data.location || "");
         setDescription(data.description || "");
@@ -42,21 +43,43 @@ export default function EditPropertyForm() {
         setSize(data.size || "");
         setBedroom(data.Bedroom || "");
         setBathroom(data.Bathroom || "");
-        if (data.images) setExistingImages(data.images.map(img => img.url || img));
+
+        if (data.images) {
+          setExistingImages(data.images.map((img) => img.url));
+        }
       } catch (error) {
-        console.log("Failed to fetch property", error);
-        toast.error("Failed to load property details");
+        console.log(error);
+        toast.error("Failed to load property");
       }
     };
 
     if (id) fetchProperty();
   }, [id]);
 
-  
+  // 🔥 REMOVE EXISTING
+  const removeExistingImage = (index) => {
+    setExistingImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  // 🔥 REMOVE NEW
+  const removeNewImage = (index) => {
+    setNewImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  // 🔥 HANDLE UPLOAD
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    setNewImages((prev) => [...prev, ...files]);
+  };
+
+  // 🔥 SUBMIT
   const updateProperty = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       const formData = new FormData();
+
       formData.append("propertyName", propertyName);
       formData.append("location", location);
       formData.append("description", description);
@@ -66,181 +89,82 @@ export default function EditPropertyForm() {
       formData.append("Bedroom", bedroom);
       formData.append("Bathroom", bathroom);
 
-      newImages.forEach((file) => formData.append("images", file));
+      // ✅ existing images
+      existingImages.forEach((img) => {
+        formData.append("existingImages", img);
+      });
 
-      await API.put(`/properties/${id}`, formData);
-      toast.success("Property updated successfully");
+      // ✅ new images
+      newImages.forEach((file) => {
+        formData.append("images", file);
+      });
 
+      const { data } = await API.put(`/properties/${id}`, formData);
+
+      // 🔥 CRITICAL FIX → UPDATE UI
+      setExistingImages(data.images.map((img) => img.url));
       setNewImages([]);
+
+      toast.success("Property updated successfully");
     } catch (error) {
       console.log(error);
-      toast.error("Failed to update property");
+      toast.error("Update failed");
+    } finally {
+      setLoading(false);
     }
   };
 
-
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    setNewImages((prev) => [...prev, ...files]);
-  };
-
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 p-4 md:p-8">
-      
-      <div className="mb-6">
-        <h1 className="text-2xl md:text-3xl font-semibold text-purple-400">
-          Edit Property
-        </h1>
-        <p className="text-zinc-500 text-sm mt-1">
-          Update the property details that will appear on the main website
-        </p>
-      </div>
+    <div className="min-h-screen  text-zinc-100 p-4 md:p-8">
+      <div className="max-w-5xl mx-auto">
+        {/* HEADER */}
+       
 
-      <div className="max-w-4xl rounded-xl border border-zinc-800 bg-zinc-900/60 backdrop-blur shadow p-4 md:p-6">
+        {/* FORM */}
         <form
           onSubmit={updateProperty}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          className="bg-gray-900 border border-zinc-800 rounded-xl p-6 grid md:grid-cols-2 gap-5"
         >
-        
-          <div>
-            <label className="text-sm text-zinc-400">Property Name</label>
-            <div className="mt-1 flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3">
-              <Home size={16} className="text-purple-400" />
-              <input
-                type="text"
-                value={propertyName}
-                onChange={(e) => setPropertyName(e.target.value)}
-                placeholder="Luxury Villa in Gurgaon"
-                className="w-full bg-transparent py-2 text-sm outline-none"
-              />
-            </div>
-          </div>
+          {/* NAME */}
+          <Input icon={<Home size={16} />} value={propertyName} setValue={setPropertyName} label="Property Name" />
 
-         
-          <div>
-            <label className="text-sm text-zinc-400">Price</label>
-            <div className="mt-1 flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3">
-              <IndianRupee size={16} className="text-purple-400" />
-              <input
-                type="number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                placeholder="7500000"
-                className="w-full bg-transparent py-2 text-sm outline-none"
-              />
-            </div>
-          </div>
+          {/* PRICE */}
+          <Input icon={<IndianRupee size={16} />} value={price} setValue={setPrice} label="Price" type="number" />
 
-         
-          <div>
-            <label className="text-sm text-zinc-400">Property Type</label>
-            <div className="mt-1 flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3">
-              <Home size={16} className="text-purple-400" />
-              <select
-                value={propertyType}
-                onChange={(e) => setPropertyType(e.target.value)}
-                className="w-full bg-transparent py-2 text-sm outline-none"
-              >
-                 <option className="bg-zinc-950" value="">
-                  Select Type
-                </option>
-                <option className="bg-zinc-950" value="Apartment">
-                  Plot
-                </option>
-                <option className="bg-zinc-950" value="Villa">
-                  Home
-                </option>
-                <option className="bg-zinc-950" value="Plot">
-                  Floor
-                </option>
-                <option className="bg-zinc-950" value="Commercial">
-                  Villa
-                </option>
-              </select>
-            </div>
-          </div>
+          {/* LOCATION */}
+          <Input icon={<MapPin size={16} />} value={location} setValue={setLocation} label="Location" />
 
-          
-          <div>
-            <label className="text-sm text-zinc-400">Size (sq.ft)</label>
-            <div className="mt-1 flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3">
-              <Maximize size={16} className="text-purple-400" />
-              <input
-                type="number"
-                value={size}
-                onChange={(e) => setSize(e.target.value)}
-                placeholder="1800"
-                className="w-full bg-transparent py-2 text-sm outline-none"
-              />
-            </div>
-          </div>
+          {/* SIZE */}
+          <Input icon={<Maximize size={16} />} value={size} setValue={setSize} label="Size" type="number" />
 
-         
-          <div>
-            <label className="text-sm text-zinc-400">Bedrooms</label>
-            <div className="mt-1 flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3">
-              <Bed size={16} className="text-purple-400" />
-              <input
-                type="number"
-                value={bedroom}
-                onChange={(e) => setBedroom(e.target.value)}
-                placeholder="3"
-                className="w-full bg-transparent py-2 text-sm outline-none"
-              />
-            </div>
-          </div>
+          {/* BED */}
+          <Input icon={<Bed size={16} />} value={bedroom} setValue={setBedroom} label="Bedrooms" type="number" />
 
-         
-          <div>
-            <label className="text-sm text-zinc-400">Bathrooms</label>
-            <div className="mt-1 flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3">
-              <Bath size={16} className="text-purple-400" />
-              <input
-                type="number"
-                value={bathroom}
-                onChange={(e) => setBathroom(e.target.value)}
-                placeholder="2"
-                className="w-full bg-transparent py-2 text-sm outline-none"
-              />
-            </div>
-          </div>
+          {/* BATH */}
+          <Input icon={<Bath size={16} />} value={bathroom} setValue={setBathroom} label="Bathrooms" type="number" />
 
-        
-          <div>
-            <label className="text-sm text-zinc-400">Location</label>
-            <div className="mt-1 flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3">
-              <MapPin size={16} className="text-purple-400" />
-              <input
-                type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                placeholder="Gurgaon, Haryana"
-                className="w-full bg-transparent py-2 text-sm outline-none"
-              />
-            </div>
-          </div>
-
-         
+          {/* DESCRIPTION */}
           <div className="md:col-span-2">
             <label className="text-sm text-zinc-400">Description</label>
-            <div className="mt-1 flex gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3">
-              <FileText size={16} className="text-purple-400 mt-2" />
-              <textarea
-                rows={4}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Write property details..."
-                className="w-full bg-transparent py-2 text-sm outline-none resize-none"
-              />
-            </div>
+            <textarea
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full mt-1 bg-zinc-950 border border-zinc-800 rounded-lg p-2 outline-none"
+            />
           </div>
 
-          
+          {/* IMAGE SECTION */}
           <div className="md:col-span-2">
-            <label className="text-sm text-zinc-400">Property Images</label>
-            <label className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-zinc-700 bg-zinc-950 p-6 text-center hover:border-purple-400 transition">
-              <Upload size={24} className="text-purple-400 mb-2" />
+            <label className="text-sm text-zinc-400 mb-2 block">
+              Property Images
+            </label>
+
+            {/* Upload Box */}
+            <label className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-700 rounded-xl p-6 cursor-pointer hover:border-purple-400 transition">
+              <Upload className="text-purple-400 mb-2" />
               <p className="text-sm text-zinc-400">Click to upload images</p>
+
               <input
                 type="file"
                 multiple
@@ -250,48 +174,75 @@ export default function EditPropertyForm() {
               />
             </label>
 
-            <div className="mt-3 flex gap-3 overflow-x-auto">
-            
+            {/* Preview */}
+            <div className="mt-4 grid grid-cols-3 md:grid-cols-6 gap-3">
+              {/* EXISTING */}
               {existingImages.map((url, i) => (
-                <div
+                <ImageCard
                   key={i}
-                  className="h-20 w-20 shrink-0 rounded-lg bg-zinc-800"
-                >
-                  <img
-                    src={url}
-                    alt="existing preview"
-                    className="h-full w-full object-cover rounded-lg"
-                  />
-                </div>
+                  src={url}
+                  onDelete={() => removeExistingImage(i)}
+                />
               ))}
 
-              
+              {/* NEW */}
               {newImages.map((file, i) => (
-                <div
+                <ImageCard
                   key={i}
-                  className="h-20 w-20 shrink-0 rounded-lg bg-zinc-800"
-                >
-                  <img
-                    src={URL.createObjectURL(file)}
-                    alt="new preview"
-                    className="h-full w-full object-cover rounded-lg"
-                  />
-                </div>
+                  src={URL.createObjectURL(file)}
+                  onDelete={() => removeNewImage(i)}
+                />
               ))}
             </div>
           </div>
 
-          
-          <div className="md:col-span-2 pt-2">
+          {/* BUTTON */}
+          <div className="md:col-span-2">
             <button
-              type="submit"
-              className="w-full rounded-lg bg-purple-600 py-2.5 text-sm font-medium hover:bg-purple-500 transition"
+              disabled={loading}
+              className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-lg font-medium transition disabled:opacity-50"
             >
-              Update Property
+              {loading ? "Updating..." : "Update Property"}
             </button>
           </div>
         </form>
       </div>
+    </div>
+  );
+}
+
+function Input({ icon, value, setValue, label, type = "text" }) {
+  return (
+    <div>
+      <label className="text-sm text-zinc-400">{label}</label>
+      <div className="mt-1 flex items-center gap-2 border border-zinc-800 bg-zinc-950 px-3 rounded-lg">
+        {icon}
+        <input
+          type={type}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className="w-full py-2 bg-transparent outline-none text-sm"
+        />
+      </div>
+    </div>
+  );
+}
+
+function ImageCard({ src, onDelete }) {
+  return (
+    <div className="relative group rounded-xl overflow-hidden border border-zinc-800">
+      <img
+        src={src}
+        className="h-24 w-full object-cover group-hover:scale-105 transition"
+      />
+
+      <button
+        type="button"
+        onClick={onDelete}
+        className="absolute top-1 right-1 bg-black/70 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition"
+      >
+        ✕
+      </button>
     </div>
   );
 }

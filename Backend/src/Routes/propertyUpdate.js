@@ -2,6 +2,8 @@ import express from "express";
 import {
   updateProperty,
   approveUpdateRequest,
+  getUpdateRequests,
+  rejectUpdateRequest,
 } from "../controllers/propertyupdate.controller.js";
 import { upload } from "../middleware/multer.js";
 import { adminAuth } from "../middleware/loginAdmin.js";
@@ -18,6 +20,9 @@ router.put(
   updateProperty,
 );
 
-router.put("/approveUpdate/:id", approveUpdateRequest);
+router.put("/approve/:id", adminAuth, approveUpdateRequest);
+
+router.get("/updateRequests", getUpdateRequests);
+router.put("/reject/:id", adminAuth, rejectUpdateRequest);
 
 export default router;

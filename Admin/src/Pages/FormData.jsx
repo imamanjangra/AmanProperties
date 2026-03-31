@@ -47,15 +47,8 @@ export default function FormData() {
   };
 
   return (
-    <div className=" flex-1 overflow-y-auto p-6 bg-zinc-950 text-zinc-100">
-      <div className="mb-6">
-        <h1 className="text-2xl md:text-3xl font-semibold text-purple-400">
-          Form Responses
-        </h1>
-        <p className="text-zinc-500 text-sm mt-1">
-          User inquiries from website forms
-        </p>
-      </div>
+    <div className=" flex-1 overflow-y-auto p-6  text-zinc-100">
+     
 
     <div className="flex flex-col space-y-2">
         {loading ? (
