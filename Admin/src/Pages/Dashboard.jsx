@@ -30,7 +30,6 @@ export default function Dashboard() {
     const fetchStats = async () => {
       try {
         const { data } = await API.get("/admin/user/status");
-        console.log("API DATA:", data);
         setStats(data);
       } catch (err) {
         console.error("API ERROR:", err);
@@ -38,16 +37,14 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
-
     fetchStats();
   }, []);
 
   const formatMonthly = (data = []) => {
     const months = [
-      "Jan","Feb","Mar","Apr","May","Jun",
-      "Jul","Aug","Sep","Oct","Nov","Dec"
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
-
     return months.map((month, index) => {
       const found = data.find((item) => item._id === index + 1);
       return {
@@ -57,27 +54,16 @@ export default function Dashboard() {
     });
   };
 
-  if (loading) {
-    return <div className="p-6 text-white">Loading...</div>;
-  }
+  if (loading) return <div className="p-6 text-white">Loading...</div>;
+  if (!stats) return <div className="p-6 text-red-500">Failed to load data</div>;
 
-  if (!stats) {
-    return <div className="p-6 text-red-500">Failed to load data</div>;
-  }
-
-  // ✅ handle object or array
-  const verifiedList = Array.isArray(stats.totalVerifiedProperties)
-    ? stats.totalVerifiedProperties
-    : stats.totalVerifiedProperties
-    ? [stats.totalVerifiedProperties]
-    : [];
-
-  const verifiedTotal = verifiedList.reduce(
-    (acc, item) => acc + (item.count || 0),
-    0
+  // Convert object to array for Pie chart & list
+  const verifiedList = Object.entries(stats.verifiedPropertiesByType || {}).map(
+    ([key, value]) => ({ _id: key, count: value })
   );
 
-  // 🔥 Pie chart colors (purple shades)
+  const verifiedTotal = stats.totalVerifiedProperties || 0;
+
   const COLORS = ["#9333ea", "#a855f7", "#c084fc", "#d8b4fe"];
 
   return (
@@ -94,100 +80,80 @@ export default function Dashboard() {
 
       {/* Charts Row 1 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-        {/* Property Growth */}
-        <div className="bg-gray-900 p-4 md:p-6 rounded-2xl border border-gray-800">
+        <div className="bg-gray-900 p-6 rounded-2xl border border-gray-800">
           <h2 className="mb-4 text-lg font-semibold">Property Growth</h2>
-          <div className="w-full h-72">
-            <ResponsiveContainer>
-              <BarChart data={formatMonthly(stats.monthlyProperty)}>
-                <XAxis dataKey="name" stroke="#ccc" />
-                <YAxis stroke="#ccc" />
-                <Tooltip />
-                <Bar dataKey="value" radius={[8, 8, 0, 0]} fill="#9333ea" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ResponsiveContainer height={250}>
+            <BarChart data={formatMonthly(stats.monthlyProperty)}>
+              <XAxis dataKey="name" stroke="#ccc" />
+              <YAxis stroke="#ccc" />
+              <Tooltip />
+              <Bar dataKey="value" fill="#9333ea" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
 
-        {/* User Growth */}
-        <div className="bg-gray-900 p-4 md:p-6 rounded-2xl border border-gray-800">
+        <div className="bg-gray-900 p-6 rounded-2xl border border-gray-800">
           <h2 className="mb-4 text-lg font-semibold">User Growth</h2>
-          <div className="w-full h-72">
-            <ResponsiveContainer>
-              <BarChart data={formatMonthly(stats.monthlyUser)}>
-                <XAxis dataKey="name" stroke="#ccc" />
-                <YAxis stroke="#ccc" />
-                <Tooltip />
-                <Bar dataKey="value" radius={[8, 8, 0, 0]} fill="#a855f7" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ResponsiveContainer height={250}>
+            <BarChart data={formatMonthly(stats.monthlyUser)}>
+              <XAxis dataKey="name" stroke="#ccc" />
+              <YAxis stroke="#ccc" />
+              <Tooltip />
+              <Bar dataKey="value" fill="#a855f7" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
 
       {/* Charts Row 2 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-        {/* Contact Form Graph */}
-        <div className="bg-gray-900 p-4 md:p-6 rounded-2xl border border-gray-800">
-          <h2 className="mb-4 text-lg font-semibold">Contact Requests Growth</h2>
-          <div className="w-full h-72">
-            <ResponsiveContainer>
-              <BarChart data={formatMonthly(stats.monthlyContactForm)}>
-                <XAxis dataKey="name" stroke="#ccc" />
-                <YAxis stroke="#ccc" />
-                <Tooltip />
-                <Bar dataKey="value" radius={[8, 8, 0, 0]} fill="#c084fc" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+        <div className="bg-gray-900 p-6 rounded-2xl border border-gray-800">
+          <h2 className="mb-4 text-lg font-semibold">Contact Requests</h2>
+          <ResponsiveContainer height={250}>
+            <BarChart data={formatMonthly(stats.monthlyContactForm)}>
+              <XAxis dataKey="name" stroke="#ccc" />
+              <YAxis stroke="#ccc" />
+              <Tooltip />
+              <Bar dataKey="value" fill="#c084fc" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
 
-        {/* Verified Properties Pie Chart */}
-        <div className="bg-gray-900 p-4 md:p-6 rounded-2xl border border-gray-800">
+        <div className="bg-gray-900 p-6 rounded-2xl border border-gray-800">
           <h2 className="mb-4 text-lg font-semibold">Verified Property Types</h2>
-          <div className="w-full h-72 flex items-center justify-center">
-            {verifiedList.length === 0 ? (
-              <p className="text-gray-400">No data</p>
-            ) : (
-              <ResponsiveContainer>
-                <PieChart>
-                  <Pie
-                    data={verifiedList}
-                    dataKey="count"
-                    nameKey="_id"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={100}
-                    label
-                  >
-                    {verifiedList.map((entry, index) => (
-                      <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            )}
-          </div>
+          {verifiedList.length === 0 ? (
+            <p className="text-gray-400">No data</p>
+          ) : (
+            <ResponsiveContainer height={250}>
+              <PieChart>
+                <Pie
+                  data={verifiedList}
+                  dataKey="count"
+                  nameKey="_id"
+                  outerRadius={90}
+                  label
+                >
+                  {verifiedList.map((entry, index) => (
+                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          )}
         </div>
       </div>
 
-      {/* List View */}
-      <div className="bg-gray-900 p-4 md:p-6 rounded-2xl border border-gray-800">
+      {/* Verified Breakdown */}
+      <div className="bg-gray-900 p-6 rounded-2xl border border-gray-800">
         <h2 className="mb-4 text-lg font-semibold">Verified Property Breakdown</h2>
-
         {verifiedList.length === 0 ? (
-          <p className="text-gray-400">No verified properties found</p>
+          <p className="text-gray-400">No verified properties</p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {verifiedList.map((item, i) => (
-              <div
-                key={i}
-                className="bg-purple-700/20 border border-purple-600 p-4 rounded-xl text-center"
-              >
+              <div key={i} className="bg-purple-700/20 p-4 rounded-xl text-center">
                 <p className="text-sm text-gray-300">{item._id}</p>
                 <h3 className="text-xl font-bold">{item.count}</h3>
               </div>

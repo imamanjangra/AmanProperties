@@ -83,6 +83,7 @@ export const getDashboardStats = async (req, res) => {
       ]),
 
       Properties.aggregate([
+        
         {
           $match: { isverifed: true },
         },
@@ -100,7 +101,14 @@ export const getDashboardStats = async (req, res) => {
     const userResult = userStats[0];
     const propertyResult = propertyStats[0];
     const contactFormResult = contactFormStats[0];
-    const verifiedPropertyResult = verifiedPropertyStats[0];
+ const verifiedPropertyResult = verifiedPropertyStats.reduce(
+  (acc, curr) => {
+    acc.byType[curr._id] = curr.count;
+    acc.total += curr.count;
+    return acc;
+  },
+  { total: 0, byType: {} }
+);
 
     return res.status(200).json({
       totalUser: userResult.total[0]?.count || 0,
@@ -109,7 +117,8 @@ export const getDashboardStats = async (req, res) => {
       monthlyProperty: propertyResult.monthly,
       totalContactForm: contactFormResult.total[0]?.count || 0,
       monthlyContactForm: contactFormResult.monthly,
-      totalVerifiedProperties: verifiedPropertyResult
+     totalVerifiedProperties: verifiedPropertyResult.total,
+  verifiedPropertiesByType: verifiedPropertyResult.byType
     });
   } catch (error) {
     return res
