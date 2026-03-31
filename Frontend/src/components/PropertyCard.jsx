@@ -1,9 +1,19 @@
-import { MapPin, Bed, Bath, Ruler } from "lucide-react";
+import { MapPin, Bed, Bath, Ruler, Share2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const PropertyCard = ({ property }) => {
   const navigate = useNavigate();
+
+  // Function to share property link via WhatsApp
+  const shareOnWhatsApp = (e) => {
+    e.stopPropagation();
+    const url = `${window.location.origin}/properties/${property.id}`;
+    const encodedURL = encodeURIComponent(url);
+
+    // Open WhatsApp with the property link
+    window.open(`https://wa.me/?text=${encodedURL}`, "_blank");
+  };
 
   return (
     <motion.div
@@ -30,17 +40,21 @@ const PropertyCard = ({ property }) => {
         />
 
         {/* TYPE BADGE */}
-        <div className="absolute top-4 right-4 px-4 py-1.5 
+        <div
+          className="absolute top-4 right-4 px-4 py-1.5 
                         bg-[#c6a46c] text-white 
-                        rounded-full text-sm font-medium shadow-lg">
+                        rounded-full text-sm font-medium shadow-lg"
+        >
           {property.type}
         </div>
 
         {/* FEATURED BADGE */}
         {property.featured && (
-          <div className="absolute top-4 left-4 px-4 py-1.5 
+          <div
+            className="absolute top-4 left-4 px-4 py-1.5 
                           bg-[#1a2a4e] text-white 
-                          rounded-full text-sm font-medium shadow-lg">
+                          rounded-full text-sm font-medium shadow-lg"
+          >
             Featured
           </div>
         )}
@@ -49,10 +63,12 @@ const PropertyCard = ({ property }) => {
       {/* CONTENT */}
       <div className="p-6">
         {/* TITLE */}
-        <h3 className="text-xl font-semibold mb-2 
+        <h3
+          className="text-xl font-semibold mb-2 
                        text-[#1a2a4e] 
                        transition-colors 
-                       group-hover:text-[#c6a46c]">
+                       group-hover:text-[#c6a46c]"
+        >
           {property.title}
         </h3>
 
@@ -88,21 +104,31 @@ const PropertyCard = ({ property }) => {
           </div>
         )}
 
-        {/* PRICE + BUTTON */}
+        {/* PRICE + BUTTONS */}
         <div className="flex items-center justify-between pt-4 border-t border-gray-200">
           <span className="text-2xl font-bold text-[#c6a46c]">
             {property.price}
           </span>
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              navigate(`/properties/${property.id}`);
-            }}
-            className="text-sm text-[#c6a46c] hover:underline"
-          >
-            View Details
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/properties/${property.id}`);
+              }}
+              className="text-sm text-[#c6a46c] hover:underline"
+            >
+              View Details
+            </button>
+
+            {/* SHARE BUTTON */}
+            <button
+              onClick={shareOnWhatsApp}
+              className="flex items-center gap-1 text-sm text-[#c6a46c] hover:underline"
+            >
+              <Share2 className="w-4 h-4" /> Share
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>
