@@ -83,19 +83,19 @@ const aboutData = [
 const services = [
   {
     title: "Property Buying",
-    img: "./public/image-1.jfif",
+    img: "/image-1.jpg",
   },
   {
     title: "Property Selling",
-    img: "./public/image-2.jfif",
+    img: "/image-2.jpg",
   },
   {
     title: "Property Rental",
-    img: "./public/image-3.jfif",
+    img: "/image-3.jpg",
   },
   {
     title: "Investment",
-    img: "./public/image-4.jfif",
+    img: "/image-4.jpg",
   },
 ];
 
