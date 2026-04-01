@@ -83,19 +83,19 @@ const aboutData = [
 const services = [
   {
     title: "Property Buying",
-    img: "https://images.unsplash.com/photo-1622015663381-d2e05ae91b72",
+    img: "./public/image-1.jfif",
   },
   {
     title: "Property Selling",
-    img: "https://images.unsplash.com/photo-1723110994499-df46435aa4b3",
+    img: "./public/image-2.jfif",
   },
   {
     title: "Property Rental",
-    img: "https://images.unsplash.com/photo-1762732793012-8bdab3af00b4",
+    img: "./public/image-3.jfif",
   },
   {
     title: "Investment",
-    img: "https://images.unsplash.com/photo-1639663742190-1b3dba2eebcf",
+    img: "./public/image-4.jfif",
   },
 ];
 
