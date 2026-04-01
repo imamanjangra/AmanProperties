@@ -8,7 +8,8 @@ const HeroSection = () => {
     <section className="relative h-dvh w-full overflow-hidden">
       {/* Background Image */}
       <motion.img
-        src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"
+        src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1920&auto=format&fit=crop"
+        alt="Hero Background"
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.6, ease: "easeOut" }}

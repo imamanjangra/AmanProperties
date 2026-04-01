@@ -79,23 +79,22 @@ const aboutData = [
   { title: "Our Vision", desc: "Become the most trusted brand." },
   { title: "Our Values", desc: "Integrity, transparency, excellence." },
 ];
-
 const services = [
   {
     title: "Property Buying",
-    img: "/image-1.jpg",
+    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "Property Selling",
-    img: "/image-2.jpg",
+    img: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "Property Rental",
-    img: "/image-3.jpg",
+    img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "Investment",
-    img: "/image-4.jpg",
+    img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
@@ -113,8 +112,11 @@ const item = {
   visible: { opacity: 1, y: 0 },
 };
 
- const socialLinks = [
-  { icon: Facebook, link: "https://www.facebook.com/profile.php?id=61588376266858" },
+const socialLinks = [
+  {
+    icon: Facebook,
+    link: "https://www.facebook.com/profile.php?id=61588376266858",
+  },
   { icon: Instagram, link: "https://www.instagram.com/amanproperties_/" },
 ];
 
@@ -167,10 +169,16 @@ export default function Landingpage2() {
             </motion.p>
 
             <motion.div variants={item} className="flex gap-4 mt-6">
-              <Link to="/properties" className="px-6 py-3 bg-[#c6a46c] text-white rounded-xl flex items-center gap-2 hover:scale-105 transition">
+              <Link
+                to="/properties"
+                className="px-6 py-3 bg-[#c6a46c] text-white rounded-xl flex items-center gap-2 hover:scale-105 transition"
+              >
                 Explore <ArrowRight />
               </Link>
-              <Link to="/signup" className="px-6 py-3 border rounded-xl hover:bg-gray-100">
+              <Link
+                to="/signup"
+                className="px-6 py-3 border rounded-xl hover:bg-gray-100"
+              >
                 Sign Up
               </Link>
             </motion.div>
@@ -188,6 +196,8 @@ export default function Landingpage2() {
               autoPlay
               muted
               loop
+              playsInline
+              preload="none"
             >
               <source src="/video.mp4" type="video/mp4" />
             </video>
@@ -255,76 +265,72 @@ export default function Landingpage2() {
         </motion.div>
       </section>
 
-          <section className="py-20 bg-gradient-to-br from-[#f5f2ed] via-white to-[#f5f2ed]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-[#f5f2ed] via-white to-[#f5f2ed]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* HEADING */}
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+              Why Choose Us
+            </h2>
 
-        {/* HEADING */}
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-            Why Choose Us
-          </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              We provide exceptional service backed by expertise and commitment.
+            </p>
+          </motion.div>
 
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We provide exceptional service backed by expertise and commitment.
-          </p>
-        </motion.div>
-
-        {/* CARDS */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.2,
+          {/* CARDS */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.2,
+                },
               },
-            },
-          }}
-        >
-          {benefits.map((item, index) => {
-            const Icon = item.icon;
+            }}
+          >
+            {benefits.map((item, index) => {
+              const Icon = item.icon;
 
-            return (
-              <motion.div
-                key={index}
-                variants={{
-                  hidden: { opacity: 0, y: 40 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                whileHover={{ y: -10 }}
-                className="bg-white rounded-2xl p-8 text-center border border-gray-200 shadow-md hover:shadow-2xl transition-all"
-              >
-                {/* ICON */}
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#c6a46c] to-[#b8955a] flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Icon className="w-8 h-8 text-white" />
-                </div>
+              return (
+                <motion.div
+                  key={index}
+                  variants={{
+                    hidden: { opacity: 0, y: 40 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  whileHover={{ y: -10 }}
+                  className="bg-white rounded-2xl p-8 text-center border border-gray-200 shadow-md hover:shadow-2xl transition-all"
+                >
+                  {/* ICON */}
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#c6a46c] to-[#b8955a] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
 
-                {/* TITLE */}
-                <h3 className="text-xl font-semibold mb-3 text-gray-900">
-                  {item.title}
-                </h3>
+                  {/* TITLE */}
+                  <h3 className="text-xl font-semibold mb-3 text-gray-900">
+                    {item.title}
+                  </h3>
 
-                {/* DESC */}
-                <p className="text-gray-600">
-                  {item.desc}
-                </p>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-      </div>
-    </section>
+                  {/* DESC */}
+                  <p className="text-gray-600">{item.desc}</p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
 
       {/* SERVICES */}
       <section className="py-20">
@@ -350,6 +356,8 @@ export default function Landingpage2() {
               >
                 <img
                   src={s.img}
+                  alt={s.title}
+                  loading="lazy"
                   className="w-full h-80 object-cover group-hover:scale-110 transition duration-700"
                 />
                 <div className="absolute inset-0 bg-black/50 flex items-end p-6">
@@ -377,155 +385,157 @@ export default function Landingpage2() {
           </motion.p>
 
           <motion.div variants={item} className="mt-6">
-            <Link to="/login" className="bg-white text-[#c6a46c] px-6 py-3 rounded-xl hover:scale-105 transition inline-flex items-center gap-2">
+            <Link
+              to="/login"
+              className="bg-white text-[#c6a46c] px-6 py-3 rounded-xl hover:scale-105 transition inline-flex items-center gap-2"
+            >
               Get Started <ArrowRight />
             </Link>
           </motion.div>
         </motion.div>
       </section>
 
-        <footer className="bg-linear-to-br from-[#f5f2ed] via-white to-[#f5f2ed] border-t border-gray-200">
-           <div className="max-w-7xl mx-auto px-6 py-16">
-             {/* GRID */}
-             <motion.div
-               className="grid grid-cols-1 md:grid-cols-4 gap-10"
-               initial="hidden"
-               whileInView="visible"
-               viewport={{ once: true }}
-               variants={{
-                 hidden: {},
-                 visible: {
-                   transition: { staggerChildren: 0.15 },
-                 },
-               }}
-             >
-               {/* BRAND */}
-               <motion.div
-                 variants={{
-                   hidden: { opacity: 0, y: 40 },
-                   visible: { opacity: 1, y: 0 },
-                 }}
-               >
-                 <div className="flex items-center gap-3 mb-4">
-                   <h3 className="text-xl font-bold">
-                     Aman{" "}
-                     <span className="bg-gradient-to-r from-[#c6a46c] to-[#b8955a] bg-clip-text text-transparent">
-                       Properties
-                     </span>
-                   </h3>
-                 </div>
-     
-                 <p className="text-gray-600 text-sm leading-relaxed">
-                   Your trusted partner in finding the perfect property. Making
-                   dreams come true.
-                 </p>
-               </motion.div>
-     
-               {/* QUICK LINKS */}
-               <motion.div
-                 variants={{
-                   hidden: { opacity: 0, y: 40 },
-                   visible: { opacity: 1, y: 0 },
-                 }}
-               >
-                 <h3 className="font-semibold mb-5 text-gray-900">Quick Links</h3>
-     
-                 <ul className="space-y-3">
-                   {[
-                     { name: "Home", link: "/" },
-                     { name: "Properties", link: "/properties" },
-                     { name: "Contact", link: "/contact" },
-                   ].map((item, i) => (
-                     <li key={i}>
-                       <a
-                         href={item.link}
-                         className="text-gray-600 text-sm hover:text-[#c6a46c] transition-all"
-                       >
-                         {item.name}
-                       </a>
-                     </li>
-                   ))}
-                 </ul>
-               </motion.div>
-     
-               {/* SERVICES */}
-               <motion.div
-                 variants={{
-                   hidden: { opacity: 0, y: 40 },
-                   visible: { opacity: 1, y: 0 },
-                 }}
-               >
-                 <h3 className="font-semibold mb-5 text-gray-900">Services</h3>
-     
-                 <ul className="space-y-3 text-sm text-gray-600">
-                   <li>Buy Property</li>
-                   <li>Sell Property</li>
-                   <li>Rent Property</li>
-                   <li>Investment</li>
-                 </ul>
-               </motion.div>
-     
-               {/* CONTACT */}
-               <motion.div
-                 variants={{
-                   hidden: { opacity: 0, y: 40 },
-                   visible: { opacity: 1, y: 0 },
-                 }}
-               >
-                 <h3 className="font-semibold mb-5 text-gray-900">Contact</h3>
-     
-                 <ul className="space-y-4 text-sm text-gray-600">
-                   <li className="flex items-center gap-2">
-                     <Mail className="w-4 h-4 text-[#c6a46c]" />
-                     AmanPropertie@email.com
-                   </li>
-     
-                   <li className="flex items-center gap-2">
-                     <Phone className="w-4 h-4 text-[#c6a46c]" />
-                     +91 9255446593
-                   </li>
-     
-                   <li className="flex items-center gap-2">
-                     <MapPin className="w-4 h-4 text-[#c6a46c]" />
-                     Haryana, India
-                   </li>
-                 </ul>
-               </motion.div>
-             </motion.div>
-     
-             {/* BOTTOM */}
-             <motion.div
-               className="mt-14 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6"
-               initial={{ opacity: 0, y: 40 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.6 }}
-               viewport={{ once: true }}
-             >
-               <p className="text-sm text-gray-500">
-                 © 2026 Aman Properties. All rights reserved.
-               </p>
-     
-               <div className="flex items-center gap-4">
-                 {socialLinks.map((item, i) => {
-                   const Icon = item.icon;
-     
-                   return (
-                     <a
-                       key={i}
-                       href={item.link}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center cursor-pointer hover:bg-gradient-to-br hover:from-[#c6a46c] hover:to-[#b8955a] hover:text-white transition-all duration-300 hover:scale-110"
-                     >
-                       <Icon className="w-4 h-4" />
-                     </a>
-                   );
-                 })}
-               </div>
-             </motion.div>
-           </div>
-         </footer>
+      <footer className="bg-linear-to-br from-[#f5f2ed] via-white to-[#f5f2ed] border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          {/* GRID */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-4 gap-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.15 },
+              },
+            }}
+          >
+            {/* BRAND */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <h3 className="text-xl font-bold">
+                  Aman{" "}
+                  <span className="bg-gradient-to-r from-[#c6a46c] to-[#b8955a] bg-clip-text text-transparent">
+                    Properties
+                  </span>
+                </h3>
+              </div>
+
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Your trusted partner in finding the perfect property. Making
+                dreams come true.
+              </p>
+            </motion.div>
+
+            {/* QUICK LINKS */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <h3 className="font-semibold mb-5 text-gray-900">Quick Links</h3>
+
+              <ul className="space-y-3">
+                {[
+                  { name: "Home", link: "/" },
+                  { name: "Properties", link: "/properties" },
+                  { name: "Contact", link: "/contact" },
+                ].map((item, i) => (
+                  <li key={i}>
+                    <a
+                      href={item.link}
+                      className="text-gray-600 text-sm hover:text-[#c6a46c] transition-all"
+                    >
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* SERVICES */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <h3 className="font-semibold mb-5 text-gray-900">Services</h3>
+
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li>Buy Property</li>
+                <li>Sell Property</li>
+                <li>Rent Property</li>
+                <li>Investment</li>
+              </ul>
+            </motion.div>
+
+            {/* CONTACT */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <h3 className="font-semibold mb-5 text-gray-900">Contact</h3>
+
+              <ul className="space-y-4 text-sm text-gray-600">
+                <li className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-[#c6a46c]" />
+                  AmanPropertie@email.com
+                </li>
+
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-[#c6a46c]" />
+                  +91 9255446593
+                </li>
+
+                <li className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#c6a46c]" />
+                  Haryana, India
+                </li>
+              </ul>
+            </motion.div>
+          </motion.div>
+
+          {/* BOTTOM */}
+          <motion.div
+            className="mt-14 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-sm text-gray-500">
+              © 2026 Aman Properties. All rights reserved.
+            </p>
+
+            <div className="flex items-center gap-4">
+              {socialLinks.map((item, i) => {
+                const Icon = item.icon;
+
+                return (
+                  <a
+                    key={i}
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center cursor-pointer hover:bg-gradient-to-br hover:from-[#c6a46c] hover:to-[#b8955a] hover:text-white transition-all duration-300 hover:scale-110"
+                  >
+                    <Icon className="w-4 h-4" />
+                  </a>
+                );
+              })}
+            </div>
+          </motion.div>
+        </div>
+      </footer>
     </div>
   );
 }
-

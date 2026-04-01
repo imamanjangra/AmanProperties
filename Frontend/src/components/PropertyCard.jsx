@@ -1,6 +1,7 @@
 import { MapPin, Bed, Bath, Ruler, Share2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import React from "react";
 
 const PropertyCard = ({ property }) => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const PropertyCard = ({ property }) => {
         <img
           src={property.image}
           alt={property.title}
+           loading="lazy"
           className="w-full h-full object-cover 
                      transition-transform duration-500 
                      group-hover:scale-110"
@@ -135,4 +137,4 @@ const PropertyCard = ({ property }) => {
   );
 };
 
-export default PropertyCard;
+export default React.memo(PropertyCard);

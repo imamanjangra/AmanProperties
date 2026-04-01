@@ -26,6 +26,7 @@ const ContactPage = () => {
 
     if (!firstName || !mobileNo || !purpose || !propertype) {
       toast.error("Please fill compelete form !!");
+      return;
     }
     try {
       const res = await API.post("/form", {
@@ -75,6 +76,7 @@ const ContactPage = () => {
           src="https://sobharealty.com/sites/default/files/styles/webp/public/2024-07/banner-1400x726.jpg.webp?itok=J6GW-yox"
           alt="Contact Hero"
           className="w-full h-full object-cover rounded-b-3xl"
+          loading="lazy"
         />
       </motion.section>
 
