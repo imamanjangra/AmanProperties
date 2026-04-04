@@ -2,10 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
+import SEO from "../components/SEO.jsx";
 export default function TermsConditionsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f5f2ed] via-white to-[#f5f2ed] py-16 px-4">
+        <SEO title="Terms & Conditions | AmanProperties" description="Read the terms and conditions for using AmanProperties. Understand our policies, your rights, and obligations as a user of our platform." />
         <Navbar variant="light" />
       <div className="max-w-4xl mt-20 mb-0 mx-auto">
 

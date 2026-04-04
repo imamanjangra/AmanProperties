@@ -19,6 +19,7 @@ import API from "../service/Api";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO.jsx";
 
 export default function PropertyDetails() {
   const { id } = useParams();
@@ -38,6 +39,10 @@ export default function PropertyDetails() {
 
   return (
     <div className="bg-[#f8f6f2] min-h-screen flex flex-col">
+      <SEO 
+        title={`${property.propertyName} | AmanProperties`} 
+        description={property.description || `View details for ${property.propertyName} located at ${property.location}. Find your dream real estate with AmanProperties.`} 
+      />
 
       <Navbar variant="light" />
       <div className="h-20" />

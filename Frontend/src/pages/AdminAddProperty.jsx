@@ -16,7 +16,7 @@ import API from "../service/Api";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContactButtons from "../components/ContactButtons";
-
+import SEO from "../components/SEO.jsx";
 export default function AdminAddProperty() {
   const [images, setImages] = useState([]);
   const [propertyName, setPropertyName] = useState("");
@@ -88,6 +88,7 @@ export default function AdminAddProperty() {
 
   return (
     <div className="min-h-screen bg-[#f8f6f2] text-black flex flex-col">
+      <SEO title="Add Property | AmanProperties" description="Admin page to add a new property listing to AmanProperties." />
       <Navbar variant="light" />
       <ContactButtons />
       <div className="flex-1 px-4 md:px-8 py-6">

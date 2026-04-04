@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import API from "../service/Api.jsx";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
+import SEO from "../components/SEO.jsx";
 
 const ContactPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -66,6 +67,10 @@ const ContactPage = () => {
 
   return (
     <div className="bg-linear-to-br from-[#f8f6f2] to-white">
+      <SEO 
+        title="Contact Us | AmanProperties" 
+        description="Get in touch with AmanProperties. Send us a message or contact us directly via WhatsApp or Call for any real estate inquiries." 
+      />
       <motion.section
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: 1, scale: 1 }}

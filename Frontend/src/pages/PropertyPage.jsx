@@ -7,6 +7,7 @@ import Properties_u from "../components/Properties_u.jsx";
 import Footer from "../components/Footer.jsx";
 import Navbar from "../components/Navbar.jsx";
 import ContactButtons from "../components/ContactButtons.jsx";
+import SEO from "../components/SEO.jsx";
 
 const PropertyPage = () => {
   const [properties, setProperties] = useState([]);
@@ -54,6 +55,10 @@ const PropertyPage = () => {
 
   return (
     <div className="bg-[#f8f6f2] min-h-screen flex flex-col">
+      <SEO 
+        title="Properties | AmanProperties" 
+        description="Browse our wide selection of properties for buying, selling, and renting. Find the perfect real estate match for you." 
+      />
       <div className="grow">
         <Navbar variant="light" />
         <ContactButtons />

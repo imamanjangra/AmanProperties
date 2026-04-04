@@ -4,6 +4,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { AuthContext } from "../Contexts/auth.context";
 import toast from "react-hot-toast";
 import API from "../service/Api";
+import SEO from "../components/SEO.jsx";
 
 export default function SignupPage() {
   const [firstname, setFirstname] = useState("");
@@ -95,6 +96,7 @@ export default function SignupPage() {
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#f2efe9] to-[#e8e4db]">
+      <SEO title="Sign Up | AmanProperties" description="Create a new account at AmanProperties to save your favorite real estate listings." />
       <div className="relative w-full max-w-md p-8 rounded-3xl bg-white/70 backdrop-blur-xl shadow-xl border border-white/40 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">
         {/* Glow */}
         <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#d4af37]/20 rounded-full blur-3xl"></div>

@@ -18,6 +18,7 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
+import SEO from "../components/SEO.jsx";
 
 /* ---------------- DATA ---------------- */
 
@@ -126,6 +127,10 @@ export default function Landingpage2() {
   const navigate = useNavigate();
   return (
     <div className="font-sans">
+      <SEO 
+        title="AmanProperties | Home" 
+        description="Find your dream home with AmanProperties. Over 10,000 satisfied clients trust our expert team for buying, selling, and renting real estate." 
+      />
       {/* NAVBAR */}
       <nav className="fixed w-full z-50 bg-white/70 backdrop-blur-xl border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between">

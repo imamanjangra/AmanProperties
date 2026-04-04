@@ -4,33 +4,36 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./Contexts/auth.context.jsx";
+import { HelmetProvider } from "react-helmet-async";
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-  <AuthProvider>
-      <Toaster
-        position="down-right"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: "#1f2937",
-            color: "#fff",
-            padding: "16px",
-            borderRadius: "10px",
-          },
-          success: {
+  <HelmetProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <Toaster
+          position="down-right"
+          toastOptions={{
+            duration: 4000,
             style: {
-              background: "#16a34a",
+              background: "#1f2937",
+              color: "#fff",
+              padding: "16px",
+              borderRadius: "10px",
             },
-          },
-          error: {
-            style: {
-              background: "#dc2626",
+            success: {
+              style: {
+                background: "#16a34a",
+              },
             },
-          },
-        }}
-      />
-      <App />
-  </AuthProvider>,
+            error: {
+              style: {
+                background: "#dc2626",
+              },
+            },
+          }}
+        />
+        <App />
+      </AuthProvider>
     </BrowserRouter>
+  </HelmetProvider>
 );

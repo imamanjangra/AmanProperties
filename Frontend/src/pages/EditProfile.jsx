@@ -4,7 +4,7 @@ import API from "../service/Api";
 import { useNavigate } from "react-router-dom";
 import { Camera, Lock } from "lucide-react";
 import toast from "react-hot-toast";
-
+import SEO from "../components/SEO.jsx";
 export default function EditProfile() {
   const navigate = useNavigate();
 
@@ -110,6 +110,7 @@ export default function EditProfile() {
 
   return (
     <div className="min-h-screen bg-[#f8f6f2]">
+      <SEO title="Edit Profile | AmanProperties" description="Update your AmanProperties profile information and account settings." />
       <Navbar variant="light" />
 
       <div className="max-w-5xl mx-auto pt-28 px-4 space-y-6">

@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
-
+import SEO from "../components/SEO.jsx";
 export default function NotFound() {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#f8f6f2] px-6 text-center">
+      
+      <SEO title="Page Not Found | AmanProperties" description="The page you are looking for does not exist." />
       
       {/* Image */}
       <img

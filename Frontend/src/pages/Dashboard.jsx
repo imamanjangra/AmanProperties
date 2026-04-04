@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Footer from "../components/Footer";
 import ContactButtons from "../components/ContactButtons";
-
+import SEO from "../components/SEO.jsx";
 export default function Dashboard() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -83,6 +83,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-[#f8f6f2]">
+      <SEO title="Dashboard | AmanProperties" description="Manage your properties and track their status on AmanProperties." />
       <Navbar variant="light" />
        <ContactButtons/>
       <div className="w-full max-w-400 mx-auto px-6 lg:px-10 xl:px-16 pt-24 pb-12">
