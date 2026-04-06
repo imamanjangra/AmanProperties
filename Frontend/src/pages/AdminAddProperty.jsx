@@ -63,7 +63,7 @@ export default function AdminAddProperty() {
       images.forEach((img) => formData.append("images", img));
 
       await API.post("/properties", formData);
-      console.log(formData);
+      // console.log(formData);
       toast.success("Property added");
 
       setPropertyName("");

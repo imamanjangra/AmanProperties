@@ -37,7 +37,7 @@ export default function ContactBox() {
       setPurpose("");
       setPropertype("");
     } catch (error) {
-        console.log(error);
+        // console.log(error);
       toast.error("Failed to submit Form");
     }
   };

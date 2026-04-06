@@ -28,7 +28,7 @@ export default function PropertyDetails() {
   useEffect(() => {
     const fetchProperty = async () => {
       const { data } = await API.get(`/properties/${id}`);
-      console.log(data);
+      // console.log(data);
       setProperty(data);
     };
     fetchProperty();

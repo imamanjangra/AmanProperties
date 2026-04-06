@@ -29,7 +29,7 @@ export default function Dashboard() {
       try {
         const { data } = await API.get("/properties/getuserproperties");
         setProperties(data || []);
-        console.log("Fetched properties:", data);
+        // console.log("Fetched properties:", data);
       } catch (error) {
         console.log(error);
       } finally {
