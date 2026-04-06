@@ -76,11 +76,11 @@ const Navbar = ({ variant = "dark" }) => {
         {/* RIGHT SECTION */}
         <div className="flex items-center gap-3">
 
-          {/* PROFILE */}
+        {/* PROFILE */}
           <Link to="/profile">
             {user?.image ? (
               <img
-                src={user.image}
+                src={user.image.replace("http://", "https://")}
                 alt="profile"
                 className="w-10 h-10 rounded-full border-2 border-[#c6a46c] object-cover"
               />
@@ -90,7 +90,6 @@ const Navbar = ({ variant = "dark" }) => {
               </div>
             )}
           </Link>
-
           {/* MOBILE MENU BUTTON */}
           <button
             className="md:hidden px-2 text-white"
