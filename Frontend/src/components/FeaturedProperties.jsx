@@ -18,7 +18,7 @@ const FeaturedProperties = () => {
       setProperties(data);
       
     } catch (error) {
-      console.log("Failed to fetch properties", error);
+      // console.log("Failed to fetch properties", error);
     } finally {
       setLoading(false);
     }
@@ -65,7 +65,7 @@ const FeaturedProperties = () => {
                 location: property.location,
                 price: `₹${property.price}`,
                 type: property.propertyType,
-                image: property.images?.[0]?.url, 
+               image: property.images?.[0]?.url?.replace("http://", "https://"),
                 beds : property.Bedroom,
                 baths : property.Bathroom,
                 size :  property.size,
