@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react"; // 1. Added useEffect
 import "./App.css";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom"; // 2. Added useLocation
 
 import Home from "./pages/Home.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
@@ -18,16 +18,36 @@ import EditProperty from "./pages/EditProperty.jsx";
 import Landingpage2 from "./pages/Landingpage2.jsx";
 
 import { AuthContext } from "./Contexts/auth.context.jsx";
-// import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import ProtectedRoute from "../ProtectedRoute.jsx";
 import TermsConditionsPage from "./pages/TermsConditionsPage.jsx";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage.jsx";
+
 function App() {
   const { user } = useContext(AuthContext);
+  const location = useLocation(); // 3. Get current page path
+
+  // --- GOOGLE TAG INTEGRATION ---
+  useEffect(() => {
+    // This part adds the script tag to your site head
+    const script = document.createElement("script");
+    script.src = "https://www.googletagmanager.com/gtag/js?id=G-H4E4MWXVYN";
+    script.async = true;
+    document.head.appendChild(script);
+
+    // This part initializes the tracking
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-H4E4MWXVYN", {
+      page_path: location.pathname, // Tracks the specific page the user is on
+    });
+  }, [location]); // Runs every time the user moves to a new page
+  // ------------------------------
 
   return (
     <Routes>
-
       {/* 🔹 Public Routes */}
       <Route path="/" element={!user ? <Landingpage2 /> : <Navigate to="/home" />} />
 
@@ -40,14 +60,16 @@ function App() {
         path="/signup"
         element={!user ? <Signup /> : <Navigate to="/home" />}
       />
+      
       <Route
         path="/term-and-condition"
         element={<TermsConditionsPage />} 
-        />
+      />
+      
       <Route
         path="/privacy-policy"
         element={<PrivacyPolicyPage />} 
-        />
+      />
 
       {/* 🔹 Protected Routes WITH Layout */}
       <Route
@@ -126,10 +148,8 @@ function App() {
         }
       />
 
-
       {/* 🔹 Fallback */}
       <Route path="*" element={<NotFound />} />
-
     </Routes>
   );
 }
