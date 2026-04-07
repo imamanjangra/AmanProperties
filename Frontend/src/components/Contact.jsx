@@ -41,7 +41,7 @@ export default function Contact() {
 
        toast.success("Form submitted successfully")
     } catch (error) {
-      console.error(error.response?.data || error.message);
+      // console.error(error.response?.data || error.message);
        toast.error("Form submission failed")
     }
   };
