@@ -12,7 +12,8 @@ const ContactPage = () => {
   const [propertype, setPropertype] = useState("");
 
   const phoneNo = 9255446593;
-  const message = "Hi, I'm interested in a property listed on your website. Could you please share more details?";
+  const message =
+    "Hi, I'm interested in a property listed on your website. Could you please share more details?";
   const handleWhatsapp = () => {
     const url = `https://wa.me/${phoneNo}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
@@ -38,13 +39,11 @@ const ContactPage = () => {
         propertype,
       });
       if (mobileNo.length != 10) {
-      toast.error("Mobile Number must be 10 digit !");
-      return;
-    }
+        toast.error("Mobile Number must be 10 digit !");
+        return;
+      }
 
-  
-
-      toast.success("Form submitted successfully")
+      toast.success("Form submitted successfully");
 
       setFirstName("");
       setLastName("");
@@ -53,7 +52,7 @@ const ContactPage = () => {
       setPropertype("");
     } catch (error) {
       console.error(error.response?.data || error.message);
-       toast.error("Failed to submit Form")
+      toast.error("Failed to submit Form");
     }
   };
 
@@ -61,15 +60,16 @@ const ContactPage = () => {
     if (/Mobi|Android/i.test(navigator.userAgent)) {
       window.location.href = "tel:+919255446593";
     } else {
-      toast.error("Please call this number from your mobile: +91 9255446593")
+      toast.error("Please call this number from your mobile: +91 9255446593");
     }
   };
 
   return (
     <div className="bg-linear-to-br from-[#f8f6f2] to-white">
-      <SEO 
-        title="Contact Us | AmanProperties" 
-        description="Get in touch with AmanProperties. Send us a message or contact us directly via WhatsApp or Call for any real estate inquiries." 
+      <SEO
+        title="Contact Us | AmanProperties"
+        description="Get in touch with AmanProperties. Send us a message or contact us directly via WhatsApp or Call for any real estate inquiries."
+        canonical="https://www.amanproperties.com/contact"
       />
       <motion.section
         initial={{ opacity: 0, scale: 1.05 }}
@@ -178,11 +178,11 @@ const ContactPage = () => {
 
             <div className="space-y-6">
               <motion.div
-                // initial={{ opacity: 0, x: 60 }}
-                // whileInView={{ opacity: 1, x: 0 }}
-                // viewport={{ once: true }}
-                // transition={{ duration: 0.7 }}
-                // className="bg-white p-8 rounded-xl shadow-lg"
+              // initial={{ opacity: 0, x: 60 }}
+              // whileInView={{ opacity: 1, x: 0 }}
+              // viewport={{ once: true }}
+              // transition={{ duration: 0.7 }}
+              // className="bg-white p-8 rounded-xl shadow-lg"
               >
                 <h3 className="font-script text-[#1a2a4e] mb-6 text-xl font-semibold">
                   CONTACT INFORMATION
@@ -299,13 +299,14 @@ const ContactPage = () => {
                 className="bg-white rounded-xl shadow-lg overflow-hidden h-64 mt-6"
               >
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3471.195059679129!2d76.97025117539334!3d29.53981327518153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390e7700337d796d%3A0x4162340ae00b672e!2sRailway%20road%20gharaunda!5e0!3m2!1sen!2sin!4v1770480607960!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.7!2d76.9!3d29.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDMwJzAwLjAiTiA3NsKwNTQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
                   width="100%"
                   height="100%"
+                  style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
                   title="Office Location"
-                  className="border-0"
                 ></iframe>
               </motion.div>
             </div>
