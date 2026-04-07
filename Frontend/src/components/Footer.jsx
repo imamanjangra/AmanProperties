@@ -12,11 +12,13 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
-
   const socialLinks = [
-  { icon: Facebook, link: "https://www.facebook.com/profile.php?id=61588376266858" },
-  { icon: Instagram, link: "https://www.instagram.com/amanproperties_/" },
-];
+    {
+      icon: Facebook,
+      link: "https://www.facebook.com/profile.php?id=61588376266858",
+    },
+    { icon: Instagram, link: "https://www.instagram.com/amanproperties_/" },
+  ];
   return (
     <footer className="bg-linear-to-br from-[#f5f2ed] via-white to-[#f5f2ed] border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -128,6 +130,7 @@ export default function Footer() {
         </motion.div>
 
         {/* BOTTOM */}
+        {/* BOTTOM */}
         <motion.div
           className="mt-14 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6"
           initial={{ opacity: 0, y: 40 }}
@@ -135,14 +138,31 @@ export default function Footer() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p className="text-sm text-gray-500">
-            © 2026 Aman Properties. All rights reserved.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <p className="text-sm text-gray-500">
+              © 2026 Aman Properties. All rights reserved.
+            </p>
+
+            {/* LEGAL LINKS ADDED HERE */}
+            <div className="flex gap-6">
+              <Link
+                to="/term-and-condition"
+                className="text-xs text-gray-400 hover:text-[#c6a46c] transition-colors"
+              >
+                Terms & Conditions
+              </Link>
+              <Link
+                to="/privacy-policy"
+                className="text-xs text-gray-400 hover:text-[#c6a46c] transition-colors"
+              >
+                Privacy Policy
+              </Link>
+            </div>
+          </div>
 
           <div className="flex items-center gap-4">
             {socialLinks.map((item, i) => {
               const Icon = item.icon;
-
               return (
                 <a
                   key={i}
