@@ -6,11 +6,28 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      // "http://localhost:5173","http://localhost:5174" 
-      "http://localhost:5173" ,"http://localhost:3000" , 'https://amanproperties.me' ,"http://localhost:5174" , "https://amanproperties.onrender.com" , "https://amanproperties-admin.onrender.com" , "https://aman-properties.vercel.app"
-    ],
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://localhost:5174",
+        "https://amanproperties.me",
+        "https://amanproperties.onrender.com",
+        "https://amanproperties-admin.onrender.com",
+        "https://aman-properties.vercel.app"
+      ];
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
 
