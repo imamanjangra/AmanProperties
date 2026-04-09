@@ -1,0 +1,18 @@
+# General settings for all search engines (Google, Bing, etc.)
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /config/
+Disallow: /private/
+
+# Specific instructions for AI Crawlers (Gemini and ChatGPT)
+# This allows AI to "learn" about your property listings
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Help search engines find your map of the website
+# REPLACE the URL below with your actual sitemap link
+Sitemap: https://amanproperties.me/sitemap.xml
