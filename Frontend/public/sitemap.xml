@@ -21,4 +21,17 @@
     <loc>https://amanproperties.me/privacy-policy</loc>
     <priority>0.30</priority>
   </url>
+  <url>
+    <loc>https://amanproperties.me/profile</loc>
+    <lastmod>2026-04-07T10:19:35+00:00</lastmod>
+    <priority>0.50</priority>
+  </url>
+
+  <url>
+    <loc>https://amanproperties.me/properties</loc>
+    <lastmod>2026-04-07T10:19:35+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  
+  
 </urlset>
