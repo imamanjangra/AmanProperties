@@ -69,7 +69,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#f2efe9] to-[#e8e4db]">
       <SEO
         title="Login | Aman Properties"
-        description="Login to access your account, manage property listings, and connect with buyers and sellers on Amam Properties"
+        description="Login to access your account, manage property listings, and connect with buyers and sellers on Aman Properties"
       />
 
       <div className="relative w-full max-w-md p-8 rounded-3xl bg-white/70 backdrop-blur-xl shadow-xl border border-white/40 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">

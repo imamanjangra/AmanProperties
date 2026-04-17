@@ -43,7 +43,7 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f8f6f2]">
-      <SEO title="My Profile | AmanProperties" description="View and manage your AmanProperties user profile, including your personal details and account settings." />
+      <SEO title="My Profile | Aman Properties" description="View and manage your Aman Properties user profile, including your personal details and account settings." />
       <Navbar variant="light" />
        <ContactButtons/>
       <div className="w-full bg-[#f8f6f2] flex flex-col lg:flex-row gap-8 px-6 lg:px-10 xl:px-20 pt-24 pb-12 flex-1">

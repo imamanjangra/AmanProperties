@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#f8f6f2] px-6 text-center">
       
-      <SEO title="Page Not Found | AmanProperties" description="The page you are looking for does not exist." />
+      <SEO title="Page Not Found | Aman Properties" description="The page you are looking for does not exist." />
       
       {/* Image */}
       <img

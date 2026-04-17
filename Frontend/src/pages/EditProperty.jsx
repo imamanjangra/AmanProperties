@@ -121,7 +121,7 @@ export default function EditPropertyForm() {
 
   return (
     <div className="min-h-screen bg-[#f8f6f2] pt-20 text-black">
-      <SEO title="Edit Property | AmanProperties" description="Edit your existing property listing on AmanProperties to keep it up to date." />
+      <SEO title="Edit Property | Aman Properties" description="Edit your existing property listing on AmanProperties to keep it up to date." />
       <Navbar variant="light" />
 
       <div className="mb-6 max-w-4xl mx-auto">

@@ -56,7 +56,7 @@ const PropertyPage = () => {
   return (
     <div className="bg-[#f8f6f2] min-h-screen flex flex-col">
       <SEO 
-        title="Properties | AmanProperties" 
+        title="Properties | Aman Properties" 
         description="Browse our wide selection of properties for buying, selling, and renting. Find the perfect real estate match for you." 
       />
       <div className="grow">

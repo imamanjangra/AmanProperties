@@ -110,7 +110,7 @@ export default function EditProfile() {
 
   return (
     <div className="min-h-screen bg-[#f8f6f2]">
-      <SEO title="Edit Profile | AmanProperties" description="Update your AmanProperties profile information and account settings." />
+      <SEO title="Edit Profile | Aman Properties" description="Update your AmanProperties profile information and account settings." />
       <Navbar variant="light" />
 
       <div className="max-w-5xl mx-auto pt-28 px-4 space-y-6">

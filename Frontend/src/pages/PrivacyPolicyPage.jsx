@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f5f2ed] via-white to-[#f5f2ed] py-16 px-4">
-      <SEO title="Privacy Policy | AmanProperties" description="Learn how AmanProperties handles and protects your personal data." />
+      <SEO title="Privacy Policy | Aman Properties" description="Learn how Aman Properties handles and protects your personal data." />
       <Navbar variant="light" />
       
       <div className="max-w-4xl mt-20 mx-auto">

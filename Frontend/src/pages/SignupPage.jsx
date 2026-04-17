@@ -97,7 +97,7 @@ export default function SignupPage() {
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#f2efe9] to-[#e8e4db]">
       <SEO
         title="Sign Up | Aman Properties"
-        description="Create your Amam Properties account to list properties, connect with buyers and sellers, and explore verified real estate opportunities in Haryana, India."
+        description="Create your Aman Properties account to list properties, connect with buyers and sellers, and explore verified real estate opportunities in Haryana, India."
       />
 
       <div className="relative w-full max-w-md p-8 rounded-3xl bg-white/70 backdrop-blur-xl shadow-xl border border-white/40 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">
