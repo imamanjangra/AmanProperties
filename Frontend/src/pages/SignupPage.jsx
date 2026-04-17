@@ -12,12 +12,12 @@ export default function SignupPage() {
   const [mobileno, setMobileno] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
-  
-
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // ✅ added
+
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -33,7 +33,6 @@ export default function SignupPage() {
       return toast.error("Passwords do not match");
     }
 
-    // 🔴 Required checks
     if (!trimmedFirstname) {
       return toast.error("First name is required");
     }
@@ -51,20 +50,18 @@ export default function SignupPage() {
     }
 
     if (!acceptedTerms) {
-    return toast.error("You must accept Terms & Conditions");
-  }
+      return toast.error("You must accept Terms & Conditions");
+    }
 
-    // 🔴 Mobile validation (India basic)
     if (!/^[6-9]\d{9}$/.test(trimmedMobileno)) {
       return toast.error("Enter a valid 10-digit mobile number");
     }
 
-    // 🔴 Email validation (only if user entered something)
-
-    // 🔴 Password strength (don’t be lazy here)
     if (trimmedPassword.length < 6) {
       return toast.error("Password must be at least 6 characters");
     }
+
+    setLoading(true); // ✅ start loading
 
     try {
       const { data } = await API.post("/users/register", {
@@ -86,22 +83,27 @@ export default function SignupPage() {
     } catch (error) {
       console.log(error);
 
-      // Better error handling (don’t show generic garbage)
       const message =
         error?.response?.data?.message ||
         "Failed to create account. Try again.";
 
       toast.error(message);
+    } finally {
+      setLoading(false); // ✅ stop loading
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#f2efe9] to-[#e8e4db]">
-      <SEO title="Sign Up | AmanProperties" description="Create a new account at AmanProperties to save your favorite real estate listings." />
+      <SEO
+        title="Sign Up | Aman Properties"
+        description="Create your Amam Properties account to list properties, connect with buyers and sellers, and explore verified real estate opportunities in Haryana, India."
+      />
+
       <div className="relative w-full max-w-md p-8 rounded-3xl bg-white/70 backdrop-blur-xl shadow-xl border border-white/40 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">
-        {/* Glow */}
+        
         <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#d4af37]/20 rounded-full blur-3xl"></div>
 
-        {/* Logo */}
         <div className="flex justify-center mb-6">
           <div className="w-25 h-25 rounded-full overflow-hidden border-4 border-[#d4af37] shadow-lg hover:scale-110 transition">
             <img
@@ -112,7 +114,6 @@ export default function SignupPage() {
           </div>
         </div>
 
-        {/* Heading */}
         <h2 className="text-2xl font-bold text-center text-gray-800">
           Create Account
         </h2>
@@ -120,34 +121,34 @@ export default function SignupPage() {
           Fill details to register
         </p>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          
           <div className="flex gap-3">
             <input
               type="text"
-              name="firstname"
               placeholder="First Name"
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
-              className="w-1/2 px-4 py-3 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
+              disabled={loading}
+              className="w-1/2 px-4 py-3 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none disabled:opacity-60"
             />
             <input
               type="text"
-              name="lastname"
               placeholder="Last Name"
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
-              className="w-1/2 px-4 py-3 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
+              disabled={loading}
+              className="w-1/2 px-4 py-3 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none disabled:opacity-60"
             />
           </div>
 
           <input
             type="text"
-            name="mobileno"
             placeholder="Mobile Number"
             value={mobileno}
             onChange={(e) => setMobileno(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
+            disabled={loading}
+            className="w-full px-4 py-3 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none disabled:opacity-60"
           />
 
           <div className="relative">
@@ -156,13 +157,14 @@ export default function SignupPage() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 pr-12 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
+              disabled={loading}
+              className="w-full px-4 py-3 pr-12 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none disabled:opacity-60"
             />
 
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
@@ -174,13 +176,16 @@ export default function SignupPage() {
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full px-4 py-3 pr-12 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none"
+              disabled={loading}
+              className="w-full px-4 py-3 pr-12 rounded-xl bg-[#f7f5f2] border border-gray-300 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/40 outline-none disabled:opacity-60"
             />
 
             <button
               type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black"
+              onClick={() =>
+                setShowConfirmPassword(!showConfirmPassword)
+              }
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
             >
               {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
@@ -191,9 +196,9 @@ export default function SignupPage() {
               type="checkbox"
               checked={acceptedTerms}
               onChange={() => setAcceptedTerms(!acceptedTerms)}
+              disabled={loading}
               className="mt-1 accent-[#d4af37] cursor-pointer"
             />
-
             <p className="text-gray-600">
               I agree to{" "}
               <span
@@ -207,13 +212,13 @@ export default function SignupPage() {
 
           <button
             type="submit"
-            className="w-full py-3 rounded-md bg-[#d4af37] text-black font-semibold hover:bg-[#c19a2e] active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg"
+            disabled={loading}
+            className="w-full py-3 rounded-md bg-[#d4af37] text-black font-semibold hover:bg-[#c19a2e] active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Sign Up
+            {loading ? "Creating account..." : "Sign Up"}
           </button>
         </form>
 
-        {/* Footer */}
         <p className="text-center text-gray-500 text-sm mt-6">
           Already have an account?
           <span

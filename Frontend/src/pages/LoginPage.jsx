@@ -10,17 +10,19 @@ export default function LoginPage() {
   const [Mobileno, setMobileno] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // ✅ added
+
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const handleLoginForm = async (e) => {
     e.preventDefault();
 
     const trimmedInput = Mobileno.trim();
     const trimmedPassword = password.trim();
 
-    // 🔴 Required checks
     if (!trimmedInput) {
-      return toast.error("Mobile number  is required");
+      return toast.error("Mobile number is required");
     }
 
     if (!trimmedPassword) {
@@ -31,10 +33,11 @@ export default function LoginPage() {
       return toast.error("Enter a valid 10-digit mobile number");
     }
 
-    // 🔴 Password basic check
     if (trimmedPassword.length < 6) {
       return toast.error("Password must be at least 6 characters");
     }
+
+    setLoading(true); // ✅ start loading
 
     try {
       const { data } = await API.post("/users/login", {
@@ -57,16 +60,24 @@ export default function LoginPage() {
         error?.response?.data?.message || "Invalid email or password";
 
       toast.error(message);
+    } finally {
+      setLoading(false); // ✅ stop loading
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#f2efe9] to-[#e8e4db]">
-      <SEO title="Login | AmanProperties" description="Log into your AmanProperties account to contact agents and manage properties." />
+      <SEO
+        title="Login | Aman Properties"
+        description="Login to access your account, manage property listings, and connect with buyers and sellers on Amam Properties"
+      />
+
       <div className="relative w-full max-w-md p-8 rounded-3xl bg-white/70 backdrop-blur-xl shadow-xl border border-white/40 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">
+        
         {/* Glow Effect */}
         <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#d4af37]/20 rounded-full blur-3xl"></div>
 
-        {/* Top Image Circle */}
+        {/* Logo */}
         <div className="flex justify-center mb-6">
           <div className="w-25 h-25 rounded-full overflow-hidden border-4 border-[#d4af37] shadow-lg transform transition duration-500 hover:scale-110">
             <img
@@ -87,7 +98,8 @@ export default function LoginPage() {
 
         {/* Form */}
         <form onSubmit={handleLoginForm} className="mt-6 space-y-5">
-          {/* Mobile Number */}
+          
+          {/* Mobile */}
           <div className="relative">
             <input
               type="text"
@@ -116,12 +128,14 @@ export default function LoginPage() {
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
+
           {/* Button */}
           <button
             type="submit"
-            className="w-full py-3 rounded-md bg-[#d4af37] text-black font-semibold hover:bg-[#c19a2e] active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg"
+            disabled={loading}
+            className="w-full py-3 rounded-md bg-[#d4af37] text-black font-semibold hover:bg-[#c19a2e] active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 

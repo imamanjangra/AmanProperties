@@ -128,8 +128,8 @@ export default function Landingpage2() {
   return (
     <div className="font-sans">
       <SEO 
-        title="AmanProperties | Home" 
-        description="Find your dream home with AmanProperties. Over 10,000 satisfied clients trust our expert team for buying, selling, and renting real estate." 
+        title="Amam Properties:Real Estate | Buy, Sell & Rent Properties in Haryana,India | Verified Real Estate Listings" 
+        description="Explore verified properties in Haryana, India. Buy, sell or rent residential and commercial properties with trusted real estate services from Amam Properties." 
       />
       {/* NAVBAR */}
       <nav className="fixed w-full z-50 bg-white/70 backdrop-blur-xl border-b border-gray-200">

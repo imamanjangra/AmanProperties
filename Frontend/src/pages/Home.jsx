@@ -9,7 +9,7 @@ const Contact = lazy(() => import("../components/Contact.jsx"));
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#f8f6f2] dark:bg-slate-950">
-      <SEO title="AmanProperties | Real Estate & Properties" description="Find your dream home with AmanProperties. Over 10,000 satisfied clients trust our expert team for buying, selling, and renting real estate." />
+      <SEO title="Amam Properties:Real Estate | Buy, Sell & Rent Properties in Haryana,India | Verified Real Estate Listings" description="Explore verified properties in Haryana, India. Buy, sell or rent residential and commercial properties with trusted real estate services from AmanProperties." />
 
       <HeroSection />
 
