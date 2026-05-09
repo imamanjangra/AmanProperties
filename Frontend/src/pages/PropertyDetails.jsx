@@ -20,6 +20,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO.jsx";
+import PropertyDetailsSkeleton from "../components/PropertyDetailsSkeleton.jsx";
 
 export default function PropertyDetails() {
   const { id } = useParams();
@@ -35,7 +36,7 @@ export default function PropertyDetails() {
   }, [id]);
 
   if (!property)
-    return <div className="text-center py-20">Loading...</div>;
+    return <PropertyDetailsSkeleton />;
 
   return (
     <div className="bg-[#f8f6f2] min-h-screen flex flex-col">
