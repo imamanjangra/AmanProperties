@@ -110,7 +110,7 @@ export default function PropertyDetails() {
             {/* DESCRIPTION */}
             <div className="bg-white rounded-2xl shadow p-6">
               <h2 className="text-xl font-semibold mb-4">Description</h2>
-              <p>{property.description}</p>
+              <p className="whitespace-pre-line">{property.description}</p>
             </div>
 
           </div>
