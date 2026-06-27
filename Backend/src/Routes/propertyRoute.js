@@ -34,7 +34,7 @@ router.post(
   "/",
   Protect,
   upload.fields([
-    { name: "images", maxCount: 5 },
+    { name: "images", maxCount: 40 },
   ]),
   createProperty
 );
@@ -42,7 +42,7 @@ router.post(
 router.put(
   "/:id",
   upload.fields([
-    { name: "images", maxCount: 5 },
+    { name: "images", maxCount: 40 },
   ]),
   adminAuth,
   updateProperty
