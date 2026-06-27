@@ -32,7 +32,7 @@ export default function PropertyImageCarousel({ images }) {
 
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [fullscreen, showGallery, images.length]);
