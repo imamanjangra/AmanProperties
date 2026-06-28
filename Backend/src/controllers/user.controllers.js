@@ -160,7 +160,7 @@ export const changeCurrentPassword = asyncHandler(async (req , res) => {
         }
 
         const PasswordCheck = await user.isPassworCorrect(oldPassword);
-        console.log(PasswordCheck);
+        // console.log(PasswordCheck);
     if (!PasswordCheck) {
       return res
         .status(400)
@@ -292,4 +292,8 @@ export const getMe = async (req, res) => {
       error: error.message,
     });
   }
+};
+
+export const wakeupserver = async (req, res) => {
+  res.status(200).json({ message: "Server is awake" });
 };

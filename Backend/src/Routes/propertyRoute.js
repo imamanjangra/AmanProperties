@@ -29,12 +29,13 @@ router.put("/reject/:id", adminAuth, rejectProperty);
 router.get("/", getProperties);
 router.get("/:id", getSingleProperty);
 
-// Admin
+
 router.post(
   "/",
   Protect,
   upload.fields([
-    { name: "images", maxCount: 40 },
+    { name: "images", maxCount: 50 },
+     { name: "videos", maxCount: 10 },
   ]),
   createProperty
 );
@@ -43,6 +44,7 @@ router.put(
   "/:id",
   upload.fields([
     { name: "images", maxCount: 40 },
+     { name: "videos", maxCount: 5 },
   ]),
   adminAuth,
   updateProperty

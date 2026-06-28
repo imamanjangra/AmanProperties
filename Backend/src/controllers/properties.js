@@ -20,15 +20,25 @@ export const createProperty = async (req, res) => {
     } = req.body;
 
     if (!propertyName || !location || !price || !propertyType) {
-      return res.status(400).json({ message: "Required fields missing" });
+      return res.status(400).json({
+        message: "Required fields missing",
+      });
     }
 
-    if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ message: "Images are required" });
+    // Require at least one media file
+    if (
+      (!req.files?.images || req.files.images.length === 0) &&
+      (!req.files?.videos || req.files.videos.length === 0)
+    ) {
+      return res.status(400).json({
+        message: "At least one image or video is required",
+      });
     }
 
     let propertyImages = [];
+    let propertyVideos = [];
 
+    // Upload images
     if (req.files?.images) {
       for (const file of req.files.images) {
         const result = await uploadOnCloudinary(file.path);
@@ -42,8 +52,27 @@ export const createProperty = async (req, res) => {
       }
     }
 
+    // Upload videos
+   if (req.files?.videos) {
+  for (const file of req.files.videos) {
+    console.log("Uploading video:", file.originalname);
+
+    const result = await uploadOnCloudinary(file.path);
+
+
+    if (result) {
+      propertyVideos.push({
+        url: result.secure_url,
+        public_id: result.public_id,
+      });
+    }
+  }
+}
+    console.log("Videos:", propertyVideos);
+
     const property = await Properties.create({
       images: propertyImages,
+      videos: propertyVideos,
       propertyName,
       location,
       description,
@@ -62,12 +91,14 @@ export const createProperty = async (req, res) => {
       isShow: true,
     });
 
-    res.status(201).json(property);
+    res.status(201).json({
+      message: "Property created successfully",
+      property,
+    });
   } catch (error) {
     res.status(500).json({
       message: "Failed to create property",
       error: error.message,
-      stack: error.stack,
     });
   }
 };
@@ -94,6 +125,7 @@ export const getSingleProperty = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch property" });
   }
 };
+
 export const updateProperty = async (req, res) => {
   try {
     const property = await Properties.findById(req.params.id);
@@ -204,6 +236,8 @@ export const getUserProperties = async (req, res) => {
       });
   }
 };
+
+
 export const verifyProperty = async (req, res) => {
   try {
     const property = await Properties.findById(req.params.id);

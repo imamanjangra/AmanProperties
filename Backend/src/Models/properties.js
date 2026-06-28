@@ -8,6 +8,12 @@ const propertiesSchema = new mongoose.Schema(
         public_id: String,
       },
     ],
+    videos: [
+      {
+        url: String,
+        public_id: String,
+      },
+    ],
     propertyName: {
       type: String,
       required: true,

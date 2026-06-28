@@ -8,7 +8,8 @@ import {
   updateUserInfo,
   refreshAccessToken,
   updateImage,
-  getMe
+  getMe,
+  wakeupserver
 } from "../controllers/user.controllers.js";
 import { Protect } from "../middleware/auth.middleware.js";
 import { upload } from "../middleware/multer.js";
@@ -33,4 +34,5 @@ router.route("/update").patch(Protect, updateUserInfo);
 router.route("/userdata").get(Protect, getuserData);
 router.route("/refreshTokens").get( refreshAccessToken);
 router.route("/me" ).get(Protect , getMe)
+router.route("/wakeup").get(wakeupserver);
 export default router;

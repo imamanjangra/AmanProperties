@@ -14,7 +14,8 @@ const router = express.Router();
 router.put(
   "/:id",
   upload.fields([
-  { name: "images", maxCount: 40 }
+  { name: "images", maxCount: 50 },
+   { name: "videos", maxCount: 10 },
 ]),
   Protect,
   updateProperty,
