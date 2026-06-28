@@ -19,6 +19,7 @@ import ContactButtons from "../components/ContactButtons";
 import SEO from "../components/SEO.jsx";
 export default function AdminAddProperty() {
   const [images, setImages] = useState([]);
+  const [videos, setVideos] = useState([]);
   const [propertyName, setPropertyName] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
@@ -39,6 +40,15 @@ export default function AdminAddProperty() {
   const removeImage = (index) => {
     setImages((prev) => prev.filter((_, i) => i !== index));
   };
+
+  const handleVideoUpload = (e) => {
+  const files = Array.from(e.target.files);
+  setVideos((prev) => [...prev, ...files]);
+};
+
+const removeVideo = (index) => {
+  setVideos((prev) => prev.filter((_, i) => i !== index));
+};
 
   const addDetail = async (e) => {
     e.preventDefault();
@@ -61,7 +71,7 @@ export default function AdminAddProperty() {
       formData.append("PropertyAge", PropertyAge);
       formData.append("Floor", Floor);
       images.forEach((img) => formData.append("images", img));
-
+      videos.forEach((video) => formData.append("videos", video));
       await API.post("/properties", formData);
       // console.log(formData);
       toast.success("Property added");
@@ -78,6 +88,7 @@ export default function AdminAddProperty() {
       setFacing("");
       setPropertyAge("");
       setFloor("");
+      setVideos([]);
     } catch (error) {
       console.log(error);
       toast.error("Failed to add property");
@@ -164,7 +175,7 @@ export default function AdminAddProperty() {
             />
             <Input
               icon={<Maximize size={16} />}
-              type="number"
+              type="String"
               value={size}
               setValue={setSize}
               placeholder="Size"
@@ -247,6 +258,44 @@ export default function AdminAddProperty() {
                 </div>
               )}
             </div>
+
+            <div className="md:col-span-2">
+  <label className="text-sm text-gray-600">Videos</label>
+
+  <label className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-gray-300 p-6 hover:border-[#c9a24d]">
+    <Upload size={24} className="text-[#c9a24d]" />
+
+    <input
+      type="file"
+      multiple
+      accept="video/*"
+      onChange={handleVideoUpload}
+      className="hidden"
+    />
+  </label>
+
+  {videos.length > 0 && (
+    <div className="mt-3 flex gap-3 overflow-x-auto">
+      {videos.map((video, i) => (
+        <div key={i} className="relative w-32 h-24">
+          <video
+            src={URL.createObjectURL(video)}
+            className="w-full h-full rounded-lg object-cover"
+            controls
+          />
+
+          <button
+            type="button"
+            onClick={() => removeVideo(i)}
+            className="absolute -top-2 -right-2 bg-black text-white w-5 h-5 rounded-full text-xs hover:bg-red-500"
+          >
+            ✕
+          </button>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
 
             {/* Button */}
             <div className="md:col-span-2">

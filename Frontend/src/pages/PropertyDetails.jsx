@@ -35,14 +35,16 @@ export default function PropertyDetails() {
     fetchProperty();
   }, [id]);
 
-  if (!property)
-    return <PropertyDetailsSkeleton />;
+  if (!property) return <PropertyDetailsSkeleton />;
 
   return (
     <div className="bg-[#f8f6f2] min-h-screen flex flex-col">
-      <SEO 
-        title={`${property.propertyName} | AmanProperties`} 
-        description={property.description || `View details for ${property.propertyName} located at ${property.location}. Find your dream real estate with AmanProperties.`} 
+      <SEO
+        title={`${property.propertyName} | AmanProperties`}
+        description={
+          property.description ||
+          `View details for ${property.propertyName} located at ${property.location}. Find your dream real estate with AmanProperties.`
+        }
       />
 
       <Navbar variant="light" />
@@ -58,53 +60,101 @@ export default function PropertyDetails() {
         <div className="lg:col-span-2">
           <div className="rounded-2xl overflow-hidden shadow h-87.5 md:h-105">
             <PropertyImageCarousel
-              images={property.images.map((img) => img.url)}
+              images={property.images?.map((img) => img.url) || []}
+              videos={property.videos?.map((video) => video.url) || []}
             />
           </div>
         </div>
 
-       <div className="sticky top-24 h-fit">
-  <div className="bg-[#fdf6f0] border border-[#f1e4d7] rounded-2xl p-6 shadow-sm">
+        <div className="sticky top-24 h-fit">
+          <div className="bg-[#fdf6f0] border border-[#f1e4d7] rounded-2xl p-6 shadow-sm">
+            {/* PROPERTY NAME */}
+            <h2 className="text-lg font-semibold text-[#1a2a4e] mb-2">
+              {property.propertyName}
+            </h2>
 
-    {/* PROPERTY NAME */}
-    <h2 className="text-lg font-semibold text-[#1a2a4e] mb-2">
-      {property.propertyName}
-    </h2>
+            {/* PRICE */}
+            <p className="text-2xl font-bold text-[#c6a46c] mb-6">
+              ₹ {property.price}
+            </p>
 
-    {/* PRICE */}
-    <p className="text-2xl font-bold text-[#c6a46c] mb-6">
-      ₹ {property.price}
-    </p>
-
-    {/* CONTACT BUTTON */}
-    <button onClick={() => navigate("/contact")} className="w-full py-3 bg-[#c6a46c] text-white rounded-xl font-medium hover:bg-[#b8965f] transition">
-      Contact Now
-    </button>
-
-  </div>
-</div>
+            {/* CONTACT BUTTON */}
+            <button
+              onClick={() => navigate("/contact")}
+              className="w-full py-3 bg-[#c6a46c] text-white rounded-xl font-medium hover:bg-[#b8965f] transition"
+            >
+              Contact Now
+            </button>
+          </div>
+        </div>
       </motion.section>
 
       {/* DETAILS */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-3 gap-10">
-
           {/* LEFT */}
           <div className="lg:col-span-2 space-y-10">
-
             {/* OVERVIEW */}
             <div className="bg-white rounded-2xl shadow p-6">
               <h2 className="text-xl font-semibold mb-6">Property Overview</h2>
 
               <div className="grid sm:grid-cols-2 gap-4">
-                {property.propertyType && <DetailItem icon={Home} label="Type" value={property.propertyType} />}
-                {property.Bedroom && <DetailItem icon={Bed} label="Bedrooms" value={property.Bedroom} />}
-                {property.Bathroom && <DetailItem icon={Bath} label="Bathrooms" value={property.Bathroom} />}
-                {property.size && <DetailItem icon={Maximize} label="Area" value={property.size} />}
-                {property.location && <DetailItem icon={MapPin} label="Location" value={property.location} />}
-                {property.Floores && <DetailItem icon={Layers} label="Floors" value={property.Floores} />}
-                {property.Facing && <DetailItem icon={Compass} label="Facing" value={property.Facing} />}
-                {property.PropertyAge && <DetailItem icon={Clock} label="Age" value={property.PropertyAge} />}
+                {property.propertyType && (
+                  <DetailItem
+                    icon={Home}
+                    label="Type"
+                    value={property.propertyType}
+                  />
+                )}
+                {property.Bedroom && (
+                  <DetailItem
+                    icon={Bed}
+                    label="Bedrooms"
+                    value={property.Bedroom}
+                  />
+                )}
+                {property.Bathroom && (
+                  <DetailItem
+                    icon={Bath}
+                    label="Bathrooms"
+                    value={property.Bathroom}
+                  />
+                )}
+                {property.size && (
+                  <DetailItem
+                    icon={Maximize}
+                    label="Area"
+                    value={property.size}
+                  />
+                )}
+                {property.location && (
+                  <DetailItem
+                    icon={MapPin}
+                    label="Location"
+                    value={property.location}
+                  />
+                )}
+                {property.Floores && (
+                  <DetailItem
+                    icon={Layers}
+                    label="Floors"
+                    value={property.Floores}
+                  />
+                )}
+                {property.Facing && (
+                  <DetailItem
+                    icon={Compass}
+                    label="Facing"
+                    value={property.Facing}
+                  />
+                )}
+                {property.PropertyAge && (
+                  <DetailItem
+                    icon={Clock}
+                    label="Age"
+                    value={property.PropertyAge}
+                  />
+                )}
               </div>
             </div>
 
@@ -113,16 +163,53 @@ export default function PropertyDetails() {
               <h2 className="text-xl font-semibold mb-4">Description</h2>
               <p className="whitespace-pre-line">{property.description}</p>
             </div>
-
           </div>
 
           {/* RIGHT CONTACT */}
           <div className="sticky top-24 h-fit">
             <ContactForm />
           </div>
-
         </div>
       </section>
+
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+        className="py-16 bg-[#fdf6f0]"
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-[#d4af37]/10 px-4 py-2 rounded-full mb-4 text-[#d4af37]">
+              Prime Location
+            </span>
+
+            <h2 className="font-script text-3xl font-semibold text-[#1a2a4e]">
+              Property Location
+            </h2>
+          </div>
+
+          <div className="relative rounded-2xl overflow-hidden shadow-xl h-105">
+            <iframe
+              src={`https://www.google.com/maps?q=${property.location}&output=embed`}
+              className="w-full h-full border-0"
+              loading="lazy"
+              title="Property Location"
+              allowFullScreen
+            />
+
+            <a
+              href={`https://www.google.com/maps?q=${property.location}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-4 right-4 z-10 bg-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 text-[#1a2a4e] font-medium"
+            >
+              Open in Maps
+            </a>
+          </div>
+        </div>
+      </motion.section>
 
       <Footer />
     </div>
@@ -202,9 +289,8 @@ function ContactForm({ property }) {
       window.location.href = "tel:+919255446593";
     } else {
       toast.error("Please call this number from your mobile: +91 9255446593");
-    } 
+    }
   };
-
 
   return (
     <form
@@ -265,7 +351,7 @@ function ContactForm({ property }) {
 
         <button
           type="button"
-           onClick={callNow}
+          onClick={callNow}
           className="flex-1 bg-[#1a2a4e] text-white py-2 rounded-md flex justify-center items-center gap-2"
         >
           <Phone className="w-4 h-4" /> Call

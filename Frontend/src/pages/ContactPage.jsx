@@ -291,7 +291,18 @@ const ContactPage = () => {
                 </button>
               </motion.div>
 
-              
+             <div className="relative bg-white rounded-xl shadow-lg overflow-hidden h-64 mt-6">
+  <iframe
+    src="https://www.google.com/maps?q=29.527500,76.976333&z=15&output=embed"
+    width="100%"
+    height="100%"
+    allowFullScreen
+    loading="lazy"
+    title="Office Location"
+    className="border-0"
+  ></iframe>
+
+</div>
             </div>
           </div>
         </div>

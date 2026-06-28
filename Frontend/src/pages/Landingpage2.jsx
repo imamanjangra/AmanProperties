@@ -19,8 +19,12 @@ import {
   Linkedin,
 } from "lucide-react";
 import SEO from "../components/SEO.jsx";
+import { useEffect } from "react";
+import API from "../service/Api.jsx";
 
 /* ---------------- DATA ---------------- */
+
+
 
 const features = [
   {
@@ -121,9 +125,21 @@ const socialLinks = [
   { icon: Instagram, link: "https://www.instagram.com/amanproperties_/" },
 ];
 
+
 /* ---------------- COMPONENT ---------------- */
 
 export default function Landingpage2() {
+  useEffect(() => {
+  const wakeupServer = async () => {
+    try {
+      await API.get("/users/wakeup");
+      console.log("Server is awake");
+    } catch (error) { 
+      console.error("Error waking up the server:", error);
+    }
+  };
+  wakeupServer();
+}, [])
   const navigate = useNavigate();
   return (
     <div className="font-sans">
