@@ -5,7 +5,7 @@ import React from "react";
 
 const PropertyCard = ({ property }) => {
   const navigate = useNavigate();
-
+  // console.log("PropertyCard rendered for property:", property.id , property.slug);
   // Function to share property link via WhatsApp
   const shareOnWhatsApp = (e) => {
     e.stopPropagation();
@@ -18,7 +18,7 @@ const PropertyCard = ({ property }) => {
 
   return (
     <motion.div
-      onClick={() => navigate(`/properties/${property.id}`)}
+      onClick={() => navigate(`/properties/${property.slug}-${property.id}`)}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}

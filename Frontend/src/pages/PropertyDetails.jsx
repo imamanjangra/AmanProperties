@@ -23,7 +23,9 @@ import SEO from "../components/SEO.jsx";
 import PropertyDetailsSkeleton from "../components/PropertyDetailsSkeleton.jsx";
 
 export default function PropertyDetails() {
-  const { id } = useParams();
+ const { slug } = useParams();
+
+const id = slug.split("-").pop();
   const [property, setProperty] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {

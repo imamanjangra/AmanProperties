@@ -69,6 +69,7 @@ const FeaturedProperties = () => {
                 beds : property.Bedroom,
                 baths : property.Bathroom,
                 size :  property.size,
+                slug : property.slug,
               }}
             />
           ))}

@@ -95,7 +95,7 @@ function App() {
       />
 
       <Route
-        path="/properties/:id"
+        path="/properties/:slug"
         element={
           <ProtectedRoute>
             <PropertyDetails />
