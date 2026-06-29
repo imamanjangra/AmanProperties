@@ -73,7 +73,12 @@ const propertiesSchema = new mongoose.Schema(
     isrejected : {
       type : Boolean,
       default : false
-    }
+    },
+    slug: {
+    type: String,
+    required: true,
+    unique: true
+}
 
 
   },

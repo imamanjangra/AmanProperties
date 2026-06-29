@@ -24,7 +24,10 @@ export const createProperty = async (req, res) => {
         message: "Required fields missing",
       });
     }
-
+    const slug = `${propertyName}-${location}-${propertyType}`
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, "")
+      .replace(/\s+/g, "-");
     // Require at least one media file
     if (
       (!req.files?.images || req.files.images.length === 0) &&
@@ -53,22 +56,21 @@ export const createProperty = async (req, res) => {
     }
 
     // Upload videos
-   if (req.files?.videos) {
-  for (const file of req.files.videos) {
-    console.log("Uploading video:", file.originalname);
+    if (req.files?.videos) {
+      for (const file of req.files.videos) {
+        // console.log("Uploading video:", file.originalname);
 
-    const result = await uploadOnCloudinary(file.path);
+        const result = await uploadOnCloudinary(file.path);
 
-
-    if (result) {
-      propertyVideos.push({
-        url: result.secure_url,
-        public_id: result.public_id,
-      });
+        if (result) {
+          propertyVideos.push({
+            url: result.secure_url,
+            public_id: result.public_id,
+          });
+        }
+      }
     }
-  }
-}
-    console.log("Videos:", propertyVideos);
+    // console.log("Videos:", propertyVideos);
 
     const property = await Properties.create({
       images: propertyImages,
@@ -89,6 +91,7 @@ export const createProperty = async (req, res) => {
       isverifed: false,
       isrejected: false,
       isShow: true,
+      slug: slug,
     });
 
     res.status(201).json({
@@ -163,7 +166,7 @@ export const updateProperty = async (req, res) => {
 
     // ✅ Find images to delete
     const imagesToDelete = property.images.filter(
-      (img) => !existingImages.includes(img.url)
+      (img) => !existingImages.includes(img.url),
     );
 
     // ✅ Delete from Cloudinary
@@ -173,7 +176,7 @@ export const updateProperty = async (req, res) => {
 
     // ✅ Keep only selected old images
     const remainingOldImages = property.images.filter((img) =>
-      existingImages.includes(img.url)
+      existingImages.includes(img.url),
     );
 
     // ✅ Final images
@@ -185,7 +188,7 @@ export const updateProperty = async (req, res) => {
         ...req.body,
         images: finalImages,
       },
-      { new: true }
+      { new: true },
     );
 
     res.status(200).json(updatedProperty);
@@ -227,16 +230,13 @@ export const getUserProperties = async (req, res) => {
     });
     res.status(200).json(properties);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Failed to fetch user properties",
-        error: error.message,
-        stack: error.stack,
-      });
+    res.status(500).json({
+      message: "Failed to fetch user properties",
+      error: error.message,
+      stack: error.stack,
+    });
   }
 };
-
 
 export const verifyProperty = async (req, res) => {
   try {
