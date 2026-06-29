@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import HeroSection from "../components/HeroSection.jsx";
 import SEO from "../components/SEO.jsx";
+import LuxuryCategories from "../components/LuxuryCategories.jsx";
 
 const FeaturedProperties = lazy(() => import("../components/FeaturedProperties.jsx"));
 const Services = lazy(() => import("../components/Services.jsx"));
@@ -15,6 +16,7 @@ export default function Home() {
 
       <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
         <FeaturedProperties />
+         <LuxuryCategories />
         <Services />
         <Contact />
       </Suspense>

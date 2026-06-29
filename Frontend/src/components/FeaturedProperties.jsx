@@ -40,7 +40,7 @@ const FeaturedProperties = () => {
             </span>
           </div>  
 
-          <h2 className=" font-script text-3xl font-bold text-[#1a2a4e] mb-4">
+          <h2 className=" text-4xl md:text-5xl font-bold text-slate-900 m-7">
             Featured Properties
           </h2>
 

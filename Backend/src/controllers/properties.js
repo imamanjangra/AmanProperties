@@ -349,7 +349,6 @@ export const serachProperties = async (req, res) => {
       isShow: true,
     };
 
-    // 🔍 SEARCH
     if (query) {
       filter.$or = [
         { propertyName: { $regex: query, $options: "i" } },
@@ -357,12 +356,10 @@ export const serachProperties = async (req, res) => {
       ];
     }
 
-    // 🏠 PROPERTY TYPE
     if (type && type !== "All") {
       filter.propertyType = type;
     }
 
-    // 💰 PRICE RANGE
     if (price) {
       if (price === "under1") {
         filter.price = { $lt: "1000000" };

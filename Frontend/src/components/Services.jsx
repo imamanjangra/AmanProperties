@@ -19,7 +19,7 @@ export default function Services() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <h2 className="font-script text-3xl font-bold">Our Services</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Our Services</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
