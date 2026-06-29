@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const services = [
   {
     title: "Property Buying",
-    img: "./public/buy.png",
+    img: "https://i.pinimg.com/736x/dd/4a/56/dd4a56adbc1b2e7257f185638c483c4c.jpg",
   },
   {
     title: "Property Selling",
