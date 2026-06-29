@@ -2,10 +2,22 @@ import { House, DollarSign, Key, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 
 const services = [
-  { title: "Buy Property", desc: "Find your perfect home", icon: House },
-  { title: "Sell Property", desc: "Get best market value", icon: DollarSign },
-  { title: "Rent Property", desc: "Homes for every lifestyle", icon: Key },
-  { title: "Investment", desc: "Smart real estate investments", icon: TrendingUp },
+  {
+    title: "Property Buying",
+    img: "./public/buy.png",
+  },
+  {
+    title: "Property Selling",
+    img: "https://images.unsplash.com/photo-1723110994499-df46435aa4b3",
+  },
+  {
+    title: "Property Rental",
+    img: "https://images.unsplash.com/photo-1762732793012-8bdab3af00b4",
+  },
+  {
+    title: "Investment",
+    img: "https://images.unsplash.com/photo-1639663742190-1b3dba2eebcf",
+  },
 ];
 
 export default function Services() {
@@ -22,26 +34,25 @@ export default function Services() {
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Our Services</h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, i) => {
-            const Icon = service.icon;
-            return (
+      <div className="grid md:grid-cols-2 gap-6">
+            {services.map((s, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -15 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="bg-white p-8 rounded-2xl shadow hover:shadow-2xl"
+                
+                className="relative rounded-2xl overflow-hidden group"
               >
-                <Icon className="w-10 h-10 text-[#c9a24d] mb-4" />
-                <h3 className="font-semibold text-lg">{service.title}</h3>
-                <p className="text-gray-500 text-sm mt-2">{service.desc}</p>
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  loading="lazy"
+                  className="w-full h-80 object-cover group-hover:scale-110 transition duration-700"
+                />
+                <div className="absolute inset-0 bg-black/50 flex items-end p-6">
+                  <h3 className="text-white text-2xl font-bold">{s.title}</h3>
+                </div>
               </motion.div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
 
       </div>
     </section>
