@@ -19,10 +19,10 @@ import {Protect} from "../middleware/auth.middleware.js"
 
 const router = express.Router();
 router.put("/verifyProperty/:id", adminAuth, verifyProperty);
-router.get("/getverifiedProperties" ,Protect ,  getverifiedProperties);
+router.get("/getverifiedProperties"  ,  getverifiedProperties);
 router.get("/getuserproperties" ,Protect ,  getUserProperties );
 router.get("/hideProperty/:id"  ,Protect ,   hideProperty);
-router.get("/searchProperties" ,Protect ,   serachProperties);
+router.get("/searchProperties"  ,   serachProperties);
 router.get("/unverified", adminAuth, getUnverifiedProperties);
 router.put("/reject/:id", adminAuth, rejectProperty);
 // Public

@@ -7,6 +7,7 @@ import { AuthProvider } from "./Contexts/auth.context.jsx";
 import { HelmetProvider } from "react-helmet-async";
 
 createRoot(document.getElementById("root")).render(
+  
   <HelmetProvider>
     <BrowserRouter>
       <AuthProvider>

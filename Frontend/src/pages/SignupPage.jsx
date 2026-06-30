@@ -79,7 +79,7 @@ export default function SignupPage() {
       setUser(userData);
 
       toast.success("Account created successfully");
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.log(error);
 

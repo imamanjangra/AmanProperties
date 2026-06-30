@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"; // 1. Added useEffect
+import { useContext, useEffect, useState } from "react"; // 1. Added useEffect
 import "./App.css";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom"; // 2. Added useLocation
 
@@ -21,44 +21,74 @@ import { AuthContext } from "./Contexts/auth.context.jsx";
 import ProtectedRoute from "../ProtectedRoute.jsx";
 import TermsConditionsPage from "./pages/TermsConditionsPage.jsx";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage.jsx";
+import Loader from "./components/Loader.jsx";
 
 function App() {
-  const { user } = useContext(AuthContext);
-  const location = useLocation(); // 3. Get current page path
+ const { user } = useContext(AuthContext);
+const location = useLocation();
 
-  // --- GOOGLE TAG INTEGRATION ---
-  useEffect(() => {
-    // This part adds the script tag to your site head
-    const script = document.createElement("script");
-    script.src = "https://www.googletagmanager.com/gtag/js?id=G-H4E4MWXVYN";
-    script.async = true;
-    document.head.appendChild(script);
+const [loading, setLoading] = useState(true);
+useEffect(() => {
+  if (location.pathname !== "/") {
+    setLoading(false);
+    return;
+  }
 
-    // This part initializes the tracking
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      window.dataLayer.push(arguments);
+  const wakeUpServer = async () => {
+    try {
+      await API.get("/users/wakeup");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 3500);
     }
-    gtag("js", new Date());
-    gtag("config", "G-H4E4MWXVYN", {
-      page_path: location.pathname, // Tracks the specific page the user is on
-    });
-  }, [location]); // Runs every time the user moves to a new page
+  };
+
+  wakeUpServer();
+}, []);
+
+useEffect(() => {
+  const script = document.createElement("script");
+  script.src =
+    "https://www.googletagmanager.com/gtag/js?id=G-H4E4MWXVYN";
+  script.async = true;
+
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+
+  gtag("js", new Date());
+
+  gtag("config", "G-H4E4MWXVYN", {
+    page_path: location.pathname,
+  });
+}, [location]);
+
+// RETURN AFTER ALL HOOKS
+if (loading) {
+  return <Loader />;
+} // Runs every time the user moves to a new page
   // ------------------------------
 
   return (
     <Routes>
       {/* 🔹 Public Routes */}
-      <Route path="/" element={!user ? <Landingpage2 /> : <Navigate to="/home" />} />
+      <Route path="/" element={<Home/>} />
 
       <Route
         path="/login"
-        element={!user ? <Login /> : <Navigate to="/home" />}
+        element={<Login />}
       />
 
       <Route
         path="/signup"
-        element={!user ? <Signup /> : <Navigate to="/home" />}
+        element={<Signup />}
       />
       
       <Route
@@ -75,12 +105,12 @@ function App() {
       <Route
         path="/"
         element={
-          <ProtectedRoute>
+         
             <Layout />
-          </ProtectedRoute>
+          
         }
       >
-        <Route path="home" element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="contact" element={<ContactPage />} />
       </Route>
 
@@ -88,18 +118,18 @@ function App() {
       <Route
         path="/properties"
         element={
-          <ProtectedRoute>
+          
             <PropertyPage />
-          </ProtectedRoute>
+         
         }
       />
 
       <Route
         path="/properties/:slug"
         element={
-          <ProtectedRoute>
+          
             <PropertyDetails />
-          </ProtectedRoute>
+        
         }
       />
 

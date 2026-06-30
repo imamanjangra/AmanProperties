@@ -52,7 +52,7 @@ export default function LoginPage() {
 
       setUser(userData);
       toast.success("Login successfully");
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.log(error);
 
